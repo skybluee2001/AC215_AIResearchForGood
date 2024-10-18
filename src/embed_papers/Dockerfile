@@ -20,7 +20,8 @@ WORKDIR /app
 
 # Add Pipfile, Pipfile.lock
 ADD Pipfile Pipfile.lock /app/
-RUN pipenv install --deploy --ignore-pipfile
+
+RUN pipenv install --deploy
 
 RUN pipenv sync
 
