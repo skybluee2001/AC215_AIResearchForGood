@@ -53,7 +53,7 @@ def delete_from_gcs(file_path, bucket_name):
     print(f"Deleted {file_path} from Google Cloud Storage")
 
 def main():
-    blobs = bucket.list_blobs(prefix='manuscripts_texts_to_retrieve/')
+    blobs = bucket.list_blobs(prefix='manuscript_texts_to_retrieve/')
     for blob in blobs:
         if blob.name.endswith(".txt"):
             local_file_path = os.path.join('/tmp', os.path.basename(blob.name))  
@@ -67,7 +67,7 @@ def main():
 
             db.add_documents(documents)
 
-            new_blob_name = blob.name.replace('manuscripts_texts_to_retrieve', 'manuscripts_texts_done')
+            new_blob_name = blob.name.replace('manuscript_texts_to_retrieve', 'manuscript_texts_done')
             bucket.blob(new_blob_name).upload_from_filename(local_file_path)
             print(f"Moved {blob.name} to {new_blob_name} in the cloud")
 
