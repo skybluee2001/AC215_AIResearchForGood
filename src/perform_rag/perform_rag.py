@@ -35,20 +35,20 @@ def retrieve_documents(query, persist_directory, model_name):
     )
 
     results = db.similarity_search(query, k=5)
-    
+
     documents = []
     for result in results:
         source = result.metadata['source']
         page_content = result.page_content
-        prompt = f"Source: {source}\nPage Content: {page_content}\nSimilarity: {result.similarity}\n"
+        prompt = f"Source: {source}\nPage Content: {page_content}\n"
         documents.append(prompt)
-    
+
     return documents
 
 def generate_answer_google(documents, query, project_id, location, model_id):
     prompt = "\n\n".join(documents)
     prompt += f"\nFor the query '{query}', please generate an explanation for the relevance of the above papers to the query."
-    
+
     vertexai.init(project=project_id, location="us-central1")
 
     model = GenerativeModel("gemini-1.5-flash")
@@ -58,27 +58,27 @@ def generate_answer_google(documents, query, project_id, location, model_id):
     )
 
     print(response.text)
-    return response.predictions[0]
+    return response.text
 
 def main():
-    os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "/secrets/ai-research-for-good-b6f4173936f9.json"
-    
+    os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "secrets/ai-research-for-good-b6f4173936f9.json"
+
     bucket_name = 'paper-rec-bucket'
     destination_folder = 'paper_vector_db'
     folder_prefix = 'paper_vector_db/'
     persist_directory = 'paper_vector_db/'
     model_name = "sentence-transformers/all-MiniLM-L6-v2"
-    
+
     PROJECT_ID = "ai-research-for-good"
     LOCATION = "us-central1"
     MODEL_ID = "gemini-1.5-pro"
-    
-    query = "AI for homelessness"
-    
+
+    query = "AI for social impact"
+
     download_files_from_bucket(bucket_name, folder_prefix, destination_folder)
     documents = retrieve_documents(query, persist_directory, model_name)
     answer = generate_answer_google(documents, query, PROJECT_ID, LOCATION, MODEL_ID)
-    
+
     print(answer)
 
 if __name__ == "__main__":
