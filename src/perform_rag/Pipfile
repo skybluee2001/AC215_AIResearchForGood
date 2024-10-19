@@ -8,9 +8,9 @@ verify_ssl = true
 [packages]
 google-cloud-storage = "*"
 langchain-community = "*"
-langchain-openai = "*"
 langchain-chroma = "*"
 langchain-huggingface = "*"
+vertexai = "*"
 
 [requires]
-python_version = "3.8"
+python_version = "3.12"

@@ -1,0 +1,609 @@
+Title: Discovery of Non Thermal X-Rays from the Northwest Shell of the New SNR
+  RX J1713.7-3946: The Second SN1006 ?
+Summary:   We report ASCA results of a featureless X-ray spectrum from RX J1713.7-3946,
+a new shell-like SNR discovered with the ROSAT all sky survey. The northwest
+part of RX J1713.7-3946 was in the field of the ASCA Galactic Plane Survey
+Project and was found to exhibit a shell-like structure. The spectrum, however
+shows neither line emission nor any signature of a thermal origin. Instead, a
+power-law model with a photon index of 2.4-2.5 gives reasonable fit to the
+spectrum, suggesting a non-thermal origin. Together with the similarity to
+SN1006, we propose that RX J1713.7-3946 is the second example, after SN1006, of
+a synchrotron X-ray radiation from a shell of SNRs. Since the synchrotron
+X-rays suggest existence of extremely high energy charged particles in the SNR
+shell, our discovery should have strong impact on the origin of the cosmic
+X-rays.
+
+Paper ID: http://arxiv.org/abs/astro-ph/9704140v2
+Authors: Katsuji Koyama, Kenzo Kinugasa, Keiichi Matsuzaki, Mamiko Nishiuchi, Mutusmi Sugizaki, Ken'ichi Torii, Shigeo Yamauchi, Bernd Aschenbach
+Published Date: 1997-04-15T02:13:18Z
+
+Title: The Impact of Net Culture on Mainstream Societies: a Global Analysis
+Summary:   In this work the impact of the Internet culture on standard mainstream
+societies has been analyzed. After analytically establishing the fact that the
+Net can be viewed as a pan-societal superstructure which supports its own
+distinct culture, an ethnographic analysis is provided to find out the key
+aspects of this culture. The elements of this culture which have an empowering
+impacts on the standard mainstream societies, as well as the elements in it
+which can cause discouraging social effects are then discussed by a global
+investigation of the present status of various fundamental aspects (e,g,
+education, economics, politics, entertainment etc) of the mainstream societies
+as well as their links with the Net culture. Though immensely potential for
+providing various prominent positive impacts, the key findings of this work
+indicate that misuse of Internet can create tremendous harm to the members of
+the mainstream societies by generating a set of morally crippled people as well
+as a future generation completely void of principles and ethics. This
+structured diagnostic approach to the social problems caused by the manhandling
+of Internet leads to a concrete effort of providing the measures that can be
+taken to enhance or to overcome the supporting and limiting effects of the Net
+culture respectively with the intent to benefit our society and to protect the
+teratoidation of certain ethical values.
+
+Paper ID: http://arxiv.org/abs/cs/9903013v1
+Authors: Tapas Kumar Das
+Published Date: 1999-03-18T17:01:27Z
+
+Title: L'ordinateur quantique
+Summary:   Project of an undergraduate student in physics (4th year) about the concept
+of quantum computers (QC) and its social impact. After a thourough theoretical
+introduction (chap. 2), the recent debate about NMR-based QC is dealt with in
+detail (chap. 3). Chapter 4 comments on the figure of the number of articles
+published on the subject, showing the dramatic growth after the publication of
+Shor's algorithm.
+
+Paper ID: http://arxiv.org/abs/quant-ph/0003132v1
+Authors: Denis Crottet
+Published Date: 2000-03-29T09:15:22Z
+
+Title: Phase transitions in social impact models of opinion formation
+Summary:   We study phase transitions in models of opinion formation which are based on
+the social impact theory. Two different models are discussed: (i) a
+cellular--automata based model of a finite group with a strong leader where
+persons can change their opinions but not their spatial positions, and (ii) a
+model with persons treated as active Brownian particles interacting via a
+communication field. In the first model, two stable phases are possible: a
+cluster around the leader, and a state of social unification. The transition
+into the second state occurs for a large leader strength and/or for a high
+level of social noise. In the second model, we find three stable phases, which
+correspond either to a ``paramagnetic'' phase (for high noise and strong
+diffusion), a ``ferromagnetic'' phase (for small nose and weak diffusion), or a
+phase with spatially separated ``domains'' (for intermediate conditions).
+
+Paper ID: http://arxiv.org/abs/cond-mat/0004026v1
+Authors: Janusz A. Holyst, Krzysztof Kacperski, Frank Schweitzer
+Published Date: 2000-04-03T16:14:35Z
+
+Title: Computer based Information Systems and Managers' Work
+Summary:   This paper identifies three categories of model: the Technology Impact Model;
+the Social Impact Model and the Integrationist Model, which imply different
+views of the "impact" of Information Technology on work organisation. These
+models are used to structure data from case studies conducted by the authors to
+explore the implications of the use of computer-based information systems for
+managers' work. The paper argues that the "impact" of information systems is
+not a single stable and predictable outcome but a non-linear ongoing process
+that changes and evolves over time. It also argues that the actions of
+individuals and groups within an organisation are not wholly determined by
+outside forces: people can and do react to, and shape, systems in different
+ways. In this sense, the "impact" of computer-based information systems on
+managers' work reflects decisions made by managers themselves about how the
+technology is used.
+
+Paper ID: http://arxiv.org/abs/cs/0102029v1
+Authors: Chris Kimble, Kevin McLoughlin
+Published Date: 2001-02-26T15:45:03Z
+
+Title: Ego-centered networks and the ripple effect
+Summary:   Recent work has demonstrated that many social networks, and indeed many
+networks of other types also, have broad distributions of vertex degree. Here
+we show that this has a substantial impact on the shape of ego-centered
+networks, i.e., sets of network vertices that are within a given distance of a
+specified central vertex, the ego. This in turn affects concepts and methods
+based on ego-centered networks, such as snowball sampling and the "ripple
+effect". In particular, we argue that one's acquaintances, one's immediate
+neighbors in the acquaintance network, are far from being a random sample of
+the population, and that this biases the numbers of neighbors two and more
+steps away. We demonstrate this concept using data drawn from academic
+collaboration networks, for which, as we show, current simple theories for the
+typical size of ego-centered networks give numbers that differ greatly from
+those measured in reality. We present an improved theoretical model which gives
+significantly better results.
+
+Paper ID: http://arxiv.org/abs/cond-mat/0111070v1
+Authors: M. E. J. Newman
+Published Date: 2001-11-05T22:58:15Z
+
+Title: Words for Nobel prizes
+Summary:   We present the statistics of the significant nouns and adjectives of social
+impact figuring in the nominations of the Nobel prizes in Physics and Chemistry
+over the period of the awards from 1901 to 2001
+
+Paper ID: http://arxiv.org/abs/physics/0203076v1
+Authors: J. M. Moran-Mirabal, H. C. Rosu
+Published Date: 2002-03-26T18:40:02Z
+
+Title: Electoral surveys influence on the voting processes: a cellular automata
+  model
+Summary:   Nowadays, in societies threatened by atomization, selfishness, short-term
+thinking, and alienation from political life, there is a renewed debate about
+classical questions concerning the quality of democratic decision-making. In
+this work a cellular automata (CA) model for the dynamics of free elections
+based on the social impact theory is proposed. By using computer simulations,
+power law distributions for the size of electoral clusters and decision time
+have been obtained. The major role of broadcasted electoral surveys in guiding
+opinion formation and stabilizing the ``{\it status quo}'' was demonstrated.
+Furthermore, it was shown that in societies where these surveys are manipulated
+within the universally accepted statistical error bars, even a majoritary
+opposition could be hindered from reaching the power through the electoral
+path.
+
+Paper ID: http://arxiv.org/abs/cond-mat/0204139v1
+Authors: S. G. Alves, N. M. Oliveira Neto, M. L. Martins
+Published Date: 2002-04-05T14:42:59Z
+
+Title: Endogeneous Versus Exogeneous Shocks in Systems with Memory
+Summary:   Systems with long-range persistence and memory are shown to exhibit different
+precursory as well as recovery patterns in response to shocks of exogeneous
+versus endogeneous origins. By endogeneous, we envision either fluctuations
+resulting from an underlying chaotic dynamics or from a stochastic forcing
+origin which may be external or be an effective coarse-grained description of
+the microscopic fluctuations. In this scenario, endogeneous shocks result from
+a kind of constructive interference of accumulated fluctuations whose impacts
+survive longer than the large shocks themselves. As a consequence, the recovery
+after an endogeneous shock is in general slower at early times and can be at
+long times either slower or faster than after an exogeneous perturbation. This
+offers the tantalizing possibility of distinguishing between an endogeneous
+versus exogeneous cause of a given shock, even when there is no ``smoking
+gun.'' This could help in investigating the exogeneous versus self-organized
+origins in problems such as the causes of major biological extinctions, of
+change of weather regimes and of the climate, in tracing the source of social
+upheaval and wars, and so on. Sornette, Malevergne and Muzy have already shown
+how this concept can be applied concretely to differentiate the effects on
+financial markets of the Sept. 11, 2001 attack or of the coup against Gorbachev
+on Aug., 19, 1991 (exogeneous) from financial crashes such as Oct. 1987
+(endogeneous).
+
+Paper ID: http://arxiv.org/abs/cond-mat/0206047v1
+Authors: D. Sornette, A. Helmstetter
+Published Date: 2002-06-05T03:40:12Z
+
+Title: Spatial Structure of the Internet Traffic
+Summary:   The Internet infrastructure is not virtual: its distribution is dictated by
+social, geographical, economical, or political constraints. However, the
+infrastructure's design does not determine entirely the information traffic and
+different sources of complexity such as the intrinsic heterogeneity of the
+network or human practices have to be taken into account. In order to manage
+the Internet expansion, plan new connections or optimize the existing ones, it
+is thus critical to understand correlations between emergent global statistical
+patterns of Internet activity and human factors. We analyze data from the
+French national `Renater' network which has about two millions users and which
+consists in about 30 interconnected routers located in different regions of
+France and we report the following results. The Internet flow is strongly
+localized: most of the traffic takes place on a `spanning' network connecting a
+small number of routers which can be classified either as `active centers'
+looking for information or `databases' providing information. We also show that
+the Internet activity of a region increases with the number of published papers
+by laboratories of that region, demonstrating the positive impact of the Web on
+scientific activity and illustrating quantitatively the adage `the more you
+read, the more you write'.
+
+Paper ID: http://arxiv.org/abs/cond-mat/0208553v1
+Authors: Marc Barthelemy, Bernard Gondran, Eric Guichard
+Published Date: 2002-08-28T12:52:58Z
+
+Title: Resilience reconsidered: Case histories from disease ecology
+Summary:   We expand the current understanding of ecological resilience to include the
+nested hierarchy of cognitive submodules that particularly, if not uniquely,
+delineates human ecosystems. These modules, ranging from the immune system to
+the local social network, are embedded in a cultural milieu which, to take the
+perspective of the evolutionary anthropologist Robert Boyd, ''is as much a part
+of human biology as the enamel on our teeth''. We begin by extending recent
+treatments of cognitive process as associated with characteristic information
+sources to a certain class of ecosystems through a generalization of
+coarse-graining. In the spirit of the Large Deviations Program, we then import
+renormalization formalism via the Asymptotic Equipartition Theorem to obtain
+punctuated response to parameters of increasing habitat degradation. A Legendre
+transform of an appropriate joint information permits analysis away from
+critical points, and generates the expected quasi-stability in a highly natural
+manner. We interweave the discussion with applications to the public health
+impacts of the massive deurbanization and deindustrialization presently
+afflicting the United States.
+
+Paper ID: http://arxiv.org/abs/q-bio/0310009v2
+Authors: Rodrick Wallace, Deborah Wallace
+Published Date: 2003-10-09T18:16:01Z
+
+Title: Effects of missing data in social networks
+Summary:   We perform sensitivity analyses to assess the impact of missing data on the
+structural properties of social networks. The social network is conceived of as
+being generated by a bipartite graph, in which actors are linked together via
+multiple interaction contexts or affiliations. We discuss three principal
+missing data mechanisms: network boundary specification (non-inclusion of
+actors or affiliations), survey non-response, and censoring by vertex degree
+(fixed choice design), examining their impact on the scientific collaboration
+network from the Los Alamos E-print Archive as well as random bipartite graphs.
+The results show that network boundary specification and fixed choice designs
+can dramatically alter estimates of network-level statistics. The observed
+clustering and assortativity coefficients are overestimated via omission of
+interaction contexts (affiliations) or fixed choice of affiliations, and
+underestimated via actor non-response, which results in inflated measurement
+error. We also find that social networks with multiple interaction contexts
+have certain surprising properties due to the presence of overlapping cliques.
+In particular, assortativity by degree does not necessarily improve network
+robustness to random omission of nodes as predicted by current theory.
+
+Paper ID: http://arxiv.org/abs/cond-mat/0306335v2
+Authors: Gueorgi Kossinets
+Published Date: 2003-06-12T19:38:15Z
+
+Title: ICT-based planning and the missing educational link
+Summary:   The past century ended with an unexpected explosion of Information and
+Communication Technologies (ICT), both in planning/managing public policies,
+and in exchanging knowledge. However, the extent to which ICT-based tools
+increase the level of public knowledge, or help decision makers is still
+uncertain. Although indirectly, the overload of unfiltered Web-based
+information seems able to hamper the knowledge growth of people, particularly
+in some developing communities, whereas Decision Support Systems (DSS) and
+Geographical Information Systems (GIS) prove to be ineffective if managed by
+unskilled planning bodies. Given such warns, this paper outlines how the
+different social and cultural awareness of local communities can affect the
+outcomes of ICT-based tools. It further explores the impacts of ICT-based tools
+on community development and spatial planning, emphasizing the role of proper
+literacy and education for effective management.
+
+Paper ID: http://arxiv.org/abs/cs/0312021v1
+Authors: Domenico Camarda
+Published Date: 2003-12-12T11:36:09Z
+
+Title: Predictability of large future changes in major financial indices
+Summary:   We present a systematic algorithm testing for the existence of collective
+self-organization in the behavior of agents in social systems, with a concrete
+empirical implementation on the Dow Jones Industrial Average index (DJIA) over
+the 20th century and on Hong Kong Hang Seng composite index (HSI) since 1969.
+The algorithm combines ideas from critical phenomena, the impact of agents'
+expectation, multi-scale analysis and the mathematical method of pattern
+recognition of sparse data. Trained on the three major crashes in DJIA of the
+century, our algorithm exhibits a remarkable ability for generalization and
+detects in advance 8 other significant drops or changes of regimes. An
+application to HSI gives promising results as well. The results are robust with
+respect to the variations of the recognition algorithm. We quantify the
+prediction procedure with error diagrams.
+
+Paper ID: http://arxiv.org/abs/cond-mat/0304601v3
+Authors: D. Sornette, W. -X. Zhou
+Published Date: 2003-04-26T06:49:20Z
+
+Title: Demo or Practice: Critical Analysis of the Language/Action Perspective
+Summary:   Despite offering several promising concepts, the Language/Action Perspective
+(LAP) is still not in the mainstream of Information Systems Development (ISD).
+Since at present there is only a limited understanding of LAP theory and
+practice, it remains unclear whether the lack of LAP's impact is due to
+shortcomings in LAP theory itself. One classic problem within ISD is the
+dichotomy between social perspectives and technical perspectives. LAP claims it
+offers a solution to this problem. This paper investigates this claim as a
+means to review LAP theory. To provide a structure to a critical analysis of
+DEMO - an example methodology that belongs to the LAP research community - this
+paper utilizes a paradigmatic framework. This framework is augmented by the
+opinion of several DEMO practitioners by means of an expert discussion. With
+use of a comparative evaluation of LAP theory and DEMO theory, the implication
+of DEMO's reflection upon LAP is determined. The paper concludes by outlining
+an agenda for further research if LAP is to improve its footprint in the field.
+
+Paper ID: http://arxiv.org/abs/cs/0410006v1
+Authors: Mark Dumay
+Published Date: 2004-10-03T20:03:17Z
+
+Title: Suicide: the key role of short range ties
+Summary:   The paper explores the connection between short-range social ties (i.e. links
+with close relatives) and the occurrence of suicide. The objective is to
+discriminate between a model based on social ties and a model based on
+psychological traumas. Our methodological strategy is to focus on instances
+characterized by the severance of some social ties. We consider several
+situations of this kind. (i) Prisoners in the first days after their
+incarceration. (ii) Prisoners in solitary confinement. (iii) Prisoners who are
+transferred from one prison to another. (iv) Prisoners in closed versus open
+prisons. (v) Prisoners in the weeks following their release. (vi) Immigrants in
+the years following their relocation. (vii) Unmarried versus married people.
+  Furthermore, in order to test the impact of major shocks we consider the
+responses in terms of suicides to the following shocks. (i) The attack of
+September 11, 2001 in Manhattan. (ii) The Korean War. (iii) The two world wars.
+(iv) The Great Depression in the United States. (v) The hyperinflation episode
+of 1923 in Germany. Major global traumatic shocks such as 9/11 or wars have no
+influence on suicide rates once changing environment conditions have been
+controlled for.
+  Overall, it turns out that the observations have a natural interpretation in
+terms of short-range ties. In contrast, the trauma model seems unable to
+adequately account for many observations.
+
+Paper ID: http://arxiv.org/abs/physics/0502047v1
+Authors: Bertrand M. Roehner
+Published Date: 2005-02-09T16:35:51Z
+
+Title: Toward alternative metrics of journal impact: A comparison of download
+  and citation data
+Summary:   We generated networks of journal relationships from citation and download
+data, and determined journal impact rankings from these networks using a set of
+social network centrality metrics. The resulting journal impact rankings were
+compared to the ISI IF. Results indicate that, although social network metrics
+and ISI IF rankings deviate moderately for citation-based journal networks,
+they differ considerably for journal networks derived from download data. We
+believe the results represent a unique aspect of general journal impact that is
+not captured by the ISI IF. These results furthermore raise questions regarding
+the validity of the ISI IF as the sole assessment of journal impact, and
+suggest the possibility of devising impact metrics based on usage information
+in general.
+
+Paper ID: http://arxiv.org/abs/cs/0503007v1
+Authors: Johan Bollen, Herbert Van de Sompel, Joan Smith, Rick Luce
+Published Date: 2005-03-03T05:14:47Z
+
+Title: How Far Can We Go Through Social System?: Algorithmic Information Social
+  Theories
+Summary:   The paper elaborates an endeavor on applying the algorithmic
+information-theoretic computational complexity to meta-social-sciences. It is
+motivated by the effort on seeking the impact of the well-known incompleteness
+theorem to the scientific methodology approaching social phenomena. The paper
+uses the binary string as the model of social phenomena to gain understanding
+on some problems faced in the philosophy of social sciences or some traps in
+sociological theories. The paper ends on showing the great opportunity in
+recent social researches and some boundaries that limit them.
+
+Paper ID: http://arxiv.org/abs/nlin/0503040v1
+Authors: Hokky Situngkir
+Published Date: 2005-03-16T20:28:33Z
+
+Title: Importance of Positive Feedbacks and Over-confidence in a
+  Self-Fulfilling Ising Model of Financial Markets
+Summary:   Following a long tradition of physicists who have noticed that the Ising
+model provides a general background to build realistic models of social
+interactions, we study a model of financial price dynamics resulting from the
+collective aggregate decisions of agents. This model incorporates imitation,
+the impact of external news and private information. It has the structure of a
+dynamical Ising model in which agents have two opinions (buy or sell) with
+coupling coefficients which evolve in time with a memory of how past news have
+explained realized market returns. We study two versions of the model, which
+differ on how the agents interpret the predictive power of news. We show that
+the stylized facts of financial markets are reproduced only when agents are
+over-confident and mis-attribute the success of news to predict return to
+herding effects, thereby providing positive feedbacks leading to the model
+functioning close to the critical point. Our model exhibits a rich multifractal
+structure characterized by a continuous spectrum of exponents of the power law
+relaxation of endogenous bursts of volatility, in good agreement with previous
+analytical predictions obtained with the multifractal random walk model and
+with empirical facts.
+
+Paper ID: http://arxiv.org/abs/cond-mat/0503607v2
+Authors: Didier Sornette, Wei-Xing Zhou
+Published Date: 2005-03-25T00:34:57Z
+
+Title: Co-Authorship Networks in the Digital Library Research Community
+Summary:   The field of digital libraries (DLs) coalesced in 1994: the first digital
+library conferences were held that year, awareness of the World Wide Web was
+accelerating, and the National Science Foundation awarded $24 Million (U.S.)
+for the Digital Library Initiative (DLI). In this paper we examine the state of
+the DL domain after a decade of activity by applying social network analysis to
+the co-authorship network of the past ACM, IEEE, and joint ACM/IEEE digital
+library conferences. We base our analysis on a common binary undirectional
+network model to represent the co-authorship network, and from it we extract
+several established network measures. We also introduce a weighted directional
+network model to represent the co-authorship network, for which we define
+$AuthorRank$ as an indicator of the impact of an individual author in the
+network. The results are validated against conference program committee members
+in the same period. The results show clear advantages of PageRank and
+AuthorRank over degree, closeness and betweenness centrality metrics. We also
+investigate the amount and nature of international participation in Joint
+Conference on Digital Libraries (JCDL).
+
+Paper ID: http://arxiv.org/abs/cs/0502056v2
+Authors: Xiaoming Liu, Johan Bollen, Michael L. Nelson, Herbert Van de Sompel
+Published Date: 2005-02-12T00:08:57Z
+
+Title: Spontaneous emergence of contrarian-like behaviour in an opinion
+  spreading model
+Summary:   We introduce stochastic driving in the Sznajd model of opinion spreading.
+This stochastic effect is meant to mimic a social temperature, so that agents
+can take random decisions with a varying probability. We show that a stochastic
+driving has a tremendous impact on the system dynamics as a whole by inducing
+an order-disorder nonequilibrium phase transition. Interestingly, under certain
+conditions, this stochastic dynamics can spontaneously lead to agents in the
+system who are analogous to Galam's contarians.
+
+Paper ID: http://arxiv.org/abs/physics/0508029v1
+Authors: Marta S. de la Lama, Juan M. Lopez, Horacio S. Wio
+Published Date: 2005-08-03T16:23:21Z
+
+Title: Outlier Detection by Logic Programming
+Summary:   The development of effective knowledge discovery techniques has become in the
+recent few years a very active research area due to the important impact it has
+in several relevant application areas. One interesting task thereof is that of
+singling out anomalous individuals from a given population, e.g., to detect
+rare events in time-series analysis settings, or to identify objects whose
+behavior is deviant w.r.t. a codified standard set of "social" rules. Such
+exceptional individuals are usually referred to as outliers in the literature.
+  Recently, outlier detection has also emerged as a relevant KR&R problem. In
+this paper, we formally state the concept of outliers by generalizing in
+several respects an approach recently proposed in the context of default logic,
+for instance, by having outliers not being restricted to single individuals
+but, rather, in the more general case, to correspond to entire (sub)theories.
+We do that within the context of logic programming and, mainly through
+examples, we discuss its potential practical impact in applications. The
+formalization we propose is a novel one and helps in shedding some light on the
+real nature of outliers. Moreover, as a major contribution of this work, we
+illustrate the exploitation of minimality criteria in outlier detection. The
+computational complexity of outlier detection problems arising in this novel
+setting is thoroughly investigated and accounted for in the paper as well.
+Finally, we also propose a rewriting algorithm that transforms any outlier
+detection problem into an equivalent inference problem under the stable model
+semantics, thereby making outlier computation effective and realizable on top
+of any stable model solver.
+
+Paper ID: http://arxiv.org/abs/cs/0409019v2
+Authors: Fabrizio Angiulli, Gianluigi Greco, Luigi Palopoli
+Published Date: 2004-09-09T14:20:02Z
+
+Title: The Impact of Social Networks on Multi-Agent Recommender Systems
+Summary:   Awerbuch et al.'s approach to distributed recommender systems (DRSs) is to
+have agents sample products at random while randomly querying one another for
+the best item they have found; we improve upon this by adding a communication
+network. Agents can only communicate with their immediate neighbors in the
+network, but neighboring agents may or may not represent users with common
+interests. We define two network structures: in the ``mailing-list model,''
+agents representing similar users form cliques, while in the ``word-of-mouth
+model'' the agents are distributed randomly in a scale-free network (SFN). In
+both models, agents tell their neighbors about satisfactory products as they
+are found. In the word-of-mouth model, knowledge of items propagates only
+through interested agents, and the SFN parameters affect the system's
+performance. We include a summary of our new results on the character and
+parameters of random subgraphs of SFNs, in particular SFNs with power-law
+degree distributions down to minimum degree 1. These networks are not as
+resilient as Cohen et al. originally suggested. In the case of the widely-cited
+``Internet resilience'' result, high failure rates actually lead to the
+orphaning of half of the surviving nodes after 60% of the network has failed
+and the complete disintegration of the network at 90%. We show that given an
+appropriate network, the communication network reduces the number of sampled
+items, the number of messages sent, and the amount of ``spam.'' We conclude
+that in many cases DRSs will be useful for sharing information in a multi-agent
+learning system.
+
+Paper ID: http://arxiv.org/abs/cs/0511011v1
+Authors: Hamilton Link, Jared Saia, Terran Lane, Randall A. LaViolette
+Published Date: 2005-11-02T23:44:34Z
+
+Title: Journal Status
+Summary:   The status of an actor in a social context is commonly defined in terms of
+two factors: the total number of endorsements the actor receives from other
+actors and the prestige of the endorsing actors. These two factors indicate the
+distinction between popularity and expert appreciation of the actor,
+respectively. We refer to the former as popularity and to the latter as
+prestige. These notions of popularity and prestige also apply to the domain of
+scholarly assessment. The ISI Impact Factor (ISI IF) is defined as the mean
+number of citations a journal receives over a 2 year period. By merely counting
+the amount of citations and disregarding the prestige of the citing journals,
+the ISI IF is a metric of popularity, not of prestige. We demonstrate how a
+weighted version of the popular PageRank algorithm can be used to obtain a
+metric that reflects prestige. We contrast the rankings of journals according
+to their ISI IF and their weighted PageRank, and we provide an analysis that
+reveals both significant overlaps and differences. Furthermore, we introduce
+the Y-factor which is a simple combination of both the ISI IF and the weighted
+PageRank, and find that the resulting journal rankings correspond well to a
+general understanding of journal status.
+
+Paper ID: http://arxiv.org/abs/cs/0601030v1
+Authors: Johan Bollen, Marko A. Rodriguez, Herbert Van de Sompel
+Published Date: 2006-01-09T16:56:01Z
+
+Title: Fuzzy Cognitive Maps Of Local People Impacted By Dam Construction: Their
+  Demands Regarding Resettlement
+Summary:   Fuzzy cognitive mapping was used to understand the wants and desires of local
+people before resettlement. Variables that the affected people think will
+increase their welfare during and after dam construction were determined.
+Simulations were done with their cumulative social cognitive map to determine
+which policy options would most increase their welfare. The construction of
+roads, job opportunities, advance payment of condemnation value, and schools
+are central variables that had the most effect on increasing people's income
+and welfare. The synergistic effects of variables demonstrated that the
+implementation of different policies not only add cumulatively to the people's
+welfare but also have an increased effect.
+
+Paper ID: http://arxiv.org/abs/q-bio/0601032v1
+Authors: Uygar Ozesmi
+Published Date: 2006-01-21T19:20:07Z
+
+Title: Ferromagnetic fluid as a model of social impact
+Summary:   The paper proposes a new model of spin dynamics which can be treated as a
+model of sociological coupling between individuals. Our approach takes into
+account two different human features: gregariousness and individuality. We will
+show how they affect a psychological distance between individuals and how the
+distance changes the opinion formation in a social group. Apart from its
+sociological aplications the model displays the variety of other interesting
+phenomena like self-organizing ferromagnetic state or a second order phase
+transition and can be studied from different points of view, e.g. as a model of
+ferromagnetic fluid, complex evolving network or multiplicative random process.
+
+Paper ID: http://arxiv.org/abs/physics/0603248v1
+Authors: Piotr Fronczak, Agata Fronczak, Janusz A. Hołyst
+Published Date: 2006-03-29T10:09:27Z
+
+Title: Efficient generation of rotating workforce schedules
+Summary:   Generating high-quality schedules for a rotating workforce is a critical task
+in all settings where a certain staffing level must be guaranteed beyond the
+capacity of single employees, such as for instance in industrial plants,
+hospitals, or airline companies. Results from ergonomics \cite{BEST91} indicate
+that rotating workforce schedules have a profound impact on the health and
+social life of employees as well as on their performance at work. Moreover,
+rotating workforce schedules must satisfy legal requirements and should also
+meet the objectives of the employing organization. We describe our solution to
+this problem. A basic design decision was to aim at quickly obtaining
+high-quality schedules for realistically sized problems while maintaining human
+control. The interaction between the decision maker and the algorithm therefore
+consists in four steps: (1) choosing a set of lengths of work blocks (a work
+block is a sequence of consecutive days of work shifts), (2) choosing a
+particular sequence of work and days-off blocks among those that have optimal
+weekend characteristics, (3) enumerating possible shift sequences for the
+chosen work blocks subject to shift change constraints and bounds on sequences
+of shifts, and (4) assignment of shift sequences to work blocks while
+fulfilling the staffing requirements. The combination of constraint
+satisfaction and problem-oriented intelligent backtracking algorithms in each
+of the four steps allows to find good solutions for real-world problems in
+acceptable time. Computational results from real-world problems and from
+benchmark examples found in the literature confirm the viability of our
+approach. The algorithms are now part of a commercial shift scheduling software
+package.
+
+Paper ID: http://arxiv.org/abs/cs/0002018v2
+Authors: Nysret Musliu, Johannes Gaertner, Wolfgang Slany
+Published Date: 2000-02-29T16:56:46Z
+
+Title: Modeling hierarchical structures - Hierarchical Linear Modeling using
+  MPlus
+Summary:   The aim of this paper is to present the technique (and its linkage with
+physics) of overcoming problems connected to modeling social structures, which
+are typically hierarchical. Hierarchical Linear Models provide a conceptual and
+statistical mechanism for drawing conclusions regarding the influence of
+phenomena at different levels of analysis. In the social sciences it is used to
+analyze many problems such as educational, organizational or market dilemma.
+This paper introduces the logic of modeling hierarchical linear equations and
+estimation based on MPlus software. I present my own model to illustrate the
+impact of different factors on school acceptation level.
+
+Paper ID: http://arxiv.org/abs/physics/0605129v1
+Authors: Magdalena Jelonek
+Published Date: 2006-05-16T08:21:03Z
+
+Title: On the suitability of the 2 x 2 games for studying reciprocal
+  cooperation and kin selection
+Summary:   The 2 x 2 games, in particular the Prisoner's Dilemma, have been extensively
+used in studies into reciprocal cooperation and, to a lesser extent, kin
+selection. This paper examines the suitability of the 2 x 2 games for modelling
+the evolution of cooperation through reciprocation and kin selection. This
+examination is not restricted to the Prisoner's Dilemma, but includes the other
+non-trivial symmetric 2 x 2 games. We show that the popularity of the
+Prisoner's Dilemma for modelling social and biotic interaction is justified by
+its superiority according to these criteria. Indeed, the Prisoner's Dilemma is
+unique in providing the simplest support for reciprocal cooperation, and
+additive kin-selected altruism. However, care is still required in choosing the
+particular Prisoner's Dilemma payoff matrix to use. This paper reviews the
+impact of non-linear payoffs for the application of Hamilton's rule to typical
+altruistic interactions, and derives new results for cases in which the roles
+of potential altruist and beneficiary are separated. In doing so we find the
+same equilibrium condition holds in continuous games between relatives, and in
+discrete games with roles.
+
+Paper ID: http://arxiv.org/abs/cs/0306128v3
+Authors: James A. R. Marshall
+Published Date: 2003-06-24T14:13:46Z
+
+Title: Assessing the Impact of Student Learning Style Preferences
+Summary:   Students express a wide range of preferences for learning environments. We
+are trying to measure the manifestation of learning styles in various learning
+environments. In particular, we are interested in performance in an environment
+that disagrees with the expressed learning style preference, paying close
+attention to social (group vs. individual) and auditory (those who prefer to
+learn by listening) environments. These are particularly relevant to
+activity-based curricula which typically emphasize group-work and de-emphasize
+lectures. Our methods include multiple-choice assessments, individual student
+interviews, and a study in which we attempt to isolate the learning
+environment.
+
+Paper ID: http://arxiv.org/abs/physics/0608296v1
+Authors: Stacey M. Davis, Scott V. Franklin
+Published Date: 2006-08-30T14:38:35Z
+

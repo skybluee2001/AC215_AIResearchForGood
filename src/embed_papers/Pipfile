@@ -6,11 +6,19 @@ verify_ssl = true
 [dev-packages]
 
 [packages]
-google-cloud-storage = "*"
+numpy = "*"
+user-agent = "*"
+requests = "*"
 langchain-community = "*"
-langchain-openai = "*"
+google-cloud-storage = "*"
+google-generativeai = "*"
+google-cloud-aiplatform = "*"
+pandas = "*"
+langchain = "*"
+llama-index = "*"
+chromadb = "*"
 langchain-chroma = "*"
 langchain-huggingface = "*"
 
 [requires]
-python_version = "3.8"
+python_version = "3.12"

@@ -1,0 +1,1908 @@
+%\documentclass[twocolumn,showpacs,preprintnumbers,superscriptaddress,amsmath,amssymb,pre]{revtex4}
+%\documentclass[preprint,showpacs,preprintnumbers,superscriptaddress,amsmath,amssymb, pre]{revtex4}
+\documentclass{elsart}
+
+\usepackage{natbib}
+\usepackage{epsfig}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{subfigure}
+%\usepackage{hyperref}
+%\bibliographystyle{h-elsevier3}
+%\bibliographystyle{elsart-harv}
+\newcommand \be{\begin{equation}}
+\newcommand \ba{\begin{eqnarray}}
+\newcommand \ee{\end{equation}}
+\newcommand \ea{\end{eqnarray}}
+
+\begin{document}
+\begin{frontmatter}
+
+\title{Importance of Positive Feedbacks and Over-confidence
+in a Self-Fulfilling Ising Model of Financial Markets}
+
+\author[ucla,nice]{\small{Didier Sornette}\thanksref{EM}},
+\author[ecust]{\small{Wei-Xing Zhou}}
+
+\address[ucla]{Institute of Geophysics and Planetary Physics and
+Department of Earth and Space Sciences, University of California,
+Los Angeles, CA 90095}
+
+\address[nice]{Laboratoire de Physique de la Mati\`ere Condens\'ee, CNRS
+UMR 6622 and Universit\'e de Nice-Sophia Antipolis, 06108 Nice
+Cedex 2, France}
+
+\address[ecust]{State Key Laboratory of Chemical Reaction Engineering,\\
+East China University of Science and Technology, Shanghai 200237,
+China}
+
+\thanks[EM]{Corresponding author. Department of Earth and Space
+Sciences and Institute of Geophysics and Planetary Physics,
+University of California, Los Angeles, CA 90095-1567, USA. Tel:
++1-310-825-2863; Fax: +1-310-206-3051. {\it E-mail address:}\/
+sornette@moho.ess.ucla.edu (D. Sornette)\\
+http://www.ess.ucla.edu/faculty/sornette/}
+
+
+\begin{abstract}
+
+Following a long tradition of physicists who have noticed that the
+Ising model provides a general background to build realistic
+models of social interactions, we study a model of financial price
+dynamics resulting from the collective aggregate decisions of
+agents. This model incorporates imitation, the impact of external
+news and private information. It has the structure of a dynamical
+Ising model in which agents have two opinions (buy or sell) with
+coupling coefficients which evolve in time with a memory of how
+past news have explained realized market returns. We study two
+versions of the model, which differ on how the agents interpret
+the predictive power of news. We show that the stylized facts of
+financial markets are reproduced only when agents are
+over-confident and mis-attribute the success of news to predict
+return to herding effects, thereby providing positive feedbacks
+leading to the model functioning close to the critical point. Our
+model exhibits a rich multifractal structure characterized by a
+continuous spectrum of exponents of the power law relaxation of
+endogenous bursts of volatility, in good agreement with previous
+analytical predictions obtained with the multifractal random walk
+model and with empirical facts.
+
+\bigskip\noindent{\it{JEL classification}}: C73 - Stochastic and
+Dynamic Games; Evolutionary Games
+
+\end{abstract}
+
+\begin{keyword}
+Ising model; Overconfidence; Imitation and herding; Econophysics
+\end{keyword}
+\end{frontmatter}
+
+\newpage
+
+Biographies:
+
+Didier SORNETTE is a professor at the University of
+California, Los Angeles and a research director of CNRS, the
+French National Center for Scientific Research. He received his
+PhD in Statistical Physics from the University of Nice, France.
+His current research focuses on the modelling and prediction of
+catastrophic events in complex systems, with applications to
+finance, economics, seismology, geophysics, and biology.
+
+Wei-Xing ZHOU is an associate research professor at East China
+University of Science and Technology. He received his PhD in
+Chemical Engineering from East China University of Science and
+Technology in 2001. His current research interest focuses on the
+modelling and prediction of catastrophic events in complex
+systems.
+
+{\large{\bf{Acknowledgements}}}
+
+We are grateful to Carlos Pedro Gon\c{c}alves,
+Jean-Fran\c{c}ois Muzy and Matthieu Wyart for stimulating
+discussions. The research by W.-X. Zhou was supported by
+NSFC/PetroChina jointly through a major project on multiscale
+methodology (No. 20490200).
+
+
+
+\newpage
+
+
+\section{Introduction}
+\label{s1:introduction}
+
+Many works borrow concepts from the theory of the Ising models and
+of phase transitions to model social interactions and organization
+\citep[see,~e.g.,][]{PhysicsToday,Montroll}. In particular,
+\citet{Orlean1,Orlean2,Orlean3,Orlean4,Orlean5,Orlean6} has
+captured the paradox of combining rational and imitative behavior
+under the name ``mimetic rationality,'' by developing models of
+mimetic contagion of investors in the stock markets which are
+based on irreversible processes of opinion forming. As recalled in
+the Appendix, the dynamical updating rules of the Ising model are
+obtained in a natural way to describe the formation of decisions
+of boundedly rational agents \citep{RS00}. The Ising  model is one
+of the simplest models describing the competition between the
+ordering force of imitation or contagion and the disordering
+impact of private information or idiosyncratic noise
+\citep{Ising1}. In the same class of minimal models of emergent
+social behaviors is the model of herding based on percolation
+clusters proposed by \citet{Contboudaaq}.
+
+Starting with a framework suggested by
+\citet{Blume1,Blume2,BrockHomme1,Durlauf1,Durlauf2,Durlauf3,Durlauf4,Durlauf5,Durlauf6},
+\citet{Phanetal} summarize the formalism starting
+with different implementation of the agents' decision processes whose
+aggregation is inspired from statistical mechanics to
+account for social influence in individual decisions.
+\citet{LuxMarchesi,LuxMarchesi2,BrockHomme4,KirmTey} have also
+developed related models in which agents' successful forecasts
+reinforce the forecasts. Such models have been found to generate swings
+in opinions, regime changes and long memory. An essential feature of
+these models is that agents are wrong for some of the time, but,
+whenever they are in the majority they are essentially right. Thus they
+are not systematically irrational \citep{KirmRev}.
+
+Here, we study a model of interacting agents buying and selling a
+single financial asset based on an extension of the Ising model.
+The agents make their decision based upon the combination of three
+different information channels: mutual influences or imitation,
+external news and idiosyncratic judgements. Agents update their
+willingness to extract information from the other agents' behavior
+based on their assessment of how past news have explained market
+returns. Agents update their propensity to herding according to
+what degree the news have been successful in predicting returns.
+We  distinguish between two possible updating rules: rational and
+irrational. In the rational version, agents decrease their
+propensity to imitate if news have been good predictors of returns
+in the recent past. In the irrational version, agents
+mis-attribute the recent predictive power of news to their
+collective action, leading to positive self-reinforcement of
+imitation. We show that the model can reproduce the major
+empirical stylized facts of financial stock markets only when the
+updating of the strength of imitation is irrational, providing a
+direct test and the evidence for the importance of misjudgement of
+agents biased toward herding.
+
+Section 2 specifies the model and compares it with previous
+related versions. Section 3 presents the results of exhaustive
+searches in the space of the major parameters of the two versions
+of the model. We describe in turn the distributions of returns at
+multiple time scales, the auto-correlations of the returns and of
+the volatility (absolute value of the returns) at different time
+scales, the multifractal properties of the structure functions of
+the absolute values of returns and their consequences in the
+characteristic relaxation of the volatility after bursts of
+endogenous versus exogenous origins. Section 4 concludes.
+
+
+\section{Model of imitation versus news impact}
+
+\subsection{Definition of the model \label{jfjs}}
+
+We study the following model of $N$ agents interacting within a
+network ${\mathcal{N}}$ (taken here for simplicity as the set of
+nodes linked by nearest-neighbor bonds on the square lattice; this
+implies that an agent sitting at a node interacts directly only
+with her four neighbors). At each time step $t$, each agent $i$
+places a buy ($s_i(t)=+1$) or sell ($s_i(t)=-1$) order. Her
+decision $s_i(t)$ is determined by the following process
+\begin{equation}
+ s_i(t)={\rm{sign}}\left[\sum_{j\in{\mathcal{N}}}K_{ij}(t) {\rm E}[s_j](t)+
+ \sigma_i(t) G(t) +\epsilon_i(t)\right]~,
+ \label{Eq:Sit22}
+\end{equation}
+where ${\rm E}[s_j](t)$ is the expectation formed by agent $i$ on
+what will be the decision of agent $j$ at the same time $t$. The
+left-hand-side and the right-hand-side are in principle evaluated
+simultaneously at the same time to capture the anticipation by a
+given agent $i$ of the actions of the other agents which are going
+to determine the change of the market price from $t-1$ to $t$.
+Indeed, we assume that the decisions $s_i(t)$ are formed slightly
+before $t$, in the period from $t-1$ to $t$, when the news $G(t)$
+has become available in the interval from $t-1$ to $t$, and are
+then converted into price at $t$ by the market clearing process.
+In principle, the best strategy for agent $i$ is indeed to base
+her action for the next investment period on her best guess of the
+{\it present} action of all other agents for the next investment
+period (see below).
+
+Expression (\ref{Eq:Sit22}) embodies three contributions to the
+decision making process of agent $i$:
+\begin{itemize}
+\item {\bf Imitation through the term
+$\sum_{j\in{\mathcal{N}}}K_{ij}(t) {\rm E}[s_j](t)$}. The kernel
+$K_{ij}$ is the relative propensity of the trader $i$ to be
+contaminated by the sentiment of her friend $j$ (coefficient of
+influence of $j$ on $i$). In other words, $K_{ij}(t)$ quantifies
+the strength of the influence of agent $j$'s expected decision on
+the decision of agent $i$, which evolves with time as we soon
+specify. Due to the heterogeneity of the traders, $K_{ij}\ne
+K_{ji}$, generally. The sum $\sum_{j\in{\mathcal{N}}}$ is carried
+over all agents $j$ who are in direct contact with agent $i$.
+
+\item {\bf Impact of external news through the term $\sigma_i(t)
+G(t)$}. $G(t)$ quantifies the impact of the external news $I(t)$
+on the decision of agent $i$. We follow the specification of the
+artificial stock market model formulated by \citet{G03AFM}, and
+assume that $I(t)$ follows a standard normal distribution and
+\begin{equation}
+ G(t)=\left\{
+ \begin{array}{rl}
+ 1, & {\rm{if}}~ I(t)>0~,\\
+ -1, & {\rm{if}}~ I(t) \leq 0~.
+ \end{array}
+ \right.
+\end{equation}
+$\sigma_i(t)$ quantifies the relative impact at time $t$ of the
+news' positive or negative outlook on the decision process of
+agent $i$. In other words, $\sigma_i$ is the relative sensitivity
+of agent's sentiment to the news.
+
+\item {\bf Idiosyncratic judgement associated with private
+information}. $\epsilon_i(t)$ embodies the idiosyncratic content
+of the decision of agent $i$ accounting for the interpretation of
+her own private information. We take it as being normally
+distributed around zero with a constant (homogeneous) standard
+deviation equal to unity, without loss of generality, since the
+relative strength of the three terms is already captures by the
+units of $K_{ij}$'s and $\sigma_i$'s.
+\end{itemize}
+
+The market price is updated according to \be p(t)=p(t-1)
+\exp[r(t)]~, \label{ngmldl} \ee so that $p(t)$ and $r(t)$ are
+known at the end of the interval from $t-1$ to $t$. The return
+$r(t)$ is determined according to
+\begin{equation}
+ r(t) = \frac{\sum_{i\in{\mathcal{N}}}s_i(t)}{\lambda N}~,
+ \label{Eq:rt}
+\end{equation}
+where $N$ is the number of traders in $\mathcal{N}$ and $\lambda$
+measures the market depth or liquidity and is taken constant. In
+expression (\ref{Eq:rt}), the decisions $s_i(t)$ are formed
+slightly before $t$, in the period from $t-1$ to $t$ and are then
+converted into price at $t$ by the market clearing process.
+
+We account for the adaptive nature of agents and their learning
+abilities by updating the coefficient of influence of agent $j$ on
+agent $i$ according to the following rule:
+\begin{equation}
+K_{ij}(t) = b_{ij} +  \alpha_{i} K_{ij}(t-1) +  \beta r(t-1)
+G(t-1) ~.
+ \label{Eq:Kimemo}
+\end{equation}
+In this, we follow the large literature on the rationality of
+imitation and of adaptive behavior when lacking sufficient
+information or when this information seems unreliable \citep[see,
+e.g.,][]{BrockHomme1,BrockHomme1bis,BrockHomme2,BrockHomme3,BrockHomme4,
+BrockHomme5,Lebaronrev,Kirman,Lux1,Lux2,LuxMarchesi,LuxMarchesi2,Taka1,
+Hubermancrash,Solomon1,Taka2,Solomon2,Gaunersdorfer}. The
+coefficients $b_{ij}$ quantify the intrinsic imitation influence
+of agent $j$ on agent $i$ in absence of other effects. For
+$\alpha_i=\beta=0$, we recover a constant coefficient of
+influence, which derives from a simple argument of bounded
+rationality recalled in the Appendix with (\ref{jgfhha}). The
+coefficient $\alpha_i>0$ (possibly different from one agent to
+another) quantifies the progressive loss of memory of past
+influences on the present. The last term with $\beta \neq 0$
+quantifies how agent $i$ updates her propensity for imitation
+based on the role of the exogenous news $G(t)$ in determining the
+sign and amplitude of the observed return in the preceding time
+period. This update depends upon whether the news $G(t-1)$ known
+between time $t-2$ and $t-1$ has the same sign as the price
+variations from $t-2$ to $t-1$, i.e., the same sign as the return
+$r(t-1)$ defined by (\ref{ngmldl}). In addition to the sign, the
+amplitude of the return is also taken into account in the updating
+rule of the coefficient $K_{ij}(t)$ quantifying the propensity to
+imitate: indeed, a small amplitude of the return has low
+psychological as well as financial consequences and should not
+count as much as a large amplitude of the return. The simplest
+specification is to take into account the impact of the amplitude
+of the return linearly in its size, hence the form $\beta r(t)
+G(t-1)$ in (\ref{Eq:Kimemo}). Stronger nonlinear dependence is
+probably more relevant \citep{PandeyStauffer,IS,SI} but is not
+considered further here to keep the discussion simple.
+\citet{prlrandis} have considered a simpler version in which each
+$K_{ij}(t)$ is purely random and is constructed as the sum of two
+random noises, one which is common to all coupling coefficients
+and one which is specific to it. They are able to reproduce
+volatility clustering and a power law distribution of returns at a
+single fixed time scale.
+
+\cite{G03AFM} considered this model (\ref{Eq:Kimemo}) with
+$\alpha_i=0$, i.e., with no memory of past influence on present
+influence, which leads the time series of $K_{ij}(t)$ looking like
+a white-noise process. Our addition of the memory effect modifies
+this white-noise structure into a Ornstein-Uhlenbeck type noise,
+tending to a random-walk-like process for $\alpha_i=1$. With the
+new term $\alpha_i \neq 0$, $K_{ij}(t)$ keeps a memory of past
+successes that the news had on predicting the stock market moves
+over approximately $1/(1-\alpha_{i})$ time steps. $\alpha_{i}$
+thus characterizes the strength of the persistence of the links of
+agent $i$ with other agents.
+
+The sign of the coefficient $\beta$ is crucial.
+\begin{enumerate}
+\item For $\beta <0$, agent $i$ is less and less influenced by
+other agents, the better has been the success of the news in
+determining the direction and amplitude of the market return. This
+process is self-reinforcing since, as $K_{ij}$ decreases, the
+dominant term becomes $ \sigma_i(t) G(t)$, which further ensures
+that the news correctly predict the decision of agents and
+therefore the direction of the market move, thus decreasing
+further the coefficient of influence $K_{ij}$. Reciprocally,
+agents tends to be more influenced by others when the news seems
+to incorrectly predict the direction of the market. The news being
+not reliable, the agents turn to other agents, believing that
+others may have useful information (see below and the Appendix for
+an elaboration of this argument).
+
+Taking a negative $\beta$ corresponds to agents behaving according
+to standard rational expectations with respect to the flow of
+external news. If the stock market is in agreement with the news
+most of the time, a rational agent would conclude that the impact
+of imitation, of herding, of trend following and of other
+endogenously generated positive feedbacks, is minor and the news
+are the dominating factor. Indeed, standard economics views the
+stock market as a machine transforming news into prices and the
+market is efficient when all news have been correctly incorporated
+and are continuously incorporated into the market prices. In our
+framework, this situation arises when the strategy
+$s_i(t)={\rm{sign}}[G(t)]$ consisting in following the news is
+found at least as good as or better than (\ref{Eq:Sit22}). The
+agent would in this case decrease its propensity $K$ to imitate,
+and continue to do so as long as the news are most of the time in
+agreement with the stock market moves. We can thus summarize this
+case  $\beta <0$ as describing ``boundedly rational'' agents.
+
+\item For $\beta >0$, the more the news predict the direction of
+the market, the more the agents imitate other agents. In other
+words, there is a reinforcement of the influence between agents
+when the news and the stock market return match at the previous
+period. This is the ``irrational'' case where agents either
+mis-attribute the origin of the market moves to herding rather
+than to the impact of news, or misinterpret the exogenous
+character of news in terms of endogenous herding or infer that
+other agents will be following more eagerly as a group the
+direction given by the news.
+
+The regime $\beta>0$ may result from several mechanism.
+\begin{itemize}
+\item {\bf Mutually-reinforcing optimism}. When the market is
+rising ($r(t-1)>0$) and the news are good ($G(t-1)=1$), the agents
+may seek each other in order to determine if the rise can be
+sustained: if the agent's neighbors are all bearish, then the
+agent interprets this as a sign that the rise cannot be sustained
+due to a lack of majority support; if the friends are bullish, the
+agent is encouraged to feel optimistic, in the sense that more
+good news may be on the way. It is thus not so much the price rise
+or fall that agents try to predict and reflect but rather the
+continuation of good news (or bad news) in the future and whether
+they expect or not the good news to continue. Since a rise in the
+market is the result of more people feeling optimistic that more
+good news are on the way, then the optimism is spreading like an
+epidemic and the market rises, reinforcing the influence
+coefficient $K_{ij}$ (called propensity to be influenced by the
+felling of others by \cite{G03AFM}).
+
+\item {\bf Overconfidence}. Another mechanism is the tendency for
+humans to exhibit overconfidence in their abilities, either
+individually or as a group. If they see that the stock market has
+moved in the same direction as the news indicated, they may
+conclude that the information provided by the other agents has
+been valuable, since the stock market is supposed to follow the
+rule of the majority. Agents may thus be tempted to increase their
+imitation behavior as long as news and stock market continue to
+match. Or said differently, they attribute a larger value in the
+prediction of the news which they interpret as being influenced by
+the majority opinion. Indeed, experiments committed by
+\cite{Darkefreedman} show that a lucky event can lead to
+overconfidence. \cite{heathgonz} have also compared decisions made
+alone to decisions made following interactions with others, and
+shown that, while interaction did not increase decision accuracy
+or meta-knowledge, subjects frequently showed stable or increasing
+confidence when they interacted with others, even with those who
+disagreed with them \citep[see
+also][]{Savoybeitel,Slaterrouner,robertscarl,Ropbythor}. A
+possible interpretation is that the interaction serves the role of
+rationalizing the subjects' decisions rather than collecting
+valuable information. In the same spirit, \citet{Sieck} have shown
+that exposition to others of the rationale behind decisions
+increase markedly subjects' confidence that their choices were
+appropriate.
+
+\end{itemize}
+
+\end{enumerate}
+
+In summary, the model contains the following general ingredients:
+(i) the agents make decisions based on a combination of three
+ingredients: imitation, news and private information; they are
+boundedly rational; (ii) traders are heterogeneous ($K_{ij}$ and
+$\sigma_i$); (iii) The propensity to imitate and herd is evolving
+adaptively as an interpretation that the agents make of past
+successes of the news to predict the direction of the market.
+
+
+\subsection{Specification of the updates of expectations of
+other agents' decisions \label{mgmlmsls}}
+
+The model is completely specified once the algorithm, used to
+construct how an agent estimates her expectation ${\rm E}[s_j](t)$
+of other agents' decisions in  expression (\ref{Eq:Sit22}), is
+given. Three possibilities can be considered.
+\begin{itemize}
+\item ${\rm E}[s_j](t) = s_j(t-1)$: agent $i$ expects a
+persistence of the other agents' decisions, similarly to a
+martingale condition; in absence of any information other than the
+past actions, the next predicted action is the last one. This
+leads to transform (\ref{Eq:Sit22}) into the prescription
+\begin{equation}
+ s_i(t)={\rm{sign}}\left[\sum_{j\in{\mathcal{N}}}K_{ij}(t)s_j(t-1)+
+ \sigma_i(t) G(t) +\epsilon_i(t)\right]~.
+ \label{Eq:Sit}
+\end{equation}
+Without the term $\sigma_i(t) G(t)$, this was the model adopted by
+\cite{JLS00IJTAF} to develop a theory of herding to explain
+financial bubbles as regimes of strong imitation between agents.
+\citet{Kaizoji} have also studied the
+dynamics of a stock market with heterogeneous agents in
+the framework of a recently proposed spin model for the emergence of
+bubbles and crashes.
+The Appendix recalls the derivation by \cite{RS00} showing how
+this specification is a natural consequence of bounded rationality
+of agents.
+
+\item ${\rm E}[s_j](t) = s_j(t)$: each agent $i$ has access to the
+information of the action of other traders instantaneously and she
+can not do better than use it. Computationally, the solution ${\rm
+E}[s_j](t) = s_j(t)$ is self-consistent since $s_i(t)$ depends on
+$s_j(t)$ which itself depends on the former. Such self-consistent
+formulation can be solved by using an iterative algorithm as
+follows
+\begin{equation}
+{\rm E}[s_j](t) = \lim_{k\to\infty}s_j^{[k]}(t)~, \label{Eq:Esi}
+\end{equation}
+ where
+\begin{equation}
+ s_i^{[k+1]}(t)={\rm{sign}}\left[\sum_{j\in{\mathcal{N}}}K_{ij}(t) s_i^{[k]}(t)+
+ \sigma_i(t) G(t) +\epsilon_i(t)\right]
+ \label{Eq:Si2Iter}
+\end{equation}
+with, for instance, the starting condition
+$s_i^{[0]}(t)=s_i(t-1)$.
+
+\item Information cascade along a given path $i=1,2,\cdots,N$
+where the ordered sequence of indices $i$ encodes the curvilinear
+abscissa along a path linking all agents, in the spirit of the
+information cascades \citep{Welch1992,Bikhchandani}. In such a
+scheme, ${\rm E}[s_j](t) = s_j(t-1)$ if $j > i$ and ${\rm
+E}[s_j](t) = s_j(t)$ if $j < i$ when considering agent $i$. In
+other words, we have
+\begin{equation}
+ {\rm E}[s_j](t)=H(j-i) s_j(t-1)+H(i-j) s_j(t)~,
+ \label{Eq:Si3Iter}
+\end{equation}
+where $H$ is the Heaviside function.
+In the literature on adaptive learning, this procedure is
+said to be backward-looking, because it does not model the other agents'
+future behavior given all past information, for instance, because agents
+are not able to form beliefs about the other agents' future choices.
+These rather naive precedures have been suggested by psychologists and
+animal behaviorists in the 1950s and have been tested in laboratory
+settings.
+
+\end{itemize}
+
+
+
+\subsection{Restriction to model \citep{G03AFM} with $\alpha_i=0$
+corresponding to the absence of memory of the coefficients
+$K_{ij}$'s of imitation \label{mgmlls}}
+
+Our model is a straightforward generalization of the artificial
+stock market model formulated by \cite{G03AFM}, in which the
+coefficients $K_{ij}$ of the influence of $j$ on $i$ are taken
+identical for all $j$'s and are updated as follows:
+\begin{equation}
+ K_{ij}(t) = K_i(t) = b_i + \beta r(t-1) G(t-1)~.
+ \label{Eq:ASMKi}
+\end{equation}
+The coefficients $b_i$'s capture the ``natural'' propensity of
+humans for imitation, which may vary from agent to agent. There
+are drawn at the beginning of the simulation from a uniform
+distribution between $0$ and some maximum positive value and
+remain fixed thereafter during the dynamics. The main difference
+between (\ref{Eq:ASMKi}) and our specification (\ref{Eq:Kimemo})
+is the absence of the persistence or memory of $K_{ij}(t)$ on its
+past values in (\ref{Eq:ASMKi}).
+
+Based on numerical simulations and synthesis, \cite{G03AFM} argues
+that the model (\ref{Eq:Sit22}) using the implementation
+(\ref{Eq:Si3Iter}) corresponding to an information cascade along a
+specific path and with (\ref{Eq:ASMKi}) reproduce all the
+important stylized facts of the stock market only for $\beta > 0$.
+This is interesting but actually not quite correct. Consider, for
+instance, the following parameters $b_{\max} = 0.22\sim 0.24$,
+$\sigma_{\max} = 0.14 \sim 0.15$ and $CV = 0.8 \sim 0.9$, which
+are recommended by \cite{G03AFM} to reproduce the main stylized
+facts (fat tailed distributions of returns, clustering of
+volatility, bubbles, crashes). The problem is that the time series
+of returns generated with these parameters have unrealistic
+bimodal distributions of returns, as shown in
+Fig.~\ref{Fig:ReturnHist:Carlos}. The origin of this bimodal
+structure results from the fact that the model explores the
+ordered regime of the Ising model too often, corresponding roughly
+speaking to an average coupling constant $\langle K_i \rangle$
+larger that the critical Ising value $K_c$. In this case, agents
+form a crowd with a majority opinion which can flip with time
+between $\pm 1$ due to the feedback process of the news and return
+dynamics on the coupling coefficient. In other words, the two
+bumps of the distribution of returns are direct signatures of the
+existence of the two spontaneous ordered states of the Ising model
+when the coupling coefficient is above its critical value. The
+dynamics of decisions is thus characterized by more or less random
+flips of crowds of agents between the two opinions. The resulting
+stylized facts can not therefore be taken as genuine signatures of
+a realistic dynamics of agents' opinions.
+
+
+\section{Simulations and results of the model with memory in the
+dynamics of influence coefficients}
+
+The origin of the unrealistic bimodal distribution of returns
+shown in Fig.~\ref{Fig:ReturnHist:Carlos} has to be found in the
+rather artificial property that the influence coefficients
+$K_{ij}(t)$'s, which are updated according to (\ref{Eq:ASMKi}),
+lose instantaneously from one time to the next the memory of their
+past values. As a consequence, the coefficients $K_{ij}(t)$
+fluctuate with time approximately as a white noise with an
+amplitude controlled by that of the returns and this gives rise to
+abrupt shifts of the majority opinion as explained in the previous
+section. This property is unrealistic to model the real
+persistence of interactions between agents. Indeed, in the real
+world, people are connected through social networks that do not
+instantaneously reshuffle in response to external effects as
+expression (\ref{Eq:ASMKi}) describe. Rather, social connections
+evolve slowly and exhibit significant persistence, as documented
+in numerous studies \citep[see, for instance,][and references
+therein]{Suitor,Wellman}. Networks of investors communicating
+their opinions and sentiment on the stock market are similarly
+persistent.
+
+We thus turn to model (\ref{Eq:Sit22}) implemented with
+(\ref{Eq:Sit}) or along a specific information cascade
+(\ref{Eq:Si3Iter}), as described in section \ref{mgmlmsls} We
+assume the existence of a memory in the dynamics of the influence
+coefficients, which are updated according to the simplified
+version of (\ref{Eq:Kimemo}) given by
+\begin{equation}
+K_{i}(t) = b_i +  \alpha K_{i}(t-1) + \beta r(t-1) G(t-1) ~.
+ \label{Eq:RevASM:Ki}
+\end{equation}
+where the $b_i$'s are uniformly distributed in $(0,b_{\max})$ at
+the beginning of the simulation and remain frozen thereafter. The
+value $b_i$ of agent $i$ represents her idiosyncratic imitation
+tendency. Compared with (\ref{Eq:Kimemo}), the memory parameter
+$\alpha$ is taken the same for all agents. We use a $50\times 50$
+lattice as the geometrical implementation of the social network,
+in which the agents are located at the nodes and each agent
+interacts only with her four nearest neighbors. The sensitivity
+$\sigma_i$ of agent $i$ to the global news $G(t)$ is uniformly
+distributed in the interval $(0,\sigma_{\max})$. The value
+$\sigma_i$ of agent $i$ is again specific to her and quantifies
+her susceptibility to be influenced by external news. The
+idiosyncratic or private information term $\epsilon_i(t)$ of agent
+$i$ is drawn at each time step from a normal distribution with
+zero mean and a standard deviation $s_{\epsilon,i}$ which is also
+different from one agent to another: $s_{\epsilon,i}$ is chosen at
+the beginning of the simulation (like $b_i$ and $\sigma_i$) to
+characterize agent $i$ according to a value equal to the sum of a
+common constant $CV$ and of a uniform random variable in the
+interval $[0,0.1]$.
+
+In our simulations, we fix $\lambda =40$ (which determines the
+scale of the returns to a value comparable to that of empirical
+observations) and $\alpha=0.2$. We have also investigated other
+values $\alpha=0.4$, $0.6$, and $0.8$ and obtain similar results.
+We explore the properties of the model in the parameter space of
+$b_{\max}$, $\sigma_{\max}$ and $CV$. There is no loss of
+generality in fixing $|\beta|=1$ to explore the relative
+importance of the term $\beta r(t-1) G(t-1)$, since the typical
+scale of the $K_i$'s is set by $b_{\max}$ whose amplitude is
+varied in our numerical exploration. However, the sign of $\beta$
+is fundamental as explained in section \ref{jfjs}. We thus
+consider in turn the two cases $\beta=-1$ and $\beta=+1$ and
+explore in each case a large sample of triplets $(b_{\max},
+\sigma_{\max}, CV)$.
+
+We ask whether the model can account for the most often reported
+stylized facts of financial markets. In other words, we would like
+to validate the model. For this, we consider the following
+metrics: (i) the distribution of returns at different time scales;
+(ii) the correlation function of returns and of the absolute value
+of the returns (taken as a proxy for the financial volatility);
+(iii) the scaling of the moments of increasing orders of the
+absolute values of the returns (testing multifractality); (iv) the
+existence of a hierarchy of exponents controlling the relaxation
+of the volatility after an endogenous shock (another hallmark of
+multifractality); (v) the existence of bubbles and crashes and
+their properties. Our strategy is to search for a robust set of
+model parameters for which all these stylized facts are reproduced
+not only qualitatively but also quantitatively. The main result of
+our analysis is that it is impossible to validate the model for
+$\beta<0$ while we find sets of parameters for $\beta>0$ which
+nicely fit the stylized facts of real financial markets.
+
+
+\subsection{News predicts the next return $\to$ decrease of imitation: $\beta=-1$}
+\label{s4:REmodel}
+
+In this case, when the news $G$ happen to correctly predict the
+return ($rG>0$), the agents reduce their mutual imitation. On the
+contrary, when $rG<0$, imitation among agents strengthens. Thus,
+$\beta<0$ corresponds to agents behaving according to standard
+rational expectations with respect to the flow of external news: a
+rational agent would concluded that, if the stock market is in
+agreement with the news then, the impact of imitation is minor and
+the news are the dominating factor, as standard economic textbook
+describe, since the strategy $s_i(t)={\rm{sign}}[G(t)]$ consisting
+in following the news is found as good as or better than the more
+elaborate dynamics of the agents' actions $s_i(t)$ incorporating
+the imitation process. For $\beta <0$, agents decrease their
+propensity to imitation as long as the news are in agreement with
+the stock market moves.
+
+The following argument shows that the attractor of the dynamics is
+characterized by negligible imitation and only the news and
+private information terms are important for the dynamics. Consider
+a population of traders at time $t$ with their propensity $K_i(t)$
+to imitate on average above the critical Ising value $K_c$ such
+that imitation initially dominates the dynamics. The news $G(t)$
+become known and the decisions of the agents given by
+(\ref{Eq:Sit22}) decide collectively the return $r(t+1)$ from time
+$t$ to $t+1$ through expression (\ref{Eq:rt}). Since the
+$K_i(t)$'s are overall above $K_c$, it is well-known from many
+past studies of the Ising model (see for instance \cite{Ising1}
+and references therein) that the corresponding ``ferromagnetic''
+phase of the system is characterized by a strong slaving to
+external fields such as $G(t)$. Hence, the collective opinion
+$\sum_i s_i$ takes the sign of $G(t)$ with a high probability. As
+a result, with a large probability, $r(t+1) G(t)$ is positive,
+which entails a downgrading of $K_i$ by an amount $r(t+1)$ since
+$beta=-1$ (in addition to the other terms which tend to reverse
+$K_i(t)$ to the value $b_i/(1-\alpha)$). This behavior continues
+as long as the $K_i$'s are above or close to $K_c$ (since the
+$K_i$'s are heterogeneous, the effective critical values is
+modified compared with the homogeneous case and our argument
+remains valid when using this modified value). Alternatively, if
+the $K_i$'s are on average smaller than $K_c$, the collective
+decision $\sum_i s_i$ and therefore the market return have little
+or no relationship with the external news. Hence, the term $\beta
+r(t+1) G(t)$ takes random signs from one time step to the next,
+leading to a effective random forcing added to the autoregressive
+equation $K_i(t) = b_i + \alpha K_i(t-1)$. The coefficients
+$K_i(t)$ evolve to fluctuate around the asymptotic value
+$b_i/(1-\alpha)$. We thus expect Gaussian distributions of returns
+when $b_i/(1-\alpha)$ is smaller than $K_c$ and bimodal
+distributions when $b_i/(1-\alpha) > K_c$ reflecting the slaving
+of the global opinion to the sign of the news.
+
+In our simulations, we have scanned $b_{\max}$ from $0.1$ to $0.5$
+with spacing $0.1$, $\sigma_{\max}$ from $0.005$ to $0.08$ with
+spacing $0.005$, and $CV$ from $0.1$ to $1.1$ with spacing $0.2$.
+This corresponds to a total of 480 different models. We use
+(\ref{Eq:Sit22}) implemented according to the information cascade
+of sentiment formation explained in the item associated with
+equation (\ref{Eq:Si3Iter}). This choice is made to minimize the
+computational cost. Tests using the other updates over limited
+time span suggest that the results we are interested in are not
+sensitive to the details of the updating rules. We run each model
+over $10^4$ time steps and then analyze the time series of
+returns.
+
+The first metric we analyze is the distribution of returns at
+different time scales $\tau$, defined according to
+\begin{equation}
+ r_{\tau}(t) = \ln[p(t)/p(t-\tau)]~.
+ \label{Eq:rtau}
+\end{equation}
+where $\tau$ is a multiple of the time step. We observe two
+classes of shapes. For large idiosyncratic noise (large $CV$) and
+not too large $b_{\max}$, the distribution of returns is Gaussian
+for all time scales $\tau$. For smaller $CV$'s and larger
+$b_{\max}$, we observe multimodal return distributions, as
+illustrated by the typical example shown in Fig.~\ref{Fig:Bimodal}
+obtained for $b_{\max}=0.2$, $\sigma_{\max}=0.045$, and $CV=0.1$.
+The number of peaks in the distribution of $r_{\tau}$ is $\tau+1$.
+These multimodal distributions correspond to the regime where the
+news $G(t)$ controls the collective opinion of the traders which
+tend to coordinate their decisions as explained above when
+$b_i/(1-\alpha)$ is larger than $K_c$. For given $b_{\max}$ and
+$CV$, the bimodal structure of the distribution of $r_1$ becomes
+more and more significant as $\sigma_{\max}$ increases.
+Alternatively, for fixed $\sigma_{\max}$ and $CV$ (say,
+$\sigma_{\max}=0.02$ and $CV=0.1$), a bimodal distribution is
+obtained for sufficiently small $b_{\max}$ and we observe a
+crossover from bimodal ($b_{\max}=0.1$) to unimodal
+($b_{\max}=0.5$) with a crossover with a plateau ($b_{\max}=0.3$).
+This corresponds to the regime in which a majority of agents react
+to the global news in the same manner and buy or sell
+simultaneously. Since the news are $G(t) = \pm 1$ with equal
+probability, the decisions of the agents and therefore the returns
+most often jump between two values of equal amplitude and opposite
+signs. The multi-modal structure of the distributions of returns
+at time scale $\tau$ then results from the properties of the
+convolution of the bimodal distribution of the returns $r_1$.
+
+In the parameter space that we have explored and notwithstanding
+our best attempts, we have not been able to find a set of
+parameters leading to distributions of returns exhibiting a
+monomodal shape with fat tails for small time scales, evolving
+slowly towards Gaussian distributions at large time scales, as can
+be observed in empirical data
+\citep{Ghashghaie-1996-Nature,Mantegna-Stanley-2000}.
+% This is given in GASM_Sim_05.mat.
+
+In addition, we observe that the correlation function of returns
+($C_{\tau}(r,r)$) and of volatilities ($C_{\tau}(|r|,|r|)$) have
+similar amplitudes and decay with the same characteristic time
+scale as a function of time lag. This is very different from the
+observed correlations of financial markets, with very short memory
+for returns and long-memory for the volatility.
+
+We have also investigated the impact of the updating rule of the
+agents' sentiments. If instead of the information cascade (third
+item of section \ref{mgmlmsls}), we use the parallel update
+(\ref{Eq:Sit}), for the same range of parameters $b_{\max}$,
+$\sigma_{\max}$, and $CV$, we find that most of the returns are
+between two values proportional to $\pm 1$ and the distribution of
+returns is close to $P(r_1)=\delta(r_1^2-1)$. In other words, the
+bimodality of the distribution of returns is much more pronounced
+than shown in Fig.~\ref{Fig:Bimodal} that was obtained for the
+information cascade updating scheme. For large idiosyncratic noise
+(large $CV$), the bimodality disappears and is replaced by pdf's
+which are approximately Gaussian. With $CV$ and $b_{\max}$ (resp.
+$\sigma_{\max}$) fixed, the volatility increases with increasing
+$\sigma_{\max}$ (resp. decreasing $b_{\max}$) and the distribution
+is bimodal when $\sigma_{\max}$ (resp. $b_{\max}$) is large (resp.
+small) enough. The time evolution exhibits in addition long
+transients with returns fluctuating around zero before bifurcating
+to the bimodal state. The duration of the transient decreases with
+increasing $\sigma_{\max}$ or $b_{\max}$. Scanning the parameters,
+we never obtained realizations with realistic distributions of
+returns at different time scales. We conclude that the updating
+scheme (\ref{Eq:RevASM:Ki}) with $\beta=-1$ corresponding to
+boundedly rational agents cannot explain the stylized facts of
+empirical finance.
+
+
+\subsection{News predicts the next return $\to$ increase of imitation: $\beta=1$}
+\label{s3:OCmodel}
+
+In our simulations, we fix $\alpha=0.2$, $b_{\max}$ varies from
+$0.1$ to $0.5$ with spacing $0.1$, $\sigma_{\max}$ from $0.01$ to
+$0.08$ with spacing $0.01$, and $CV$ from $0.1$ to $0.7$ with
+spacing $0.2$. This gives 160 models that we explore by generating
+time series of length equal to 10000 time steps. We use
+(\ref{Eq:Sit22}) implemented according to the information cascade
+of sentiment formation explained in the item associated with
+equation (\ref{Eq:Si3Iter}).
+% This is given in GASM_Sim_01.mat.
+% WXZHOU_StylizedFacts(cumsum(r{3,3,1}), 'GASM_OC', num);
+%   We redid the simulation with longer time evolution to have better
+% statistics for the parameters (0.3,0.03,0.1) used below and the
+% simulated returns are stored in GASM_Sim_OC_bubble.mat.
+
+When $CV$ is very large, the distribution of return $r_{\tau}$ is
+Gaussian, simply because the returns are dominated by the
+idiosyncratic noise modeling private information, which is chosen
+Gaussian. This regime is not interesting since it erases both the
+effect of news and of imitation. For smaller $CV$'s, we also
+observe bimodal distributions of the returns $r_1$ for certain
+ranges of parameters, as in the case $\beta=-1$. This occurs for
+large $\sigma_{\max}$ and small $b_{\max}$. Similar bimodal
+distributions of returns are obtained for $\alpha=0$, as described
+in section \ref{mgmlls}.
+
+We have found several parameter combinations which lead to
+realistic stylized facts. For instance, for the following sets of
+$(b_{\max}, \sigma_{\max}, CV)$, (0.3, 0.03, 0.1), (0.4, 0.04,
+0.1), (0.4, 0.05, 0.1), (0.5, 0.06, 0.1), (0.1, 0.01, 0.3), (0.1,
+0.02, 0.3), (0.2, 0.02, 0.3), (0.2, 0.03, 0.3), (0.3, 0.04, 0.3),
+(0.5, 0.05, 0.3), (0.5, 0.07, 0.3), (0.3, 0.03, 0.5), and (0.5,
+0.05, 0.5), the distribution of returns $r_{\tau}$ is a stretched
+exponential (or close to a power law) \citep{Malpissor} for small
+$\tau$, exponential for intermediate $\tau$, and Gaussian for
+large $\tau$, as in real financial data.
+
+In the following, we exemplify the obtained stylized facts with
+$\alpha=0.2$ and with the parameter combination ($b_{\max}=0.3,
+\sigma_{\max}=0.03, CV=0.1$) which is typical.
+
+\subsubsection{Probability density functions of log-returns at different time scales}
+
+Figure \ref{Fig:OC:lnP} shows a realization of the logarithm of
+the price over a time interval of $10^5$ time steps. Figure
+\ref{Fig:OC:R} shows the corresponding time series of the
+log-returns defined by (\ref{ngmldl},\ref{Eq:rt}), where
+$\lambda=40$ is set to scale the returns to realistic values. Note
+the existence of clusters of volatility which are qualitatively
+similar to those observed in real financial data. The solid lines
+in Fig. \ref{Fig:OC:pdfR} show the logarithm of the probability
+distribution densities (pdf) of the log-returns at different time
+scales defined by (\ref{Eq:rtau}) as a function of the returns
+$r_{\tau}$ scaled by their standard deviation $\sigma_{\tau}$. The
+pdf curves have been translated vertically for clarity. In the
+semi-log representation of Figure \ref{Fig:OC:pdfR}, a straight
+line qualifies an exponential law. We observe stretched
+exponential laws at short time scales that cross over smoothly to
+a Gaussian law at the largest shown time scale. This evolution of
+pdf's with time scales comply with the well-known stylized fact of
+financial markets \citep{Ghashghaie-1996-Nature}. The model thus
+obtains price series with the correct monomodal shape with fat
+tails, and the correct progressive transition to a Gaussian
+distribution at large time scales. We stress that this comparison
+improves on those involving only one time scale.
+
+It is interesting to compare the obtained pdf's at time scales
+$\tau$ larger than the elementary time step $1$ with those which
+would derive by $\tau$-fold convolution of the pdf at the unit
+time scale. In absence of time dependence, the two should be
+asymptotically identical. For instance, the pdf ${\rm{pdf}}(r_4)$
+of returns $r_4$ over four time steps would be given by
+${\rm{pdf}}(r_4)={\rm{pdf}}(r_1)\otimes {\rm{pdf}}(r_1)\otimes
+{\rm{pdf}}(r_1)\otimes {\rm{pdf}}(r_1)$. Upon convolution in the
+absence of dependence, the variance is additive which gives a
+prediction for the standard deviation of the pdf of returns at
+$\tau$ time steps, $\sigma_{\tau} = \sigma_1 \sqrt{\tau}$, which
+can be used to normalize the pdfs in terms of the reduced variable
+$r_{\tau}/\sigma_{\tau}$. The corresponding pdf's of $r_4$,
+$r_{16}$, $r_{64}$, and $r_{256}$ obtained by convolution of the
+pdf of $r_1$ are drawn in Fig.~\ref{Fig:OC:pdfR} with dashed
+lines. We see clearly that the true pdf's for $\tau=4, 16, 64$
+have a much fatter tail compared with the theoretical pdf's based
+on absence of dependence. Such behavior is very similar to what is
+observed in real data \citep[see for instance][Fig.
+2.2]{Malsorbook}.
+
+
+\subsubsection{Autocorrelations of log-returns and volatility \label{ngjs}}
+
+Figure \ref{Fig:OC:CorrR} shows the temporal correlation of the
+log returns $r_1$ as a function of the time lag $\ell$. One can
+observe a very short correlation time, of duration smaller than
+one time step. Figure \ref{Fig:OC:CorrAbsR} presents the temporal
+correlation of the absolute value of log returns $r_1$, taken as a
+proxy for the volatility, both in linear-linear and in linear-log
+scales. It is apparent that the volatility exhibits a strong
+correlation with memory lasting approximately 100 time steps for
+this set of parameter. The right panel of Figure
+\ref{Fig:OC:CorrAbsR} represents the correlation of the volatility
+as a function of the logarithm of the time lag. This
+representation is suggested by the multifractal random walk (MRW)
+model which is constructed by definition with a correlation
+decaying linearly with the logarithm of the time lag, up to a
+so-called integral time scale $T$
+\citep{M_etal,B_etal,MuzyQF,endovol}. The right panel of Figure
+\ref{Fig:OC:CorrAbsR} shows that this dependence suggested by the
+MRW provides a reasonable approximation of the numerical data. The
+integral time scale is here estimated around 100 time steps. These
+observations are is good agreement with the stylized facts on the
+correlation of returns and of volatility of real financial
+markets. Indeed, one of the key stylized facts observed
+empirically is that there are only very short-range correlations
+in price changes and the time memory is less than one trading day
+and as small as minutes for the most liquid markets
+\citep{Liu-Gopikrishnan-1999-PRE,Gopikrishnan-1999-PRE,Mantegna-Stanley-2000}.
+In contrast, volatility exhibits a memory over up to the order of
+one year.
+
+If we combine the information on the time scales from the pdf's of
+returns shown in Figure \ref{Fig:OC:pdfR}, the correlation of
+returns shown in Figure \ref{Fig:OC:CorrR} and the correlation of
+the volatility shown in Figure \ref{Fig:OC:CorrAbsR}, we can
+obtain a rough idea of the correspondence between the time step of
+the model and real trading time. From Figure \ref{Fig:OC:pdfR}, we
+see that the pdf of returns at time scale $\tau=4$ and $\tau=16$
+are similar to the empirical one at the daily scale for major
+stocks and indices. This suggests that one day corresponds to
+roughly $4-16$ time steps of the model. This correspondence is
+compatible with Figure \ref{Fig:OC:CorrR} for the absence of
+correlation at the daily time scale observed empirically. This
+correspondence gives with Figure \ref{Fig:OC:CorrAbsR} an integral
+time scale for the volatility correlation of about $100/4$ to
+$100/16$ days, i.e., $6-25$ days. This is about a factor of ten
+shorter than observed on real markets, if we believe the relevance
+of the MRW and its calibration of $T$ for real markets.
+
+The memory of the autocorrelation of the volatility (as well as
+the correlation of the returns) is sensitive to the value taken by
+the parameter $\alpha$ introduced in our model, which embodies the
+dependence of the coefficient $K_{ij}$ of imitation on its past
+values. Figure \ref{Fig:OC:alfa1} shows that much longer ranges
+for the correlation of the absolute value of returns are found for
+larger values of $\alpha$, however at the cost of introducing an
+unrealistic correlation of the returns. This figure suggests that
+$\alpha$ cannot be larger than $0.2-0.3$ without producing
+unrealistic correlation in returns.
+
+
+\subsubsection{Multifractal properties}
+\label{s3:MF}
+
+The MRW also predicts (and this is well-verified by empirical
+data) that the autocorrelation functions of $|r_\tau(t)|$ for
+different $\tau$ should superimpose for time lags larger than
+their respective $\tau$ \citep{M_etal,B_etal}. Figure
+\ref{Fig:OC:CRtau} shows that this is approximately the case.
+
+Another important stylized facts is the multifractal structure of
+the absolute values of log-returns
+\citep{Fisher,Mandel97,Vande1,Brachet,Bershadskii,Ivanova,Schmitt,Pasquini,MuzyQF},
+which led to the proposition that the MRW might be a good model
+for financial price time series
+\citep{M_etal,B_etal,MuzyQF,endovol}. Figure \ref{Fig:OC:Scaling}
+shows in log-log scale the structure function \be M_q(\tau) \equiv
+\langle |r_{\tau}|^q \rangle \ee as a function of the time scale
+$\tau$. The power law dependence of the structure functions
+$M_q(\tau)$ as a function of $\tau$ is found to be reasonable. The
+slopes of the lines in log-log plots give the exponents
+$\xi_{\tau}$ defined by \be M_q(\tau) \sim \tau^{\xi_q}~.
+\label{mbjowls} \ee Multifractality is qualified by a nonlinear
+dependence of $\xi_q$ as a function of the order $q$ of the
+structure function
+\citep{Mantegna-Stanley-1995-Nature,Ghashghaie-1996-Nature}., as
+reported in Fig.~\ref{Fig:OC:xi}.
+
+
+\subsubsection{Endogenous versus exogenous shocks}
+
+The dynamical process described by (\ref{Eq:Kimemo}) together with
+(\ref{Eq:Sit}) and (\ref{Eq:rt}) describes a flux of external news
+$G(t)$ which are ``digested'' by the collective behavior of the
+population of traders to create a time series of returns
+presenting long-range memory in the volatility and multifractal
+properties, similarly to the multifractal random walk model
+\citep{M_etal,B_etal,MuzyQF,endovol}. In addition, \cite{endovol}
+have discovered a new consequence of multifractality in the form
+of a continuous dependence of the exponent of the power law
+relaxation of the volatility after a spontaneous peak as a
+function of the amplitude of this peak \cite[see also other
+applications in][]{endo2,endoamazon}. We proceed to test if such
+an effect is found in our model.
+
+Consider a realization giving a time series of returns $r(t)$. Let
+us define the local volatility within a window $[t+1,t+\Delta{t}]$
+of size $\Delta{t}$ by
+\begin{equation}
+ \sigma^2_{\Delta{t}}(t) = \sum_{i=1}^{\Delta{t}} |r(t+i)|^2
+\end{equation}
+Using this definition, we construct a time series for the
+volatility $\sigma^2_{\Delta{t}}(t)$ in moving windows of size
+$\Delta{t}$. The (unconditional) average volatility $E[\sigma^2]$
+is nothing but the average of the time series of
+$\sigma^2_{\Delta{t}}(t)$. Let us follow \cite{endovol} and
+consider local burst of volatility $\sigma^2_{\Delta{t}}(t)$ with
+amplitude scaled to the average volatility $E[\sigma^2]$:
+\begin{equation}
+\sigma^2_{\Delta{t}}(t_) = e^{2s(t)}E[\sigma^2]~. \label{mgbjle}
+\end{equation}
+The parameter $s$ thus quantifies the relative amplitude of a
+local burst of volatility in units of the average volatility.
+Following  \cite{endovol}, for a given $s$, we identify all times
+$t_s$ whose volatility $\sigma^2_{\Delta{t}}(t_s)$ is close to
+$e^{2s}E[\sigma^2]$, that is,
+\begin{equation}
+e^{2(s-ds)}E[\sigma^2] \le \sigma^2_{\Delta{t}}(t_s) \le
+e^{2(s+ds)}E[\sigma^2]~,
+\end{equation}
+where $ds \ll 1$. For a given relative log-amplitude $s$, we
+translate and superimpose all time series starting at all the
+previously found times $t_s$. Averaging over these time series of
+volatility obtains the average conditional relaxation function of
+the volatility $E[\sigma(t|s)^2]$ following a local burst of
+volatility of amplitude (\ref{mgbjle}). The multifractal random
+walk model predicts a power dependence
+\begin{equation}
+ E[\sigma(t|s)^2]\sim t^{-\alpha(s)}~,
+ \label{Eq:alpha:Def}
+\end{equation}
+with
+\begin{equation}
+ \alpha(s)=\frac{2s}{3/2+\ln(T/\Delta{t})}~,
+ \label{Eq:alpha:Ana}
+\end{equation}
+when $\Delta{t}<t\ll \Delta{t}e^{|s|/\lambda^2}$, where
+$\lambda^2\approx 0.02$. We keep the symbol $\alpha(s)$ for the
+exponent in (\ref{Eq:alpha:Def}) in line with the notation of
+~\cite{endovol}, but this should not be confused with the
+parameter $\alpha$ in (\ref{Eq:Kimemo}) which controls the memory
+of the imitation coefficients $K_{ij}$.
+
+Fig.~\ref{Fig:OC:Endo_1} shows the average normalized conditional
+volatility $E[\sigma(t|s)^2]/E[\sigma^2]$ as a function of the
+time $t-t_s$ to the local burst of volatility at time $t_s$ for
+different log-amplitudes $s$ in double logarithmic coordinates. As
+expected from the predictions (\ref{Eq:alpha:Def}) and
+(\ref{Eq:alpha:Ana}) of the MRW, the average volatility after a
+burst decays (respectively increases) when $s>0$ (respectively
+$s<0$). Similar to real data analyzed by \cite{endovol}, we
+observe approximate power laws. The power law exponents for
+different values of $\Delta{t}$ are plotted in
+Fig.~\ref{Fig:OC:Endo_2}. The exponent $\alpha(s)$ depends
+linearly on $s$, with a slope increasing with $\Delta{t}$, in
+agreement with the prediction of the MRW and the finding of
+Sec.~\ref{s3:MF}.
+
+We can actually obtain a direct estimation of the integral time
+scale $T$ by studying how the slope $1/k$ of $\alpha(s)$ as a
+function of $s$ depends upon $\Delta{t}$. Expression
+(\ref{Eq:alpha:Ana}) predicts that $k(\Delta{t}) =
+-\frac{1}{2}\ln(\Delta{t}) + \frac{1}{2}\ln(T) + \frac{3}{4}$. A
+linear regression of $k$ as a function of $\ln({\Delta{t}})$ gives
+$k(\Delta{t}) = -0.48\ln(\Delta{t}) + 2.08$. The first coefficient
+$-0.48$ is nicely close to the exact value $-1/2$ predicted by the
+multifractal theory, which provides an independent check on the
+validity of multifractality. Identifying $\frac{1}{2}\ln(T) +
+\frac{3}{4}$ with $2.08$ yields $T=14.3$.
+
+Fig.~\ref{Fig:OC:Exo} shows the average relaxation of the
+volatility after an exogenous shock, created by imposing a very
+large news impact $G(t_s)$ at a single time $t_s$ and then letting
+the system evolve according to its normal dynamics thereafter. To
+gather sufficient statistics, we impose such large shocks with a
+periodicity of several hundred time steps, which is sufficiently
+long to allow the system to relax back to its normal fluctuating
+volatility. We have checked that the relaxation shown in Figure
+\ref{Fig:OC:Exo} is independent of the amplitude of the shock when
+sufficiently large. Note that, immediately after the news impact,
+the volatility first increases over a few time step before
+relaxing, which reflects the strong increase of the coupling
+coefficient $K_{ij}$ and the resulting stronger cooperativity of
+the agents. In order to mimic the previous analysis of the data by
+\cite{endovol}, the origin of time for the relaxation of the
+volatility is taken at the peak time, rather than from the
+incipient exogenous news shock at $t_s$. This shifts the origin of
+time by approximately $2-3$ time steps, which is compatible with
+the correspondence that one trading day corresponds to $4-16$ time
+steps, as discussed in section \ref{ngjs}.
+
+According to the theory relating the endogenous relaxation to the
+exogenous response function of the MRW developed by
+\cite{endovol}, the relaxation shown in Fig.~\ref{Fig:OC:Exo}
+should be characterized by an exponent close to $1/2$ over
+approximately the same range of times $t-t_s$ as found for the
+power law dependence of the relaxations shown in
+Fig.~\ref{Fig:OC:Endo_1}. We indeed observe a first decay regime
+which is compatible with a power law with an exponent close to
+$0.5$ (but of course the range is too short to provide anything
+other than an indication). We also observe a cross-over to a
+faster decay, compatible with a faster decaying power with
+exponent close to $1.5$. This behavior is actually expected if the
+system is not exactly critical but close to critical, as shown by
+\cite{endo2} and \cite{endoamazon}: the response function to an
+exogenous shock should in this case cross over from a dependence
+proportional to $1/t^{1-\theta}$ to $1/t^{1+\theta}$, with
+$\theta=1/2$ for a multifractal system. Fig.~\ref{Fig:OC:Exo} thus
+suggests that the multifractal properties of our system hold only
+up to a finite time scale $T$ beyond which a cross-over to a
+non-critical behavior dominates.
+
+
+\section{Discussion}
+
+In this paper, we have extended the artificial stock market model
+introduced by \cite{G03AFM} to include a memory in the dynamics of
+the influence coefficient on its past realization. This additional
+memory turns out to be a key ingredient to reproduce the major
+stylized facts of financial stock markets. In the previous
+specification $\alpha=0$ of \cite{G03AFM}, the influence
+coefficients $K_i$ adjust instantaneously to previous news and
+returns realization. With a non-zero $\alpha$ as proposed here,
+the influence coefficients exhibit an inertia. We believe that
+this is a crucial property of the interactions between social
+agents who only relatively slowly update their tendency to
+imitate their colleagues or friends. That this parameter provides,
+together with the competition between imitation and news, the main
+stylized facts of financial stock markets is an encouraging sign
+that we have correctly captured some of the most important
+ingredients at the origin of the organization of financial stock
+markets.
+
+These ingredients comprise imitation between agents, their
+influence by external news and the impact of their private
+information. The imitation plus the idiosyncratic part of the
+decision process give together the dynamics of the Ising model.
+The news act then as an time-dependent external field. The
+addition of an evolution in the influence coefficients (which can
+also be called ``coupling coefficients'') make the strength of the
+imitations between agents a function of the past realization of
+the news and returns.
+
+The empirical stylized facts of financial stock markets have been
+found only for $\beta>0$ and $\alpha$ neither too small nor too
+large. The condition $\beta>0$ means that agents increase the
+propensity to imitate if the external news have been predictive of
+the returns in the past. This behavior corresponds to agents who
+misinterpret, or misattribute the source of the prediction of
+returns. Alternatively, this behavior corresponds to
+over-confident agents. Technically, the stylized facts in this
+regime result from the fact that the model operates around the
+critical point of the corresponding Ising model, with coupling
+coefficients which are time-dependent and endowed with a memory of
+past realizations. The critical point of the Ising model is
+associated with a critical value $K_c$ for the average coupling
+coefficient. Close to this value, agents organize spontaneously
+within clusters of similar opinions, which become very susceptible
+to small external influences, such as a change of news. This may
+explain the occurrence of crashes, as argued previously
+\citep[see,][Ch. 5]{Sornette-2003}. The present model exhibits
+bubbles and crashes as shown in figure \ref{FigGASM_OC_Bubbles},
+whose detailed study will be reported elsewhere. Intuitively, the
+critical slowing down well-known to characterize the proximity to
+the critical Ising point can explain the long-term memory of the
+volatility while the almost absence of correlation of the returns
+themselves is ensured by the impact of the news and the random
+idiosyncratic decisions.
+
+The fact that the most basic stylized facts (monomodal shape with
+fat tails, short-time return correlations and long-memory of the
+volatility) cannot be obtained for $\beta<0$ suggests the
+importance of the imitation behavior captured by (\ref{Eq:ASMKi})
+with $\beta>0$. In this model, the creation of anomalous
+volatility, of its persistence, and of multifractality result from
+the tendency of agents to misinterpret the combined information of
+the news and of the stock market as resulting from the influence
+of the agents and their imitation. Or seen from a different view
+point, conditioned on their role of reflecting the stock market,
+the news serve as the substrate for fostering social interactions
+and reinforcing herding. By the mechanism of intermittent
+reinforcing of social interaction in (\ref{Eq:ASMKi}), the
+coupling coefficient $K_{ij}$ will vary and sometimes increase
+close to or cross a critical value at which critical fluctuations
+occur and beyond which global cooperativity dominates.
+
+As a bonus, we have discovered that this simple model exhibits a
+rich multifractal structure, diagnosed not only by the standard
+convexity of the exponents of the structure functions but also by
+distinct power law response functions to endogenous compared with
+exogenous volatility shocks \citep{endovol,endo2,endoamazon}. To
+our knowledge, this is the first nonlinear model in which such
+clear distinction is documented quantitatively, based on a
+bottom-up self-organization. In contrast, the multifractal random
+walk which has provided the theoretical predictions used here is a
+descriptive phenomenological model.
+
+Let us end by noting the connection with the model of
+\cite{Wyart}, which can be embedded in our model by putting all
+$K_{ij}$ to $0$ (no imitation) and adding a dependence of
+$\sigma_i$ on past correlations between the realized returns
+$r(t)$  and the available information $G(t)$, similarly to the
+dynamics of $K_{ij}$ in our model. \cite{Wyart} have studied the
+limit of self-fulfilling conventions created by the belief of
+agents on the existence of correlations between information and
+returns. By this belief, traders try to estimate this correlation
+from past time series and act on it, thus creating it. Our model
+emphasizes the other class of conventions based on imitation and
+moods. For the future, it would be interesting to combine both
+mechanisms as they are arguably present together in real markets,
+in order to clarify their relative importance and interplay.
+
+
+
+
+\section*{Appendix: Justification that the imitation term
+is rational in the absence of reliable information}
+
+The form (\ref{Eq:Sit}) of the formulation of the decision of
+agent $i$ (without the term $ \sigma_i(t) G(t)$) derives naturally
+from an argument of bounded-rationality, as follows.
+
+Let us denote $N(i)$ the number of traders directly connected to
+$i$ on the graph of acquaintance ($N_i=4$ for the 2D-square
+topology). The traders buy or sell one asset at price $p(t)$ which
+evolves as a function of time assumed to be discrete and measured
+in units of the time step $\Delta t$. In the simplest version of
+the model, each agent can either buy or sell only one unit of the
+asset. This is quantified by the buy state $s_i=+1$ or the sell
+state $s_i=-1$. Each agent can trade at time $t-1$ at the price
+$p(t-1)$ based on all previous information including that at
+$t-1$. We assume that the asset price variation is determined by
+the following equation \be \frac{p(t)-p(t-1)}{p(t-1)} =
+F\left({\sum_{i=1}^N s_i(t-1) \over N}\right) ~+~ \sigma~
+\eta(t)~.  \label{jfjfjka} \ee $\sigma$ is the price volatility
+per unit time and $\eta(t)$ is a white Gaussian noise with unit
+variance.  The first term in the r.h.s. of (\ref{jfjfjka}) is the
+systematic price drift resulting from the possible imbalance
+between buyers and sellers. The impact function $F(x)$ is such
+that $F(0)=0$ and is monotonically increasing with its argument as
+shown by recent empirical studies
+\citep{Kempf,Pleroudemand,Lillodemand,boupotbdem}: perfect balance
+between buyers and sellers does not move the price; a larger
+(resp. smaller) number of buyers than sellers drive the price up
+(resp. down). An often used dependence is simply a linear
+relationship $F(x) = \mu x$ \citep{Beja,boucont,farmereco}. The
+second stochastic term of the r.h.s. of (\ref{jfjfjka}) accounts
+for noisy sources of price fluctuations. Taken alone, it would
+give the usual log-normal random walk process
+
+At time $t-1$, just when the price $p(t-1)$ has been announced,
+the trader $i$ defines her strategy $s_i(t-1)$ that she will hold
+from $t-1$ to $t$, thus realizing the profit/loss
+$(p(t)-p(t-1))s_i(t-1)$. To define $s_i(t-1)$, the trader
+calculates her expected profit $P_E$, given the past information
+and her position, and then chooses $s_i(t-1)$ such that $P_E$ is
+maximum. Within the rational expectation model, all traders have
+full knowledge of the fundamental equation (\ref{jfjfjka}) of
+their financial world. However, they cannot poll the positions
+$s_j$ of all other traders which will determine the price drift
+according to (\ref{jfjfjka}). The next best thing that trader $i$
+can do is to poll her $N(i)$ ``neighbors'' and construct her
+prediction for the price drift from this information. Note that,
+in this approach, the ``neighbors'' are by definition those who
+are polled by the trader according to her network of acquaintance.
+The trader needs an additional information, namely the a priori
+probability $P_+$ and $P_-$ for each trader to buy or sell. The
+probabilities $P_+$ and $P_-$ are the only information that she
+can use for all the traders who are not polled directly. From
+this, she can form her expectation of the price change. The
+simplest case corresponds to a neutral market where $P_+=P_-=1/2$.
+The trader $i$ expects the following relative price change \be
+ \mu~ \left({\sum_{j=1}^{*~N(i)} s_j(t-1) \over N}\right)~+~ \sigma~ \eta(t)~,
+\ee where the index $j$ runs over the neighborhood of agent $i$.
+Notice that the sum is now restricted to the $N(i)$ neighbors of
+trader $i$. The contribution of all other traders, whom she cannot
+poll directly, is one contribution to the stochastic term $
+\sigma~ \eta(t)$. The restricted sum over the neighbors is
+represented by the star symbol. Her expected profit is thus \be
+\left(\mu~ \left({\sum_{j=1}^{*~N(i)} s_j(t-1) \over N}\right) +
+ \sigma~ \eta(t)\right)~p(t-1)~s_i(t-1)~.
+\ee The strategy that maximizes her profit is \be s_i(t-1) = {\rm
+sign} \left( {\mu \over N} \sum_{j=1}^{N(i)_*} s_j(t-1) ~+~ \sigma
+~ \eta(t)\right)~. \label{jgfhha} \ee The equation recovers
+(\ref{Eq:Sit}) (without the term $ \sigma_i(t) G(t)$) by
+identifying ${\mu \over \sigma N}$ with $K_{ij}=K$ taken uniform.
+The evolution of opinions given by (\ref{jgfhha}) is nothing but
+the dynamical version of the Ising model in which the sentiments
+$\{s_i\}$ are called ``magnetic spins.'' Recall that the Ising
+model exhibits a phase transition between two phases:
+\begin{enumerate}
+\item For weak coupling between spins (or large idiosyncratic
+noise $\sigma$), the spins take random signs and there is no
+majority opinion. The average opinion is zero. \item Above a
+threshold $K_c$ for the average coupling coefficient (or below a
+threshold $\sigma_c$), the spins align spontaneously along a
+preferred direction; there is a non-zero majority opinion, which
+can be either $+1$ or $-1$ depending on the history. The
+properties of this transition and the spontaneous symmetry
+breaking in the context of social agents is described in details
+by \citet[][see Ch.5]{Sornette-2003}.
+\end{enumerate}
+
+In the extension (\ref{Eq:Sit22}) with (\ref{Eq:Kimemo}), the
+coupling coefficients $K_{ij}$ between ``spins'' is allowed to
+change with time. During their dynamical evolution, one can expect
+that the coupling coefficients $K_{ij}$ between agents' sentiments
+explore a large set of possible values according to a process
+similar to the increments of a random walk-like trajectory. At
+some times, a significant fraction of the $K_{ij}$ may approach or
+pass above the critical value $K_c$: this will lead, according to
+the mechanism of the phase transition in the Ising model, to the
+occurrence of a majority of opinion and thus to strong herding
+behavior. The introduction of the dynamics of the coupling
+coefficient $K_{ij}(t)$ is reminiscent of the mechanism discussed
+by \cite{SS99} in the similar context of a percolation model of
+cluster of agents impacting the price evolution
+\cite{Contboudaaq}, in which the connectivity parameter is varied
+randomly in time. It is also providing a specific mechanism for
+the occurrence of critical times as explained by \citet[][see
+Ch.5]{Sornette-2003}. The additional existence of external news
+corresponds in the language of the Ising model to an external
+forcing ``field'' which help the opinion of the majority in the
+herding phase to bifurcate towards one or the other values $\pm
+1$. However, the dynamics of (\ref{Eq:Sit22}) with
+(\ref{Eq:Kimemo}) is clearly more complicated than for the Ising
+model due to the feedback of the external news and the collective
+decision process captured by the term $\beta r(t) G(t)$ on the
+coefficients of influences $K_{ij}$.
+
+
+%\bibliography{MfDSI}
+
+\begin{thebibliography}{999}
+
+\bibitem[Bacry,~et al.(2001)]{B_etal} Bacry, E., Delour, J., Muzy, J.F.,
+(2001). Multifractal ranom walk. Physical Review E 64, 026103.
+
+\bibitem[Beja~and~Goldman(1980)]{Beja} Beja, A., Goldman, M.B.,
+(1980). The dynamics of prices in disequilibrium situations.
+Journal of Finance 35, 235-248.
+
+\bibitem[Bershadskii(1999)]{Bershadskii} Bershadskii, A., (1999).
+Multifractal critical phenomena in traffic and economic processes.
+Eur. Phys. J. B 11, 361-364.
+
+\bibitem[Bikhchandani,~et al.(1992)]{Bikhchandani}
+Bikhchandani, S., Hirshleifer, D., Welch, I., (1992). A theory of
+fads, fashion, custom, and cultural change as informational
+cascades. Journal of Political Economy 100, 992-1026.
+
+\bibitem[Blume(1993)]{Blume1} Blume, L.E. (1993).
+The Statistical Mechanics of Strategic Interaction,
+Games and Economic Behavior 5, 387-424.
+
+\bibitem[Blume(1995)]{Blume2} Blume, L.E. (1995).
+The Statistical Mechanics of Best-Response Strategy Revisions,
+Games and Economic Behavior 11, 111-145.
+
+\bibitem[Bouchaud~and~Cont(1998)]{boucont} Bouchaud, J.-P.,
+Cont, R., (1998). A Langevin approach to stock market fluctuations
+and crashes. European Journal of Physics B 6, 543-550.
+
+\bibitem[Bouchaud~and~Potters(2003)]{boupotbdem} Bouchaud, J.-P.,
+Potters, M., (2003). More statistical properties of order books
+and price impact. Physica A 324, 133-140.
+
+\bibitem[Brachet,~et al.(2000)]{Brachet} Brachet,
+M.-E., Taflin, E., Tcheou, J. M., (2000). Scaling transformation
+and probability distributions for financial time series. Chaos,
+Solitons and Fractals 11, 2343-2348.
+
+\bibitem[Brock(1993)]{BrockHomme1} Brock, W.A., (1993).
+Pathways to randomness in the economy: emergent nonlinearity and
+chaos in economics and finance. Estudios Econ\'{o}micos 8, 3-55
+(SSRI Reprint 410 University of Wisconsin).
+
+\bibitem[Brock~and~LeBaron(1996)]{BrockHomme1bis} Brock, W.A., LeBaron, B.D.,
+(1996). A dynamic structural model for stock return volatility and
+trading volume. Review of Economics \& Statistics 78, 94-110.
+
+\bibitem[Brock~and~Hommes(1997)]{BrockHomme2} Brock, W.A., Hommes, C.H.,
+(1997). A rational route to randomness. Econometrica 65,
+1059-1095.
+
+\bibitem[Brock~and~Hommes(1998)]{BrockHomme3} Brock, W.A., Hommes, C.H.,
+(1998). Heterogeneous beliefs and routes to chaos in a simple
+asset pricing model. Journal of Economic Dynamics and Control 22,
+1235-1274.
+
+\bibitem[Brock~and~Hommes(1999)]{BrockHomme4} Brock, W.A., Hommes, C.H.,
+(1999). Rational Animal Spirits. In: Herings, P.J.J., Laan, van
+der G., Talman, A.J.J., (eds.), The Theory of Markets,
+North-Holland, Amsterdam, 109-137.
+
+\bibitem[Callen~and~Shapero(1974)]{PhysicsToday} Callen,~E.,
+Shapero,~D., (1974). A theory of social imitation. Physics Today,
+July, 23-28.
+
+\bibitem[Cont~and~Bouchaud(2000)]{Contboudaaq} Cont, R., Bouchaud,
+J.P., (2000). Herd Behavior and aggregate fluctuations in
+financial markets. Macroeconomics Dynamics 4, 170-196.
+
+\bibitem[Darke~and~Freedman(1997)]{Darkefreedman} Darke, P.R., Freedman, J.L.,
+(1997). Lucky events and beliefs in luck: Paradoxical effects on
+confidence and risk-taking. Personality \& Social Psychology
+Bulletin 23, 378-388.
+
+\bibitem[Durlauf(1991)]{Durlauf1} Durlauf, S.N. (1991).
+Multiple equilibria and persistence in Aggregate Fluctuations,
+American Economic Review 81, 70-74.
+
+\bibitem[Durlauf(1993)]{Durlauf2} Durlauf S.N. (1993).
+Nonergodic economic growth, Review of Economic
+Studies 60 (203), 349-366.
+
+\bibitem[Durlauf(1994)]{Durlauf3} Durlauf, S.N. (1994).
+Path Dependance in Aggegate Output, Industrial and
+Corporate Change 1, 149-172.
+
+\bibitem[Durlauf(1996)]{Durlauf4} Durlauf, S.N. (1996).
+A Theory of Persistent Income Inequality, Journal of
+Economic Growth 1, 349-366.
+
+\bibitem[Durlauf(1997)]{Durlauf5} Durlauf, S.N. (1997).
+Statistical Mechanics Approaches to Socioeconomic Behavior,
+in Arthur B., Durlauf, S., Lane, D. (eds.),
+The Economy as an Evolving Complex System II,
+Santa Fe Institute Studies in the Sciences of Complexity, Volume XXVII,
+Addison-Wesley.
+
+\bibitem[Durlauf(1999)]{Durlauf6} Durlauf, S.N. (1999).
+How can Statistical Mechanics contribute to social science?,
+Proceedings of the National Academy of Sciences 96, 10582-10584.
+
+\bibitem[Farmer(2002)]{farmereco} Farmer, J.D., (2002). Market force, ecology and
+evolution. Industrial and Corporate Change 11, 895-953.
+
+\bibitem[Fisher,~et al.(1997)]{Fisher} Fisher, A., Calvet, L., Mandelbrot, B.B.,
+(1997). Multifractality of the deutschmark/us dollar exchange
+rate. Cowles Foundation Discussion Paper.
+
+\bibitem[Gaunersdorfer(2000)]{Gaunersdorfer} Gaunersdorfer, A.,
+(2000). Endogenous fluctuations in a simple asset pricing model
+with heterogeneous agents. Journal of Economic Dynamics \& Control
+24, 799-831.
+
+\bibitem[Ghashghaie,~et al.(1996)]{Ghashghaie-1996-Nature}
+Ghashghaie, S., Breymann, W., Peinke, J., Talkner, P., Dodge, Y.,
+(1996). Turbulent cascades in foreign exchange markets. Nature
+381, 767-770.
+
+\bibitem[Gon\c{c}alves(2003)]{G03AFM} Gon\c{c}alves, C.P.,
+Artificial financial market model, submitted (12/01/2003).
+Available at http://ccl.northwestern.edu/netlogo/models/community
+/Artificial\%20Financial\%20Market
+
+\bibitem[Gopikrishnan,~et al.(1999)]{Gopikrishnan-1999-PRE}
+Gopikrishnan, P., Plerou, V., Amaral, L.A.N., Meyer, M., Stanley,
+H.E., (1999). Scaling of the distribution of fluctuations of
+financial market indices. Phys. Rev. E 60, 5305-5316.
+
+\bibitem[Heath~and~Gonzalez(1995)]{heathgonz} Heath, C., Gonzalez, R.,
+(1995). Interaction with others increases decision confidence but
+not decision quality: Evidence against information collection
+views of interactive decision making. Organizational Behavior \&
+Human Decision Processes 61, 305-326.
+
+\bibitem[Hommes(2001)]{BrockHomme5} Hommes, C.H., (2001).
+Financial markets as nonlinear adaptive evolutionary systems.
+Quantitative Finance 1, 149-167.
+
+\bibitem[Ide~and~Sornette(2002)]{IS} Ide, K., Sornette, D.,
+(2002). Oscillatory Finite-Time Singularities in Finance.
+Population and Rupture, Physica A 307, 63-106.
+
+\bibitem[Ivanova~and~Ausloos(1999)]{Ivanova} Ivanova, K., Ausloos, M.,
+(1999). Low q-moment multifractal analysis of Gold price, Dow
+Jones Industrial Average and BGL-USD exchange rate. European
+Physics Journal B 8, 665-669; erratum Eur. Phys. J. B 12 613.
+
+\bibitem[Johansen,~et al.(2000)]{JLS00IJTAF} Johansen, A., Ledoit,
+O., Sornette, D., (2000). Crashes as critical points.
+International Journal of Theoretical and Applied Finance 3,
+219-255.
+
+\bibitem[Kaizokji~et~al.(2002)]{Kaizoji} Kaizoji, T., S. Bornoldt and Y. Fujiwara (2002).
+Dynamics of price
+and trading volume in a spin model of stock markets with heterogeneous agents,
+Physica A316, 441-452.
+
+\bibitem[Kempf~and~Korn(1999)]{Kempf} Kempf, A., Korn, O., (1999). Market Depth and Order
+Size. Journal of Financial Markets 2, 29-48.
+
+\bibitem[Kirman(1991)]{Kirman} Kirman, A., (1991).
+Epidemics of opinion and speculative bubbles in financial markets.
+In: Taylor, M., (ed.), Money and financial markets, Macmillan.
+
+\bibitem[Kirman(1997)]{KirmRev} Kirman, A. (1997). Interaction and
+Markets, G.R.E.Q.A.M. 97a02, Universite Aix-Marseille III.
+
+\bibitem[Kirman~and~Teyssiere(2002)]{KirmTey} Kirman, A.P. and G. Teyssiere (2002). Micro-economic
+Models for Long Memory in the Volatility of Financial Time Series, in
+P.J.J. Herings, G. Van der Laan and A.J.J/ Talman (eds.), The theory of
+Markets, pp. 109-137, North Holland, Amsterdam.
+
+\bibitem[Krawiecki,~et al.(2002)]{prlrandis} Krawiecki, A., Holyst, J.A., Helbing, D.,
+(2002). Volatility clustering and scaling for financial time
+series due to attractor bubbling. Physical Review Letters 89,
+158701.
+
+\bibitem[LeBaron(2000)]{Lebaronrev} LeBaron, B., (2000).
+Agent based computational finance: suggested readings and early
+research. Journal of Economic Dynamics and Control 24, 679-702.
+
+\bibitem[Levy,~et al.(1995)]{Solomon1} Levy, M., Levy, H., Solomon, S.,
+(1995). Microscopic simulation of the stock market - the effect of
+microscopic diversity. Journal der Physique I 5, 1087-1107.
+
+\bibitem[Levy,~et al.(2000)]{Solomon2} Levy, M., Levy, H., Solomon, S.,
+(2000). The microscopic simulation of financial markets: from
+investor behavior to market phenomena. Academic Press, San Diego.
+
+\bibitem[Lillo,~et al.(2002)]{Lillodemand} Lillo, F., Farmer, J.D., Mantegna, R.,
+(2002). Single Curve Collapse of the Price Impact Function for the
+New-York Stock Exchange. e-print cond-mat/0207428; Master curve
+for price-impact function. (2003) Nature 421, 129.
+
+\bibitem[Liu,~et al.(1999)]{Liu-Gopikrishnan-1999-PRE}
+Liu, Y.-H., Gopikrishnan, P., Cizeau, P., Meyer, M., Peng, C.-K.,
+ Stanley, H.E., (1999). Statistical properties of the volatility of
+price fluctuations. Phys. Rev. E 60, 1390-1400.
+
+\bibitem[Lux(1995)]{Lux1} Lux, T., (1995).
+Herd behaviour, bubbles and crashes. Economic Journal: The Journal
+of the Royal Economic Society 105, 881-896.
+
+\bibitem[Lux(1998)]{Lux2} Lux, T., (1998).
+The socio-economic dynamics of speculative markets: interacting
+agents, chaos, and the fat tails of return distributions. Journal
+of Economic Behavior \& Organization 33, 143-165.
+
+\bibitem[Lux~and~Marchesi(1999)]{LuxMarchesi} Lux, T., Marchesi, M.,
+(1999). Scaling and criticality in a stochastic multi-agent model
+of a financial market. Nature 397, 498-500.
+
+\bibitem[Lux~and~Marchesi(2000)]{LuxMarchesi2} Lux, T., Marchesi, M.,
+(2000). Volatility clustering in financial markets: a
+micro-simulation of interacting agents. International Journal of
+Theoretical and Applied Finance 3, 675-702.
+
+\bibitem[Malevergne,~et al.(2003)]{Malpissor} Malevergne, Y., Pisarenko, V.F., Sornette, D.,
+(2003). Empirical distributions of log-returns: between the
+stretched exponential and the power law? in press in Quantitative
+Finance (preprint at http://arXiv.org/abs/physics/0305089).
+
+\bibitem[Malevergne~and~Sornette(2005)]{Malsorbook} Malevergne, Y., Sornette, D.,
+(2005). Extreme Financial Risks (from dependence to risk
+management). Springer, Heidelberg, in press.
+
+\bibitem[Mandelbrot(1997)]{Mandel97} Mandelbrot, B.B., (1997). Fractals and scaling
+in finance : discontinuity, concentration, risk : selecta volume E
+(with foreword by R.E. Gomory, and contributions by P.H. Cootner
+et al.), New York : Springer.
+
+\bibitem[Mantegna~and~Stanley(1995)]{Mantegna-Stanley-1995-Nature} Mantegna,
+R.N., Stanley, H.E., (1995). Scaling behavior in the dynamics of
+an economic index. Nature 376, 46-49.
+
+\bibitem[Mantegna~and~Stanley(2000)]{Mantegna-Stanley-2000} Mantegna, R.N., Stanley, H.E.,
+(2000). An Introduction to Econophysics: correlations and
+Complexity in Finance. Cambridge University Press, Cambridge.
+
+\bibitem[McCoy~and~Wu(1973)]{Ising1} McCoy, B.M., Wu, T.T.,
+(1973). The Two-Dimensional Ising Model. Harvard University,
+Cambridge, Mass.
+
+\bibitem[Montroll~and~Badger(1974)]{Montroll} Montroll, E.W., Badger, W.W.,
+(1974). {\it Introduction to quantitative aspects of social
+phenomena}. New York, Gordon and Breach.
+
+\bibitem[Muzy,~et al.(2000)]{M_etal} Muzy, J.F., Delour, J., Bacry, E.,
+(2000). Modelling fluctuations of financial time series: from
+cascade process to stochastic volatility model. The European
+physical Journal B 17, 537-548.
+
+\bibitem[Muzy,~et al.(2001)]{MuzyQF} Muzy, J.-F., Sornette, D.,
+Delour, J., Arneodo, A., (2001). Multifractal returns and
+hierarchical portfolio theory. Quantitative Finance 1, 131-148.
+
+\bibitem[Orl\'ean(1984)]{Orlean1} Orl\'ean, A., (1984). Mim\'etisme et anticipations rationnelles:
+une perspective keynesienne. Recherches Economiques de Louvain 52,
+45-66.
+
+\bibitem[Orl\'ean(1986)]{Orlean2} Orl\'ean, A., (1986). L'auto-r\'ef\'erence dans la th\'eorie
+keynesienne de la sp\'eculation. Cahiers d'Economie Politique
+14-15.
+
+\bibitem[Orl\'ean(1989a)]{Orlean3} Orl\'ean, A., (1989). Comportements mim\'etiques et diversit\'e
+des opinions sur les march\'es financiers, Chap. III, in Th\'eorie
+\'economique et crises des march\'es financiers, Bourguinat, H.
+and Artus, P., editors (Economica, Paris) pp. 45-65.
+
+\bibitem[Orl\'ean(1989b)]{Orlean4} Orl\'ean, A., (1989). Mimetic contagion and speculative
+bubbles. Theory and Decision 27, 63-92.
+
+\bibitem[Orl\'ean(1991)]{Orlean5} Orl\'ean, A., (1991). Disorder in the stock market (in
+french). La Recherche 22, 668-672.
+
+\bibitem[Orl\'ean(1995)]{Orlean6} Orl\'ean, A., (1995). Bayesian interactions and collective
+dynamics of opinion - Herd behavior and mimetic contagion. Journal
+of Economic Behavior \& Organization 28, 257-274.
+
+\bibitem[Pandey~and~Stauffer(2000)]{PandeyStauffer} Pandey, R. B., Stauffer, D.,
+(2000). Search for log-periodicity oscillations in stock market
+simulations. International Journal of Theoretical and Applied
+Finance 3, 479-482.
+
+\bibitem[Pasquini~and~Serva(2000)]{Pasquini}
+Pasquini, M., Serva, M., (2000). Clustering of volatility as a
+multiscale phenomenon. Eur. Phys. J. B 16, 195-201.
+
+\bibitem[Phan~et~al.(2004)]{Phanetal} Phan, D., M.B. Gordon and J.-P. Nadal (2004)
+Social Interactions in Economic Theory: an Insight from Statistical Mechanics,
+in Cognitive Economics -- an
+interdisciplinary approach, Bourgine, P. and Nadal, J.-P. eds., Springer (2004).
+
+\bibitem[Plerou,~et al.(2002)]{Pleroudemand} Plerou, V., Gopikrishnan, P.,
+Gabaix, X., Stanley, H.E., (2002). Quantifying stock price
+response to demand fluctuations. Phys. Rev. E 66, 027104/1-4.
+
+\bibitem[Roberts~and~Castore(1972)]{robertscarl} Roberts, J.C., Castore, C.H.,
+(1972). The effects of conformity, information, and confidence
+upon subjects' willingness to take risk following a group
+discussion. Organizational Behavior \& Human Performance 8,
+384-394.
+
+\bibitem[Roby~and~Carterette(1965)]{Ropbythor} Roby, T.B., Carterette, T.,
+(1965). The measurement of confidence and trust. United States Air
+Force Electronic Systems Division Technical Documentary Report
+65-299, 27.
+
+\bibitem[Roehner~and~Sornette(2000)]{RS00} Roehner, B.M., Sornette, D.,
+(2000). ``Thermometers'' of Speculative Frenzy. European Physical
+Journal B 16, 729-739.
+
+\bibitem[Sato~and~Takayasu(1998)]{Taka2} Sato, A.H. and Takayasu, H. (1998)
+Dynamic numerical models of stock market price: from microscopic
+determinism to macroscopic randomness, Physica A 250, 231-252.
+
+\bibitem[Savoy~and~Beitel(1997)]{Savoybeitel} Savoy, C., Beitel, P.,
+(1997). The relative effect of a group and group/individualized
+program on state anxiety and state self-confidence. Journal of
+Sport Behavior 20, 364-376.
+
+\bibitem[Schmitt,~et al.(1999)]{Schmitt} Schmitt, F., Schertzer, D., Lovejoy, S.,
+(1999). Multifractal analysis of foreign exchange data. Appl.
+Stochastic Data Anal. 15, 29-53.
+
+\bibitem[Sieck~and~Yates(1997)]{Sieck} Sieck, W., Yates, J.F.,
+(1997). Exposition effects on decision making: Choice and
+confidence in choice. Organizational Behavior \& Human Decision
+Processes 70, 207-219.
+
+\bibitem[Slater~and~Rouner(1992)]{Slaterrouner} Slater, M.D., Rouner, D.,
+(1992). Confidence in beliefs about social groups as an outcome of
+message exposure and its role in belief change persistence.
+Communication Research 19, 597-617.
+
+\bibitem[Sornette(1998)]{S98PR} Sornette, D., (1998). Discrete scale invariance and complex
+dimensions. Physics Reports 297, 239-270.
+
+\bibitem[Sornette(2003)]{Sornette-2003} Sornette, D., (2003). {\it{Why Stock Markets Crash --
+Critical Events in Complex Financial Systems}}. Princeton
+University Press, Princeton, NJ.
+
+\bibitem[Sornette,~et al.(2004)]{endoamazon} Sornette, D., Desch\^{a}tres, F., Gilbert, T., Ageon, Y.,
+(2004). Endogenous versus exogenous shocks in complex networks: An
+empirical test using book sale rankings. Phys. Rev. Lett. 93,
+228701.
+
+\bibitem[Sornette~and~Helmstetter(2003)]{endo2} Sornette, D., Helmstetter, A.
+(2003). Endogeneous versus exogeneous shocks in systems with
+memory. Physica A 318, 577-591.
+
+\bibitem[Sornette~and~Ide(2002)]{SI} Sornette, D., Ide, K.,
+(2002). Theory of self-similar oscillatory finite-time
+singularities in Finance, Population and Rupture. Int. J. Mod.
+Phys. C 14, 267-275.
+
+\bibitem[Sornette,~et al.(1996)]{Sornette-Johansen-Bouchaud-1996-JPIF}
+Sornette, D., Johansen, A., Bouchaud, J.-P., (1996). Stock market
+crashes, precursors and replicas. J. Phys. I France 6, 167-175.
+
+\bibitem[Sornette,~et al.(2003)]{endovol} Sornette, D., Malevergne, Y.,
+ Muzy, J.-F., (2003). What causes crashes? Risk 16 (2), 67-71.
+
+\bibitem[Stauffer~and~Sornette(1999)]{SS99} Stauffer, D., Sornette, D.,
+(1999). Self-organized percolation model for stock market
+fluctuations. Physica A 271, 496-506.
+
+\bibitem[Suitor,~et al.(1997)]{Suitor} Suitor, J.J., Wellman, B., Morgan, D.L.,
+(1997). It's about time: how, why, and when networks change.
+Social Networks 19, 1-7.
+
+\bibitem[Takayasu,~et al.(1992)]{Taka1} Takayasu, H., Miura, H., Hirabayshi, T., Hamada, K.,
+(1992). Statistical properties of deterministic threshold elements
+-- The case of the market price. Physica A 184, 127-134.
+
+\bibitem[Vandewalle~and~Ausloos(1998)]{Vande1} Vandewalle, N., Ausloos, M.,
+(1998). Multi-affine analysis of typical currency exchange rates.
+Eur. Phys. J. B 4, 257-261.
+
+\bibitem[Welch(1992)]{Welch1992} Welch, I., (1992).
+Sequential sales, learning, and cascades. Journal of Finance 47,
+695-732. see also http://welch.som.yale.edu/cascades for an
+annotated bibliography and resource reference on ``information
+cascades''.
+
+\bibitem[Wellman,~et al.(1997)]{Wellman} Wellman, B., Wong, R.,
+Tindall, D., Nazer, N., (1997). A decade of network change:
+Turnover, persistence and stability in personal communities.
+Social Networks 19, 27-50.
+
+\bibitem[Wyart~and~Bouchaud(2003)]{Wyart} Wyart, M., Bouchaud, J.-P., (2003). Self-referential
+behaviour, overreaction, and conventions in financial markets. in
+press in Journal of Economic Behavior and Organization.
+
+\bibitem[Youssefmir,~et al.(1998)]{Hubermancrash} Youssefmir, M., Huberman, B.A., Hogg, T.,
+(1998). Bubbles and market crashes. Computational Economics 12,
+97-114.
+
+
+
+\end{thebibliography}
+
+\clearpage
+%FIGURE 1
+\begin{figure}
+\begin{center}
+\includegraphics[width=14cm]{FigReturnHist_Carlos}
+\end{center}
+\caption{Density distribution of returns $r_1$ for a realization
+of the artificial stock market model formulated by \cite{G03AFM}
+generated using $b_{\max} = 0.22\sim 0.24$, $\sigma_{\max} = 0.14
+\sim 0.15$ and $CV = 0.8 \sim 0.9$ as recommended by this author.
+The time series of returns have been kindly provided by
+Gon\c{c}alves. Our own simulations reproduce the same results.}
+\label{Fig:ReturnHist:Carlos}
+\end{figure}
+
+\clearpage
+%FIGURE 2
+\begin{figure}
+\begin{center}
+\includegraphics[width=14cm]{FigGASM_Bimodal.eps}
+\end{center}
+\caption{A typical example of the multimodal distribution for
+$b_{\max}=0.2$, $\sigma_{\max}=0.045$, and $CV=0.1$.}
+\label{Fig:Bimodal}
+\end{figure}
+
+\clearpage
+%FIGURE 3
+\begin{figure}
+\begin{center}
+\includegraphics[width=14cm]{FigGASM_OC_lnP.eps}
+\end{center}
+\caption{A realization of the logarithm of the price over $10^5$
+time steps generated using $\alpha = 0.2$, $b_{\max} = 0.3$,
+$\sigma_{\max} = 0.03$ and $CV = 0.1$ of the generalized
+artificial stock market model defined by (\ref{Eq:Sit22}),
+(\ref{Eq:rt}) and (\ref{Eq:ASMKi}). } \label{Fig:OC:lnP}
+\end{figure}
+
+\clearpage
+%FIGURE 4
+\begin{figure}
+\begin{center}
+\includegraphics[width=14cm]{FigGASM_OC_R.eps}
+\end{center}
+\caption{Time series of the log-returns of the price shown in
+Fig.~\ref{Fig:OC:lnP}. } \label{Fig:OC:R}
+\end{figure}
+
+\clearpage
+%FIGURE 5
+\begin{figure}
+\begin{center}
+\includegraphics[width=14cm]{FigGASM_OC_pdfR.eps}
+\end{center}
+\caption{(Color online) Empirical (solid lines) and theoretical
+(dashed thin lines) probability distribution density (in
+logarithmic scales) of log-returns at different time scales $\tau$
+of the price time series shown in Fig.~\ref{Fig:OC:lnP}. The
+log-returns $r_{\tau}$ are normalized by their corresponding
+standard deviations $\sigma_{\tau}$. The pdf curves are translated
+vertically for clarity. The thick dashed line is the Gaussian
+pdf.} \label{Fig:OC:pdfR}
+\end{figure}
+
+\clearpage
+%FIGURE 6
+\begin{figure}
+\begin{center}
+\includegraphics[width=14cm]{FigGASM_OC_CorrR.eps}
+\end{center}
+\caption{Autocorrelation function of the log-returns of the
+realization shown in Fig.~\ref{Fig:OC:lnP}. } \label{Fig:OC:CorrR}
+\end{figure}
+
+\clearpage
+%FIGURE 7
+\begin{figure}
+\begin{center}
+\includegraphics[width=12cm]{FigGASM_OC_CorrAbsRa.eps}
+\end{center}
+\begin{center}
+\includegraphics[width=12cm]{FigGASM_OC_CorrAbsRb.eps}
+\end{center}
+\caption{Autocorrelation function of the absolute value of
+log-returns of the realization shown in Fig.~\ref{Fig:OC:lnP}. The
+top panel show the correlation in linear-linear scale. The bottom
+panel plots the correlation function as a function of the
+logarithm of the time lag, as suggested by the multifractal random
+walk model (see text).} \label{Fig:OC:CorrAbsR}
+\end{figure}
+
+\clearpage
+%FIGURE 8
+\begin{figure}
+\begin{center}
+\includegraphics[width=14cm]{FigGASM_OC_alfa1.eps}
+\end{center}
+\begin{center}
+\includegraphics[width=14cm]{FigGASM_OC_alfa2.eps}
+\end{center}
+\caption{The impact of $\alpha$ on the auto-correlation of the
+absolute values of the returns and of the returns.}
+\label{Fig:OC:alfa1}
+\end{figure}
+
+\clearpage
+%FIGURE 9
+\begin{figure}
+\begin{center}
+\includegraphics[width=14cm]{FigGASM_OC_CRtau.eps}
+\end{center}
+\caption{Scaling of the autocorrelation functions of $|r_\tau(t)|$
+for different time scales $\tau$ of the realization shown in
+Fig.~\ref{Fig:OC:lnP}.} \label{Fig:OC:CRtau}
+\end{figure}
+
+\clearpage
+%FIGURE 10
+\begin{figure}
+\begin{center}
+\includegraphics[width=14cm]{FigGASM_OC_Scaling.eps}
+\end{center}
+\caption{Scaling of the structure functions $M_q(\tau)$ of
+log-returns shown in Fig.~\ref{Fig:OC:R} at different scales
+$\tau$ for different orders $q$. } \label{Fig:OC:Scaling}
+\end{figure}
+
+\clearpage
+%FIGURE 11
+\begin{figure}
+\begin{center}
+\includegraphics[width=14cm]{FigGASM_OC_xi.eps}
+\end{center}
+\caption{Dependence of the scaling exponents $\xi_q$ defined in
+(\ref{mbjowls}) as a function of the order $q$ of the structure
+functions $M_q(\tau) \sim \tau^{\xi_q}$. The concavity of $\xi_q$
+as a function $q$ is the hallmark of multifractality.}
+\label{Fig:OC:xi}
+\end{figure}
+
+\clearpage
+%FIGURE 12
+\begin{figure}
+\begin{center}
+\includegraphics[width=14cm]{FigGASM_OC_Endo_vol.eps}
+\end{center}
+\caption{Average normalized conditional volatility
+$\sigma^2_{\Delta{t}}(t)/E[\sigma^2]$ as a function of the time
+$t-t_s$ from the local burst of volatility at time $t_s$ for
+different log-amplitudes $s$ in double logarithmic coordinates.}
+\label{Fig:OC:Endo_1}
+\end{figure}
+
+\clearpage
+%FIGURE 13
+\begin{figure}
+\begin{center}
+\includegraphics[width=14cm]{FigGASM_OC_Endo_alfa.eps}
+\end{center}
+\caption{Exponent $\alpha(s)$ of the conditional volatility
+response  as a function of the endogenous shock amplitude $S$ for
+$\Delta{t}=1, 2, 4$, and $8$.} \label{Fig:OC:Endo_2}
+\end{figure}
+
+
+\clearpage
+%FIGURE 14
+\begin{figure}
+\begin{center}
+\includegraphics[width=14cm]{FigGASM_OC_Exo2.eps}
+\end{center}
+\caption{Relaxation of superposed excess volatility after
+exogenous shocks obtained by imposing a very large news $G(t_s)$
+for $\Delta{t}=1$.} \label{Fig:OC:Exo}
+\end{figure}
+
+\clearpage
+%FIGURE 15
+\begin{figure}
+\begin{center}
+\includegraphics[width=14cm]{FigGASM_OC_Bubbles.eps}
+\end{center}
+\caption{Five price trajectories showing bubbles preceding crashes
+that occur at the shifted time $0$. The five time series have been
+translated so that the time of their crash is placed at the origin
+$t=0$.} \label{FigGASM_OC_Bubbles}
+\end{figure}
+
+
+\end{document}

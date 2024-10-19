@@ -4,7 +4,6 @@ from langchain_text_splitters import CharacterTextSplitter
 from langchain_chroma import Chroma
 from langchain_huggingface import HuggingFaceEmbeddings
 from google.cloud import storage
-from google.cloud import aiplatform
 import vertexai
 from vertexai.generative_models import GenerativeModel
 
