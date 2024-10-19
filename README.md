@@ -13,11 +13,13 @@ The Pipeline Flow is as shown:
 
 ## Data Pipeline Overview
 
+We utilized textual data fetched from social impact-related papers obtained using the ArXiv API, then embedded it using the Hugging Face library and stored it in the vector database. Currently, we fetch and store the manuscripts (both raw and embedded) for around 30 papers. 
+
 **Container 1: Retrieve Papers**
 
-Query ArXiv API for papers on “social impact” and fetch metadata for the top 30 results and saves all the manuscript .txt files to the Google cloud bucket. 
+Query ArXiv API for papers on “social impact” fetch metadata for the top 30 results and save all the manuscript .txt files to the Google cloud bucket. 
 
-Instructions for running the the container:
+Instructions for running the container:
 ```
 cd retrieve_papers
 pipenv lock
@@ -30,7 +32,7 @@ python retrieve_papers.py
 
 Process the manuscripts, perform chunking, embed each chunk and store the embeddings in a ChromaDB vector database
 
-Instructions for running the the container:
+Instructions for running the container:
 ```
 cd embed_papers
 pipenv lock
@@ -43,7 +45,7 @@ python embed_papers.py
 
 Manages the retrieval of relevant research papers and generates responses for user queries using Gemini MiniLM
 
-Instructions for running the the container:
+Instructions for running the container:
 ```
 cd perform_rag
 pipenv lock
