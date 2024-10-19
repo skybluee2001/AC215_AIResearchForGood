@@ -3,11 +3,15 @@
 **Project:** Build a global platform that links AI research groups with organizations aiming to solve social issues using AI. The platform will have a search interface for organizations to look for AI research papers relevant to their social cause. A dashboard will provide a curated list of relevant research to the user prompt, the research groups, and how the research work relates to the user’s problem prompt. The platform will be designed to support a growing number of research groups and global organizations. We process a large corpus of AI research papers & social issue descriptions and train LLMs for information retrieval and matching between research and real-world problems.
 
 The User Interface is as shown:
+
 <img src="references/UI.jpeg"  width="800">
 
 
 The Pipeline Flow is as shown:
+
 <img src="references/Flowchart.jpeg"  width="800">
+
+## Data Pipeline Overview
 
 **Container 1: Retrieve Papers**
 
