@@ -5,6 +5,9 @@ from langchain_chroma import Chroma
 from langchain_huggingface import HuggingFaceEmbeddings
 from google.cloud import storage
 from google.cloud import aiplatform
+import vertexai
+from vertexai.generative_models import GenerativeModel
+
 
 def download_files_from_bucket(bucket_name, folder_prefix, destination_folder):
     storage_client = storage.Client()
@@ -46,10 +49,15 @@ def generate_answer_google(documents, query, project_id, location, model_id):
     prompt = "\n\n".join(documents)
     prompt += f"\nFor the query '{query}', please generate an explanation for the relevance of the above papers to the query."
     
-    aiplatform.init(project=project_id, location=location)
-    model = aiplatform.Model(model_id)
-    response = model.predict([prompt], temperature=0.7)
-    
+    vertexai.init(project=project_id, location="us-central1")
+
+    model = GenerativeModel("gemini-1.5-flash")
+
+    response = model.generate_content(
+       prompt
+    )
+
+    print(response.text)
     return response.predictions[0]
 
 def main():
