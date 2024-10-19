@@ -20,8 +20,9 @@ model_name = "sentence-transformers/all-MiniLM-L6-v2"
 hf = HuggingFaceEmbeddings(model_name=model_name)
 
 persist_directory = "paper_vector_db"
+
 db = Chroma(
-    collection_name="example_collection",
+    collection_name="all_manuscripts",
     embedding_function=hf,  
     persist_directory=persist_directory 
 )

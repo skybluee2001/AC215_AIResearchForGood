@@ -26,7 +26,7 @@ def download_files_from_bucket(bucket_name, folder_prefix, destination_folder):
 def retrieve_documents(query, persist_directory, model_name):
     hf = HuggingFaceEmbeddings(model_name=model_name)
     db = Chroma(
-        collection_name="example_collection",
+        collection_name="all_manuscripts",
         embedding_function=hf,
         persist_directory=persist_directory
     )
