@@ -1,0 +1,46 @@
+{
+    "_meta": {
+        "hash": {
+            "sha256": "samplehashvalue1234567890abcdef1234567890abcdef1234567890abcdef12345678"
+        },
+        "version": 1
+    },
+    "default": {
+        "google-cloud-storage": {
+            "hashes": [
+                "sha256:samplehashvalue1",
+                "sha256:samplehashvalue2"
+            ],
+            "version": "==1.43.0"
+        },
+        "langchain-chroma": {
+            "hashes": [
+                "sha256:samplehashvalue3",
+                "sha256:samplehashvalue4"
+            ],
+            "version": "==0.0.1"
+        },
+        "langchain-community": {
+            "hashes": [
+                "sha256:samplehashvalue5",
+                "sha256:samplehashvalue6"
+            ],
+            "version": "==0.0.1"
+        },
+        "langchain-huggingface": {
+            "hashes": [
+                "sha256:samplehashvalue7",
+                "sha256:samplehashvalue8"
+            ],
+            "version": "==0.0.1"
+        },
+        "langchain-openai": {
+            "hashes": [
+                "sha256:samplehashvalue9",
+                "sha256:samplehashvalue10"
+            ],
+            "version": "==0.0.1"
+        }
+    },
+    "develop": {}
+}
