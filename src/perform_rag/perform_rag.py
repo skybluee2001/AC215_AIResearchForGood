@@ -34,7 +34,8 @@ def retrieve_documents(query, persist_directory, model_name):
     )
 
     results = db.similarity_search(query, k=5)
-
+    print(results)
+    print("Retrieved documents:................")
     documents = []
     for result in results:
         source = result.metadata['source']
@@ -59,7 +60,7 @@ def generate_answer_google(documents, query, project_id, location, model_id):
     print(response.text)
     return response.text
 
-def main():
+def main(query):
     os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "secrets/ai-research-for-good-b6f4173936f9.json"
 
     bucket_name = 'paper-rec-bucket'
@@ -72,13 +73,14 @@ def main():
     LOCATION = "us-central1"
     MODEL_ID = "gemini-1.5-pro"
 
-    query = "AI for social impact"
+    #query = "AI for social impact"
 
     download_files_from_bucket(bucket_name, folder_prefix, destination_folder)
     documents = retrieve_documents(query, persist_directory, model_name)
+    print(documents)
     answer = generate_answer_google(documents, query, PROJECT_ID, LOCATION, MODEL_ID)
 
-    print(answer)
+    return answer
 
 if __name__ == "__main__":
     main()
