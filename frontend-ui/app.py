@@ -11,7 +11,7 @@ st.title("Global AI colab for good")
 st.write("Enter a problem statement to find relevant AI research papers and get an explanation for bonus!")
 
 # User query input
-query = st.text_input("Enter your query:", "AI for social impact")
+query = st.text_input("Enter your query:", "social media network")
 
 if st.button("Submit"):
     with st.spinner("Fetching relevant papers and generating explanation..."):

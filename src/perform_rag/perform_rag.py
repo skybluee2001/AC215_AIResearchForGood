@@ -38,14 +38,15 @@ def retrieve_documents(query, persist_directory, model_name):
     for result in results:
         source = result.metadata['source']
         page_content = result.page_content
-        prompt = f"Source: {source}\nPage Content: {page_content}\n"
+        print(page_content)
+        prompt = f"\nPage Content: {page_content}\n"
         documents.append(prompt)
 
     return documents
 
 def generate_answer_google(documents, query, project_id, location, model_id):
     prompt = "\n\n".join(documents)
-    prompt += f"\nFor the query '{query}', please generate an explanation for the relevance of the above papers to the query."
+    prompt += f"\nFor the query '{query}', please give paper name and summary of the above papers and show how it relates to the query."
 
     vertexai.init(project=project_id, location="us-central1")
 
@@ -75,7 +76,7 @@ def main(query):
 
     download_files_from_bucket(bucket_name, folder_prefix, destination_folder)
     documents = retrieve_documents(query, persist_directory, model_name)
-    print(documents)
+    # print(documents)
     answer = generate_answer_google(documents, query, PROJECT_ID, LOCATION, MODEL_ID)
 
     return answer
