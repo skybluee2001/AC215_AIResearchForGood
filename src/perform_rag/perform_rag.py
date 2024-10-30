@@ -34,8 +34,6 @@ def retrieve_documents(query, persist_directory, model_name):
     )
 
     results = db.similarity_search(query, k=5)
-    print(results)
-    print("Retrieved documents:................")
     documents = []
     for result in results:
         source = result.metadata['source']
