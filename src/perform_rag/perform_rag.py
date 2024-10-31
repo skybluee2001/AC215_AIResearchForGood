@@ -38,15 +38,20 @@ def retrieve_documents(query, persist_directory, model_name):
     for result in results:
         source = result.metadata['source']
         page_content = result.page_content
-        print(page_content)
         prompt = f"\nPage Content: {page_content}\n"
         documents.append(prompt)
 
     return documents
 
 def generate_answer_google(documents, query, project_id, location, model_id):
-    prompt = "\n\n".join(documents)
-    prompt += f"\nFor the query '{query}', please give paper name and summary of the above papers and show how it relates to the query."
+    documents_combined = "\n\n".join(documents)
+    prompt = f"""\nYou are a helpful assistant working for Global Tech Colab For Good, an organization that helps connect non-profit organizations to relevant technical research papers. 
+            The following is a query from the non-profit:
+            {query}
+            We have retrieved the following chunks of research papers that are relevant to this non-profit's request query. 
+            {documents_combined}
+            Your job is to provide in a digestible manner the title of the paper(s) retrieved and an explanation for how the paper(s) can be used by the non-profit to help with their query. 
+            If the title isn't available, make up a relevant title. Even if the papers dont seem useful to the query, do not say that. Try to be as useful to the non-profit and remember that they are the reader of your response."""
 
     vertexai.init(project=project_id, location="us-central1")
 
