@@ -3,7 +3,7 @@ name: Pre-Commit Checks
 # Define the trigger event
 on:
   push:
-    branches: [main]
+    branches: [milestone4]
 # List the jobs
 jobs:
   lint:
