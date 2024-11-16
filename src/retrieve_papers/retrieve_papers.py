@@ -5,7 +5,14 @@ from google.cloud import storage
 import requests
 import tarfile
 
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "../../../secrets/ai-research-for-good-b6f4173936f9.json"
+# Get the directory of the current script
+script_dir = os.path.dirname(os.path.abspath(__file__))
+
+# Construct the absolute path to the credentials file
+credentials_path = os.path.join(script_dir, "../../../secrets/ai-research-for-good-b6f4173936f9.json")
+
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = credentials_path
+# os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "../../../secrets/ai-research-for-good-b6f4173936f9.json"
 
 bucket_name = 'paper-rec-bucket'
 storage_client = storage.Client()

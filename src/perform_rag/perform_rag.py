@@ -65,7 +65,13 @@ def generate_answer_google(documents, query, project_id, location, model_id):
     return response.text
 
 def main(query):
-    os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "../../../secrets/ai-research-for-good-b6f4173936f9.json"
+    # Get the directory of the current script
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+
+    # Construct the absolute path to the credentials file
+    credentials_path = os.path.join(script_dir, "../../../secrets/ai-research-for-good-b6f4173936f9.json")
+
+    os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = credentials_path
 
     bucket_name = 'paper-rec-bucket'
     destination_folder = 'paper_vector_db'
