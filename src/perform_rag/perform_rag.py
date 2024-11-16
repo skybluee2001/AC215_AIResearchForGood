@@ -65,7 +65,7 @@ def generate_answer_google(documents, query, project_id, location, model_id):
     return response.text
 
 def main(query):
-    os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "secrets/ai-research-for-good-b6f4173936f9.json"
+    os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "../../../secrets/ai-research-for-good-b6f4173936f9.json"
 
     bucket_name = 'paper-rec-bucket'
     destination_folder = 'paper_vector_db'

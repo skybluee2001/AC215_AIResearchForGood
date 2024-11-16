@@ -1,1 +1,0 @@
-Please add the secrets file from GCP here. It should be a JSON file named like `ai-research-for-good-{NUMBER}.json`
