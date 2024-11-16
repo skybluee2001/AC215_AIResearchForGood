@@ -14,7 +14,7 @@ fi
 
 echo "-----------------Model training started-----------------"
 # Run autotrain with the specified config and redirect output and error to logs
-autotrain --config some_ml.yaml 
+autotrain --config some_ml.yaml
 
 echo "-----------------Model training completed-----------------"
 

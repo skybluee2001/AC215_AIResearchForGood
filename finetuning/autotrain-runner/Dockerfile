@@ -39,4 +39,3 @@ RUN mkdir /app/data
 
 # Set the default entrypoint
 ENTRYPOINT  ["/bin/bash"]
-

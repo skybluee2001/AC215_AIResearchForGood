@@ -3,12 +3,16 @@ import sys
 import os
 
 # Add the src directory to the path to import perform_rag
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'src', 'perform_rag')))
+sys.path.append(
+    os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "src", "perform_rag"))
+)
 from perform_rag import main as perform_rag_main
 
 # Streamlit UI
 st.title("Global Tech Colab For Good: A Platform for Non-Profits and Research Groups")
-st.write("Enter a problem statement to find relevant tech research papers and get an explanation for bonus!")
+st.write(
+    "Enter a problem statement to find relevant tech research papers and get an explanation for bonus!"
+)
 
 # User query input
 query = st.text_input("Enter your query:", "")

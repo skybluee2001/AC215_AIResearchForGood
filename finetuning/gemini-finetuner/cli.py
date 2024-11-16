@@ -12,10 +12,14 @@ from google.oauth2 import service_account
 
 # Setup
 GCP_PROJECT = os.environ["GCP_PROJECT"]
-TRAIN_DATASET = "gs://dataset-ai-research/train_annotated.jsonl" # Replace with your dataset
-VALIDATION_DATASET = "gs://dataset-ai-research/val_annotated.jsonl" # Replace with your dataset
+TRAIN_DATASET = (
+    "gs://dataset-ai-research/train_annotated.jsonl"  # Replace with your dataset
+)
+VALIDATION_DATASET = (
+    "gs://dataset-ai-research/val_annotated.jsonl"  # Replace with your dataset
+)
 GCP_LOCATION = "us-central1"
-GENERATIVE_SOURCE_MODEL = "gemini-1.5-flash-002" # gemini-1.5-pro-002
+GENERATIVE_SOURCE_MODEL = "gemini-1.5-flash-002"  # gemini-1.5-pro-002
 # Configuration settings for the content generation
 generation_config = {
     "max_output_tokens": 3000,  # Maximum number of tokens for output
@@ -24,9 +28,12 @@ generation_config = {
 }
 
 
-credentials = service_account.Credentials.from_service_account_file('secrets/ai-research-for-good-b6f4173936f9.json')
+credentials = service_account.Credentials.from_service_account_file(
+    "secrets/ai-research-for-good-b6f4173936f9.json"
+)
 
-vertexai.init(project=GCP_PROJECT, location=GCP_LOCATION,  credentials=credentials)
+vertexai.init(project=GCP_PROJECT, location=GCP_LOCATION, credentials=credentials)
+
 
 def train(wait_for_job=False):
     print("train()")
@@ -36,17 +43,17 @@ def train(wait_for_job=False):
         source_model=GENERATIVE_SOURCE_MODEL,
         train_dataset=TRAIN_DATASET,
         validation_dataset=VALIDATION_DATASET,
-        epochs=10, # change to 2-3
+        epochs=10,  # change to 2-3
         adapter_size=4,
         learning_rate_multiplier=1.0,
         tuned_model_display_name="GlobalCollab-FineTuned-Model",
     )
     print("Training job started. Monitoring progress...\n\n")
-    
+
     # Wait and refresh
     time.sleep(60)
     sft_tuning_job.refresh()
-    
+
     if wait_for_job:
         print("Check status of tuning job:")
         print(sft_tuning_job)
@@ -63,14 +70,14 @@ def train(wait_for_job=False):
 def chat():
     print("chat()")
     # Get the model endpoint from Vertex AI: https://console.cloud.google.com/vertex-ai/studio/tuning?project=ac215-project
-    #MODEL_ENDPOINT = "projects/129349313346/locations/us-central1/endpoints/810191635601162240"
-    #MODEL_ENDPOINT = "projects/129349313346/locations/us-central1/endpoints/5584851665544019968"
-    MODEL_ENDPOINT = "projects/129349313346/locations/us-central1/endpoints/3319822527953371136" # Finetuned model
-    
+    # MODEL_ENDPOINT = "projects/129349313346/locations/us-central1/endpoints/810191635601162240"
+    # MODEL_ENDPOINT = "projects/129349313346/locations/us-central1/endpoints/5584851665544019968"
+    MODEL_ENDPOINT = "projects/129349313346/locations/us-central1/endpoints/3319822527953371136"  # Finetuned model
+
     generative_model = GenerativeModel(MODEL_ENDPOINT)
 
     query = "How to solve homelessness?"
-    print("query: ",query)
+    print("query: ", query)
     response = generative_model.generate_content(
         [query],  # Input prompt
         generation_config=generation_config,  # Configuration settings
@@ -78,14 +85,14 @@ def chat():
     )
     generated_text = response.text
     print("Fine-tuned LLM Response:", generated_text)
-     
+
 
 def main(args=None):
     print("CLI Arguments:", args)
 
     if args.train:
         train()
-    
+
     if args.chat:
         chat()
 

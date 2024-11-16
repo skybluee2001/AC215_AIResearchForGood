@@ -1,13 +1,13 @@
 # Use the official Debian-hosted Python image
 FROM python:3.12-slim-bookworm
 
-# Tell pipenv where the shell is. 
+# Tell pipenv where the shell is.
 # This allows us to use "pipenv shell" as a container entry point.
 ENV PYENV_SHELL=/bin/bash
 
 ENV GOOGLE_APPLICATION_CREDENTIALS=secrets/ai-research-for-good-b6f4173936f9.json
 
-# Ensure we have an up to date baseline, install dependencies 
+# Ensure we have an up to date baseline, install dependencies
 RUN set -ex; \
     apt-get update && \
     apt-get upgrade -y && \

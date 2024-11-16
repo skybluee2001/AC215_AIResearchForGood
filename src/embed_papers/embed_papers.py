@@ -9,18 +9,20 @@ from google.cloud import storage
 script_dir = os.path.dirname(os.path.abspath(__file__))
 
 # Construct the absolute path to the credentials file
-credentials_path = os.path.join(script_dir, "../../../secrets/ai-research-for-good-b6f4173936f9.json")
+credentials_path = os.path.join(
+    script_dir, "../../../secrets/ai-research-for-good-b6f4173936f9.json"
+)
 
 os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = credentials_path
 # os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "../../../secrets/ai-research-for-good-b6f4173936f9.json"
 
 # Google Cloud setup
-bucket_name = 'paper-rec-bucket'
+bucket_name = "paper-rec-bucket"
 storage_client = storage.Client()
 bucket = storage_client.bucket(bucket_name)
 
-texts_to_retrieve = 'manuscript_texts_to_retrieve'
-texts_done = 'manuscript_texts_done'
+texts_to_retrieve = "manuscript_texts_to_retrieve"
+texts_done = "manuscript_texts_done"
 os.makedirs(texts_done, exist_ok=True)
 
 model_name = "sentence-transformers/all-MiniLM-L6-v2"
@@ -30,9 +32,10 @@ persist_directory = "paper_vector_db"
 
 db = Chroma(
     collection_name="all_manuscripts",
-    embedding_function=hf,  
-    persist_directory=persist_directory 
+    embedding_function=hf,
+    persist_directory=persist_directory,
 )
+
 
 def upload_to_gcs(local_path, bucket_name):
     bucket = storage_client.bucket(bucket_name)
@@ -48,11 +51,13 @@ def upload_to_gcs(local_path, bucket_name):
         blob.upload_from_filename(local_path)
         print(f"Uploaded {local_path} to {bucket_name}")
 
+
 def download_from_gcs(blob_name, download_path, bucket_name):
     bucket = storage_client.bucket(bucket_name)
     blob = bucket.blob(blob_name)
     blob.download_to_filename(download_path)
     print(f"Downloaded {blob_name} from {bucket_name} to {download_path}")
+
 
 def delete_from_gcs(file_path, bucket_name):
     bucket = storage_client.bucket(bucket_name)
@@ -60,11 +65,12 @@ def delete_from_gcs(file_path, bucket_name):
     blob.delete()
     print(f"Deleted {file_path} from Google Cloud Storage")
 
+
 def main():
-    blobs = bucket.list_blobs(prefix='manuscript_texts_to_retrieve/')
+    blobs = bucket.list_blobs(prefix="manuscript_texts_to_retrieve/")
     for blob in blobs:
         if blob.name.endswith(".txt"):
-            local_file_path = os.path.join('/tmp', os.path.basename(blob.name))  
+            local_file_path = os.path.join("/tmp", os.path.basename(blob.name))
 
             download_from_gcs(blob.name, local_file_path, bucket_name)
 
@@ -75,7 +81,9 @@ def main():
 
             db.add_documents(documents)
 
-            new_blob_name = blob.name.replace('manuscript_texts_to_retrieve', 'manuscript_texts_done')
+            new_blob_name = blob.name.replace(
+                "manuscript_texts_to_retrieve", "manuscript_texts_done"
+            )
             bucket.blob(new_blob_name).upload_from_filename(local_file_path)
             print(f"Moved {blob.name} to {new_blob_name} in the cloud")
 
@@ -89,6 +97,7 @@ def main():
     upload_to_gcs(texts_done, bucket_name)  # Upload embedded files
 
     print("All manuscripts have been embedded and uploaded to the cloud.")
+
 
 if __name__ == "__main__":
     main()

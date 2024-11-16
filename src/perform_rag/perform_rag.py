@@ -25,65 +25,68 @@ def download_files_from_bucket(bucket_name, folder_prefix, destination_folder):
         blob.download_to_filename(local_path)
         print(f"Downloaded {blob.name} to {local_path}")
 
+
 def retrieve_documents(query, persist_directory, model_name):
     hf = HuggingFaceEmbeddings(model_name=model_name)
     db = Chroma(
         collection_name="all_manuscripts",
         embedding_function=hf,
-        persist_directory=persist_directory
+        persist_directory=persist_directory,
     )
 
     results = db.similarity_search(query, k=5)
     documents = []
     for result in results:
-        source = result.metadata['source']
+        source = result.metadata["source"]
         page_content = result.page_content
         prompt = f"\nPage Content: {page_content}\n"
         documents.append(prompt)
 
     return documents
 
+
 def generate_answer_google(documents, query, project_id, location, model_id):
     documents_combined = "\n\n".join(documents)
-    prompt = f"""\nYou are a helpful assistant working for Global Tech Colab For Good, an organization that helps connect non-profit organizations to relevant technical research papers. 
+    prompt = f"""\nYou are a helpful assistant working for Global Tech Colab For Good, an organization that helps connect non-profit organizations to relevant technical research papers.
             The following is a query from the non-profit:
             {query}
-            We have retrieved the following chunks of research papers that are relevant to this non-profit's request query. 
+            We have retrieved the following chunks of research papers that are relevant to this non-profit's request query.
             {documents_combined}
-            Your job is to provide in a digestible manner the title of the paper(s) retrieved and an explanation for how the paper(s) can be used by the non-profit to help with their query. 
+            Your job is to provide in a digestible manner the title of the paper(s) retrieved and an explanation for how the paper(s) can be used by the non-profit to help with their query.
             If the title isn't available, make up a relevant title. Even if the papers dont seem useful to the query, do not say that. Try to be as useful to the non-profit and remember that they are the reader of your response."""
 
     vertexai.init(project=project_id, location="us-central1")
 
     model = GenerativeModel("gemini-1.5-flash")
 
-    response = model.generate_content(
-       prompt
-    )
+    response = model.generate_content(prompt)
 
     print(response.text)
     return response.text
+
 
 def main(query):
     # Get the directory of the current script
     script_dir = os.path.dirname(os.path.abspath(__file__))
 
     # Construct the absolute path to the credentials file
-    credentials_path = os.path.join(script_dir, "../../../secrets/ai-research-for-good-b6f4173936f9.json")
+    credentials_path = os.path.join(
+        script_dir, "../../../secrets/ai-research-for-good-b6f4173936f9.json"
+    )
 
     os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = credentials_path
 
-    bucket_name = 'paper-rec-bucket'
-    destination_folder = 'paper_vector_db'
-    folder_prefix = 'paper_vector_db/'
-    persist_directory = 'paper_vector_db/'
+    bucket_name = "paper-rec-bucket"
+    destination_folder = "paper_vector_db"
+    folder_prefix = "paper_vector_db/"
+    persist_directory = "paper_vector_db/"
     model_name = "sentence-transformers/all-MiniLM-L6-v2"
 
     PROJECT_ID = "ai-research-for-good"
     LOCATION = "us-central1"
     MODEL_ID = "gemini-1.5-pro"
 
-    #query = "AI for social impact"
+    # query = "AI for social impact"
 
     download_files_from_bucket(bucket_name, folder_prefix, destination_folder)
     documents = retrieve_documents(query, persist_directory, model_name)
@@ -91,6 +94,7 @@ def main(query):
     answer = generate_answer_google(documents, query, PROJECT_ID, LOCATION, MODEL_ID)
 
     return answer
+
 
 if __name__ == "__main__":
     main()
