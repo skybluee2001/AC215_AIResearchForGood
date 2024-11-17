@@ -71,7 +71,7 @@ def main(query):
 
     # Construct the absolute path to the credentials file
     credentials_path = os.path.join(
-        script_dir, "../../../secrets/ai-research-for-good-b6f4173936f9.json"
+        script_dir, "../../../secrets/ai-research-for-good-bdf580df11b3.json"
     )
 
     os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = credentials_path

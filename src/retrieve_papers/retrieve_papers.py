@@ -10,15 +10,18 @@ script_dir = os.path.dirname(os.path.abspath(__file__))
 
 # Construct the absolute path to the credentials file
 credentials_path = os.path.join(
-    script_dir, "../../../secrets/ai-research-for-good-b6f4173936f9.json"
+    script_dir, "../../../secrets/ai-research-for-good-bdf580df11b3.json"
 )
 
 os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = credentials_path
 # os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "../../../secrets/ai-research-for-good-b6f4173936f9.json"
 
-bucket_name = "paper-rec-bucket"
-storage_client = storage.Client()
-bucket = storage_client.bucket(bucket_name)
+
+def set_up_gcs(bucket_name):
+    """Set up the Google Cloud Storage client."""
+    storage_client = storage.Client()
+    bucket = storage_client.bucket(bucket_name)
+    return bucket, storage_client
 
 
 def fetch_arxiv_papers(search_query, max_results=50):
@@ -65,7 +68,7 @@ def save_paper_metadata_to_txt(papers, file_name):
             file.write("\n")
 
 
-def upload_to_gcs(file_name, bucket_name):
+def upload_to_gcs(storage_client, file_name, bucket_name):
     bucket = storage_client.bucket(bucket_name)
     blob = bucket.blob(file_name)
     blob.upload_from_filename(file_name)
@@ -174,6 +177,9 @@ def process_paper(url, base_extract_path, final_txt_path):
 
 
 def main():
+    bucket_name = "paper-rec-bucket"
+    bucket, storage_client = set_up_gcs(bucket_name)
+
     search_query = 'social+AND+impact+OR+"social+impact"'
     max_results = 30
     output_file = "arxiv_social_impact_papers.txt"
@@ -192,7 +198,7 @@ def main():
     save_paper_metadata_to_txt(papers, output_file)
 
     # Upload the .txt file to Google Cloud bucket
-    upload_to_gcs(output_file, bucket_name)
+    upload_to_gcs(storage_client, output_file, bucket_name)
 
     # Process each paper, downloading and uploading the .tex file if successful
     for paper in papers:
