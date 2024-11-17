@@ -23,12 +23,13 @@ def download_files_from_bucket(bucket_name, folder_prefix, destination_folder):
         blob.download_to_filename(local_path)
         print(f"Downloaded {blob.name} to {local_path}")
 
+
 def rank_and_filter_documents(query, documents, model, top_k=5):
     """
     Rank and filter documents using the fine-tuned model.
     """
     # Use the fine-tuned model's ranking function
-    list_res=[]
+    list_res = []
 
     for doc in documents:
         Input = f"""You are an expert data annotator who works on a project to connect non-profit users to technological research papers that might be relevant to the non-profit's use case
@@ -43,7 +44,7 @@ def rank_and_filter_documents(query, documents, model, top_k=5):
             Input,
         )
         generated_text = response.text
-        if generated_text.lower()=='not relevant':
+        if generated_text.lower() == "not relevant":
             # list_res.append(doc)
             continue
         else:
@@ -91,8 +92,7 @@ def generate_answer_google(documents, query, project_id, location, model_id):
     return response.text
 
 
-
-def main(query='How to educate communities on homelessness'):
+def main(query="How to educate communities on homelessness"):
     # Get the directory of the current script
     script_dir = os.path.dirname(os.path.abspath(__file__))
 
@@ -109,7 +109,9 @@ def main(query='How to educate communities on homelessness'):
     persist_directory = "paper_vector_db/"
     model_name = "sentence-transformers/all-MiniLM-L6-v2"
     TOP_K = 5
-    MODEL_ENDPOINT = "projects/129349313346/locations/us-central1/endpoints/3319822527953371136" 
+    MODEL_ENDPOINT = (
+        "projects/129349313346/locations/us-central1/endpoints/3319822527953371136"
+    )
     PROJECT_ID = "ai-research-for-good"
     LOCATION = "us-central1"
     MODEL_ID = "gemini-1.5-pro"
@@ -118,15 +120,15 @@ def main(query='How to educate communities on homelessness'):
 
     download_files_from_bucket(bucket_name, folder_prefix, destination_folder)
     documents = retrieve_documents(query, persist_directory, model_name)
-    model=GenerativeModel(MODEL_ENDPOINT)
+    model = GenerativeModel(MODEL_ENDPOINT)
     top_documents = rank_and_filter_documents(query, documents, model, TOP_K)
 
-    answer = generate_answer_google(top_documents, query, PROJECT_ID, LOCATION, MODEL_ID)
+    answer = generate_answer_google(
+        top_documents, query, PROJECT_ID, LOCATION, MODEL_ID
+    )
 
     return answer
 
+
 if __name__ == "__main__":
     main()
-
-
-

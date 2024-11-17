@@ -1,7 +1,11 @@
 import pytest
 import os
 from unittest.mock import patch, MagicMock
-from perform_rag.perform_rag import retrieve_documents, download_files_from_bucket,rank_and_filter_documents
+from perform_rag.perform_rag import (
+    retrieve_documents,
+    download_files_from_bucket,
+    rank_and_filter_documents,
+)
 
 
 def test_import():
@@ -32,15 +36,15 @@ def test_rank_and_filter_documents():
     """Test ranking and filtering of documents based on a query."""
     # Mock model
     mock_model = MagicMock()
-    
+
     # Define test cases
     query = "Non-profit technology use"
     documents = [
         "Research paper about AI for non-profits",
         "Study on urban planning unrelated to technology",
-        "Technological advancements in clean water projects"
+        "Technological advancements in clean water projects",
     ]
-    
+
     # Mock model.generate_content responses
     def mock_generate_content(input_text):
         if "AI for non-profits" in input_text:
@@ -49,16 +53,16 @@ def test_rank_and_filter_documents():
             return MagicMock(text="Relevant")
         else:
             return MagicMock(text="Not Relevant")
-    
+
     mock_model.generate_content.side_effect = mock_generate_content
-    
+
     # Run the function
     filtered_docs = rank_and_filter_documents(query, documents, mock_model)
-    
+
     # Verify the result
     expected_docs = [
         "Research paper about AI for non-profits",
-        "Technological advancements in clean water projects"
+        "Technological advancements in clean water projects",
     ]
     assert filtered_docs == expected_docs
 
