@@ -1,6 +1,4 @@
 import os
-from langchain_community.document_loaders import TextLoader
-from langchain_text_splitters import CharacterTextSplitter
 from langchain_chroma import Chroma
 from langchain_huggingface import HuggingFaceEmbeddings
 from google.cloud import storage
@@ -26,6 +24,35 @@ def download_files_from_bucket(bucket_name, folder_prefix, destination_folder):
         print(f"Downloaded {blob.name} to {local_path}")
 
 
+def rank_and_filter_documents(query, documents, model, top_k=5):
+    """
+    Rank and filter documents using the fine-tuned model.
+    """
+    # Use the fine-tuned model's ranking function
+    list_res = []
+
+    for doc in documents:
+        Input = f"""You are an expert data annotator who works on a project to connect non-profit users to technological research papers that might be relevant to the non-profit's use case
+        Please rate the following research paper for its relevance to the non-profit's user query. Output "Relevant" if the paper relevant, or "Not Relevant" if the paper is not relevant.
+
+        User query: {query}
+
+        Paper snippet: {doc}
+        """
+
+        response = model.generate_content(
+            Input,
+        )
+        generated_text = response.text
+        if generated_text.lower() == "not relevant":
+            # list_res.append(doc)
+            continue
+        else:
+            list_res.append(doc)
+
+    return list_res
+
+
 def retrieve_documents(query, persist_directory, model_name):
     hf = HuggingFaceEmbeddings(model_name=model_name)
     db = Chroma(
@@ -34,7 +61,7 @@ def retrieve_documents(query, persist_directory, model_name):
         persist_directory=persist_directory,
     )
 
-    results = db.similarity_search(query, k=5)
+    results = db.similarity_search(query, k=10)
     documents = []
     for result in results:
         source = result.metadata["source"]
@@ -65,7 +92,7 @@ def generate_answer_google(documents, query, project_id, location, model_id):
     return response.text
 
 
-def main(query):
+def main(query="How to educate communities on homelessness"):
     # Get the directory of the current script
     script_dir = os.path.dirname(os.path.abspath(__file__))
 
@@ -81,7 +108,10 @@ def main(query):
     folder_prefix = "paper_vector_db/"
     persist_directory = "paper_vector_db/"
     model_name = "sentence-transformers/all-MiniLM-L6-v2"
-
+    TOP_K = 5
+    MODEL_ENDPOINT = (
+        "projects/129349313346/locations/us-central1/endpoints/3319822527953371136"
+    )
     PROJECT_ID = "ai-research-for-good"
     LOCATION = "us-central1"
     MODEL_ID = "gemini-1.5-pro"
@@ -90,8 +120,12 @@ def main(query):
 
     download_files_from_bucket(bucket_name, folder_prefix, destination_folder)
     documents = retrieve_documents(query, persist_directory, model_name)
-    # print(documents)
-    answer = generate_answer_google(documents, query, PROJECT_ID, LOCATION, MODEL_ID)
+    model = GenerativeModel(MODEL_ENDPOINT)
+    top_documents = rank_and_filter_documents(query, documents, model, TOP_K)
+
+    answer = generate_answer_google(
+        top_documents, query, PROJECT_ID, LOCATION, MODEL_ID
+    )
 
     return answer
 

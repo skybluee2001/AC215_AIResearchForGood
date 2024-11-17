@@ -1,8 +1,11 @@
 import pytest
 import os
 from unittest.mock import patch, MagicMock
-from perform_rag.perform_rag import retrieve_documents, download_files_from_bucket
-from langchain_community.document_loaders import TextLoader
+from perform_rag.perform_rag import (
+    retrieve_documents,
+    download_files_from_bucket,
+    rank_and_filter_documents,
+)
 
 
 def test_import():
@@ -27,6 +30,41 @@ def test_download_files_from_bucket(mock_storage_client):
 
     # Verify that the mocked download_to_filename is called with the correct file path
     mock_blob.download_to_filename.assert_called_once_with(expected_file_path)
+
+
+def test_rank_and_filter_documents():
+    """Test ranking and filtering of documents based on a query."""
+    # Mock model
+    mock_model = MagicMock()
+
+    # Define test cases
+    query = "Non-profit technology use"
+    documents = [
+        "Research paper about AI for non-profits",
+        "Study on urban planning unrelated to technology",
+        "Technological advancements in clean water projects",
+    ]
+
+    # Mock model.generate_content responses
+    def mock_generate_content(input_text):
+        if "AI for non-profits" in input_text:
+            return MagicMock(text="Relevant")
+        elif "clean water projects" in input_text:
+            return MagicMock(text="Relevant")
+        else:
+            return MagicMock(text="Not Relevant")
+
+    mock_model.generate_content.side_effect = mock_generate_content
+
+    # Run the function
+    filtered_docs = rank_and_filter_documents(query, documents, mock_model)
+
+    # Verify the result
+    expected_docs = [
+        "Research paper about AI for non-profits",
+        "Technological advancements in clean water projects",
+    ]
+    assert filtered_docs == expected_docs
 
 
 @patch("perform_rag.perform_rag.storage.Client")
@@ -79,7 +117,7 @@ def test_retrieve_documents(mock_chroma, mock_hf_embeddings):
     )
 
     # Verify similarity_search was called
-    mock_chroma_instance.similarity_search.assert_called_once_with("test_query", k=5)
+    mock_chroma_instance.similarity_search.assert_called_once_with("test_query", k=10)
 
     # Verify the return value
     expected_documents = [
