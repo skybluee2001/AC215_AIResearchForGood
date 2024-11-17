@@ -63,9 +63,9 @@ def test_retrieve_documents(mock_chroma, mock_hf_embeddings):
 
     # Call the function
     documents = retrieve_documents(
-        "test_query",               # Query string
-        "mock_persist_directory",   # Chroma persistence directory
-        "mock_model_name"           # Embedding model name
+        "test_query",  # Query string
+        "mock_persist_directory",  # Chroma persistence directory
+        "mock_model_name",  # Embedding model name
     )
 
     # Verify HuggingFaceEmbeddings was initialized
@@ -75,7 +75,7 @@ def test_retrieve_documents(mock_chroma, mock_hf_embeddings):
     mock_chroma.assert_called_once_with(
         collection_name="all_manuscripts",
         embedding_function=mock_hf_embeddings_instance,
-        persist_directory="mock_persist_directory"
+        persist_directory="mock_persist_directory",
     )
 
     # Verify similarity_search was called

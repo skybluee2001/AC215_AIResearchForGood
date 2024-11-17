@@ -1,4 +1,4 @@
-import pytest,os
+import pytest, os
 from unittest.mock import patch, MagicMock
 from retrieve_papers.retrieve_papers import (
     fetch_arxiv_papers,
@@ -15,6 +15,7 @@ def test_import():
     """Test importing the module."""
     assert type("retrieve_papers") == str
 
+
 @patch("retrieve_papers.retrieve_papers.urllib.request.urlopen")
 def test_fetch_arxiv_papers(mock_urlopen):
     """Test fetching papers from arXiv."""
@@ -28,9 +29,10 @@ def test_fetch_arxiv_papers(mock_urlopen):
         "http://export.arxiv.org/api/query?search_query=all:test_query&start=0&max_results=10&sortBy=lastUpdatedDate&sortOrder=ascending"
     )
 
+
 def test_parse_paper_data():
     """Test parsing paper data from XML."""
-    xml_data = '''
+    xml_data = """
     <feed xmlns="http://www.w3.org/2005/Atom">
         <entry>
             <title>Test Paper</title>
@@ -40,7 +42,7 @@ def test_parse_paper_data():
             <published>2024-01-01</published>
         </entry>
     </feed>
-    '''
+    """
     papers = parse_paper_data(xml_data)
     assert len(papers) == 1
     assert papers[0]["title"] == "Test Paper"
@@ -49,17 +51,21 @@ def test_parse_paper_data():
     assert papers[0]["authors"] == ["Author One"]
     assert papers[0]["published_date"] == "2024-01-01"
 
+
 from unittest.mock import mock_open
+
 
 @patch("builtins.open", new_callable=mock_open)
 def test_save_paper_metadata_to_txt(mock_open):
-    papers = [{
-        "title": "Test Paper",
-        "summary": "Test Summary",
-        "paper_id": "http://arxiv.org/abs/test_id",
-        "authors": ["Author One"],
-        "published_date": "2024-01-01",
-    }]
+    papers = [
+        {
+            "title": "Test Paper",
+            "summary": "Test Summary",
+            "paper_id": "http://arxiv.org/abs/test_id",
+            "authors": ["Author One"],
+            "published_date": "2024-01-01",
+        }
+    ]
     save_paper_metadata_to_txt(papers, "test_file.txt")
 
     mock_open.assert_called_once_with("test_file.txt", "w")
@@ -79,6 +85,7 @@ def test_download_tar_file(mock_get):
     assert result == "test_output.tar"
     mock_get.assert_called_once_with("http://example.com/test.tar", stream=True)
 
+
 @patch("retrieve_papers.retrieve_papers.tarfile.open")
 def test_extract_tar_file(mock_tarfile_open):
     """Test extracting a tar file."""
@@ -90,6 +97,7 @@ def test_extract_tar_file(mock_tarfile_open):
     assert result == "test_output"
     mock_tar.extractall.assert_called_once_with(path="test_output")
 
+
 def test_find_tex_file():
     """Test finding a .tex file in a directory."""
     with patch("os.walk") as mock_walk:
@@ -99,6 +107,7 @@ def test_find_tex_file():
         result = find_tex_file("test_dir")
         assert result == os.path.join("root", "file2.tex")
 
+
 @patch("builtins.open", new_callable=MagicMock)
 def test_save_tex_as_text(mock_open):
     """Test saving a .tex file as a text file."""
@@ -107,4 +116,3 @@ def test_save_tex_as_text(mock_open):
     assert result is True
     mock_open.assert_any_call("input.tex", "r", encoding="utf-8", errors="ignore")
     mock_open.assert_any_call("output.txt", "w", encoding="utf-8")
-
