@@ -1,4 +1,4 @@
-name: Pre-Commit Checks
+name: pre-commit
 
 # Define the trigger event
 on:
