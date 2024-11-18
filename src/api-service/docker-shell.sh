@@ -28,7 +28,7 @@ docker run --rm --name $IMAGE_NAME -ti \
 -v "$PERSISTENT_DIR":/persistent \
 -p 9000:9000 \
 -e DEV=1 \
--e GOOGLE_APPLICATION_CREDENTIALS=/secrets/ai-research-for-good-b6f4173936f9.json \
+-e GOOGLE_APPLICATION_CREDENTIALS=/secrets/ai-research-for-good-bdf580df11b3.json \
 -e GCP_PROJECT=$GCP_PROJECT \
 -e GCS_BUCKET_NAME=$GCS_BUCKET_NAME \
 -e CHROMADB_HOST=$CHROMADB_HOST \

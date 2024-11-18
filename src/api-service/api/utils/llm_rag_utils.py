@@ -194,9 +194,12 @@ import os
 from typing import List, Dict
 from langchain_chroma import Chroma
 from langchain_huggingface import HuggingFaceEmbeddings
+import vertexai
 from vertexai.generative_models import GenerativeModel
 from google.cloud import storage
+import logging
 
+logger = logging.getLogger(__name__)
 
 def download_files_from_bucket(bucket_name: str, folder_prefix: str, destination_folder: str):
     """
@@ -206,11 +209,13 @@ def download_files_from_bucket(bucket_name: str, folder_prefix: str, destination
         folder_prefix (str): The folder prefix in the bucket to download files from.
         destination_folder (str): The local folder to save the downloaded files.
     """
+    logger.info(f"Starting download from bucket: {bucket_name}, prefix: {folder_prefix}")
     storage_client = storage.Client()
     bucket = storage_client.bucket(bucket_name)
 
     if not os.path.exists(destination_folder):
         os.makedirs(destination_folder)
+        logger.info(f"Created destination folder: {destination_folder}")
 
     blobs = bucket.list_blobs(prefix=folder_prefix)
     for blob in blobs:
@@ -219,8 +224,13 @@ def download_files_from_bucket(bucket_name: str, folder_prefix: str, destination
         local_folder = os.path.dirname(local_path)
         if not os.path.exists(local_folder):
             os.makedirs(local_folder)
+            logger.debug(f"Created local folder: {local_folder}")
+        logger.info(f"Downloading: {blob.name} -> {local_path}")
         blob.download_to_filename(local_path)
         print(f"Downloaded {blob.name} to {local_path}")
+        logger.debug(f"Downloaded {blob.name} to {local_path}")
+
+    logger.info("All files downloaded successfully.")
 
 
 def retrieve_documents(query: str, persist_directory: str, model_name: str) -> List[str]:
@@ -233,7 +243,9 @@ def retrieve_documents(query: str, persist_directory: str, model_name: str) -> L
     Returns:
         List[str]: A list of relevant document snippets.
     """
+    logger.info(f"Retrieving documents for query: {query}")
     hf = HuggingFaceEmbeddings(model_name=model_name)
+    logger.debug(f"Using model: {model_name} with persist directory: {persist_directory}")
     db = Chroma(
         collection_name="all_manuscripts",
         embedding_function=hf,
@@ -241,6 +253,7 @@ def retrieve_documents(query: str, persist_directory: str, model_name: str) -> L
     )
 
     results = db.similarity_search(query, k=10)
+    logger.info(f"Retrieved {len(results)} results from ChromaDB")
     documents = []
     for result in results:
         source = result.metadata.get("source", "Unknown Source")
@@ -250,37 +263,72 @@ def retrieve_documents(query: str, persist_directory: str, model_name: str) -> L
 
     return documents
 
+# def rank_and_filter_documents(query: str, documents: List[str], model: GenerativeModel, top_k: int = 5) -> List[str]:
+#     """
+#     Ranks and filters documents using a fine-tuned generative model.
+#     Args:
+#         query (str): The query string for ranking.
+#         documents (List[str]): A list of document snippets to evaluate.
+#         model (GenerativeModel): A Vertex AI generative model for ranking.
+#         top_k (int): The number of top documents to retain.
+#     Returns:
+#         List[str]: A list of top-ranked document snippets.
+#     """
+#     ranked_documents = []
 
-def rank_and_filter_documents(query: str, documents: List[str], model: GenerativeModel, top_k: int = 5) -> List[str]:
-    """
-    Ranks and filters documents using a fine-tuned generative model.
-    Args:
-        query (str): The query string for ranking.
-        documents (List[str]): A list of document snippets to evaluate.
-        model (GenerativeModel): A Vertex AI generative model for ranking.
-        top_k (int): The number of top documents to retain.
-    Returns:
-        List[str]: A list of top-ranked document snippets.
-    """
-    ranked_documents = []
+#     logger.info(f"Ranking and filtering {len(documents)} documents for query: {query}")
+#     # for doc in documents:
+#     for idx, doc in enumerate(documents):
+#         logger.debug(f"Document {idx + 1}: {doc[:200]}")  # Log first 200 characters of each document
+#         input_prompt = f"""
+#         You are an expert data annotator tasked with connecting non-profits to relevant research papers.
+#         Please evaluate the following paper snippet for its relevance to the query.
+
+#         User query: {query}
+
+#         Paper snippet: {doc}
+
+#         Output "Relevant" if the paper is relevant, or "Not Relevant" if it is not.
+#         """
+#         response = model.generate_content(input_prompt)
+#         generated_text = response.text.strip().lower()
+#         if generated_text == "relevant":
+#             ranked_documents.append(doc)
+
+#     return ranked_documents[:top_k]
+
+
+def rank_and_filter_documents(query, documents, model, top_k=5):
+    # This function ranks and filters documents using the fine-tuned model.
+    list_res = []
 
     for doc in documents:
-        input_prompt = f"""
-        You are an expert data annotator tasked with connecting non-profits to relevant research papers.
-        Please evaluate the following paper snippet for its relevance to the query.
+        input_text = (
+            f"""You are an expert data annotator who works on a project to connect non-profit users to technological research papers that might be relevant to the non-profit's use case
+        Please rate the following research paper for its relevance to the non-profit's user query. Output "Relevant" if the paper relevant, or "Not Relevant" if the paper is not relevant.
 
         User query: {query}
 
         Paper snippet: {doc}
-
-        Output "Relevant" if the paper is relevant, or "Not Relevant" if it is not.
         """
-        response = model.generate_content(input_prompt)
-        generated_text = response.text.strip().lower()
-        if generated_text == "relevant":
-            ranked_documents.append(doc)
+        )
 
-    return ranked_documents[:top_k]
+        print("Query:", query)
+        print("Number of documents:", len(documents))
+        print("Top K:", top_k)
+        print("Model:", model)
+    
+
+        model = GenerativeModel("projects/ai-research-for-good/locations/us-central1/endpoints/8528956776635170816")
+        response = model.generate_content([input_text],)
+        generated_text = response.text.strip()  # Strip whitespace from response
+
+        if generated_text.lower() == "relevant":
+            print("added")
+            list_res.append(doc)
+
+
+        return list_res
 
 
 def generate_answer(documents: List[str], query: str, project_id: str, location: str, model_id: str) -> str:
@@ -295,7 +343,9 @@ def generate_answer(documents: List[str], query: str, project_id: str, location:
     Returns:
         str: The generated response.
     """
+    logger.info(f"Generating answer for query: {query} using {len(documents)} documents")
     documents_combined = "\n\n".join(documents)
+    logger.debug(f"Combined documents:\n{documents_combined[:500]}")  # Log the first 500 characters
     prompt = f"""
     You are a helpful assistant for Global Tech Colab For Good, connecting non-profits with relevant research papers.
     

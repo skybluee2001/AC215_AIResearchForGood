@@ -167,32 +167,49 @@
 #         )
 
 from fastapi import APIRouter, HTTPException
-from api.utils.llm_rag_utils import retrieve_documents, rank_and_filter_documents, generate_answer
+from api.utils.llm_rag_utils import download_files_from_bucket, retrieve_documents, rank_and_filter_documents, generate_answer
+import vertexai
 from vertexai.generative_models import GenerativeModel
+import logging
+
+logger = logging.getLogger(__name__)
 
 router = APIRouter()
 
 @router.post("/perform_rag")
 async def perform_rag(query: str):
     try:
+        logger.info(f"Received query: {query}")
         # Hardcoded values for now; make configurable later
         persist_directory = "paper_vector_db/"
         model_name = "sentence-transformers/all-MiniLM-L6-v2"
         project_id = "ai-research-for-good"
         location = "us-central1"
-        model_id = "gemini-1.5-flash"
+        model_id = "gemini-1.5-flash-002"
+        TOP_K = 5
 
+        bucket_name = "paper-rec-bucket"
+        folder_prefix = "paper_vector_db/"
+        destination_folder = "paper_vector_db"
+        download_files_from_bucket(bucket_name, folder_prefix, destination_folder)
+
+        logger.debug("Starting document retrieval")
         # Step 1: Retrieve documents
         documents = retrieve_documents(query, persist_directory, model_name)
 
+        logger.debug("Starting document ranking and filtering")
         # Step 2: Rank and filter documents
         model = GenerativeModel(model_id)
-        top_documents = rank_and_filter_documents(query, documents, model, top_k=5)
+        # top_documents = rank_and_filter_documents(query, documents, model, top_k=5)
+        top_documents = rank_and_filter_documents(query, documents, TOP_K)
 
+        logger.debug("Starting answer generation")
         # Step 3: Generate an answer
         answer = generate_answer(top_documents, query, project_id, location, model_id)
 
+        logger.info("Perform RAG completed successfully")
         return {"query": query, "answer": answer}
 
     except Exception as e:
+        logger.error(f"Error in perform_rag: {e}", exc_info=True)
         raise HTTPException(status_code=500, detail=str(e))

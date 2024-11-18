@@ -1,3 +1,15 @@
+import logging
+
+logging.basicConfig(
+    level=logging.DEBUG,  # Change to INFO or ERROR for less verbosity
+    format="%(asctime)s [%(levelname)s] %(message)s",
+    handlers=[
+        logging.StreamHandler()  # Log to the console
+    ]
+)
+
+logger = logging.getLogger(__name__)
+
 from fastapi import FastAPI
 from starlette.middleware.cors import CORSMiddleware
 from api.routers import llm_chat, llm_cnn_chat, llm_rag_chat, llm_agent_chat
