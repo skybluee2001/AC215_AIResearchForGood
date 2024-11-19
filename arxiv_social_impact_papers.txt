@@ -1,6 +1,0 @@
-Title: Test Paper
-Summary: Test summary
-Paper ID: http://arxiv.org/abs/2304.12345
-Authors: Test Author
-Published Date: 2024-01-01T00:00:00Z
-
