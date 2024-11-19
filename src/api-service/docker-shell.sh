@@ -8,9 +8,9 @@ export IMAGE_NAME="aigood-app-api-service"
 export BASE_DIR=$(pwd)
 export SECRETS_DIR=$(pwd)/../../../secrets/
 export PERSISTENT_DIR=$(pwd)/../../../persistent-folder/
-export GCP_PROJECT="ai-research-for-good" # CHANGE TO YOUR PROJECT ID
+export GCP_PROJECT="ai-research-for-good"
 export GCS_BUCKET_NAME="paper-rec-bucket"
-export CHROMADB_HOST="vector-db-host" #"cheese-app-vector-db"
+export CHROMADB_HOST="vector-db-host"
 export CHROMADB_PORT=8000
 
 # Create the network if we don't have it yet
