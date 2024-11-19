@@ -77,19 +77,19 @@
 #     """
 #     Generate a response using the chat session to maintain history.
 #     Handles both text and image inputs.
-    
+
 #     Args:
 #         chat_session: The Vertex AI chat session
 #         message: Dict containing 'content' (text) and optionally 'image' (base64 string)
-    
+
 #     Returns:
 #         str: The model's response
 #     """
 #     try:
 #         # Initialize parts list for the message
 #         message_parts = []
-        
-        
+
+
 #         # Process image if present
 #         if message.get("image"):
 #             try:
@@ -101,10 +101,10 @@
 #                 else:
 #                     base64_data = base64_string
 #                     mime_type = 'image/jpeg'  # default to JPEG if no header
-                
+
 #                 # Decode base64 to bytes
 #                 image_bytes = base64.b64decode(base64_data)
-                
+
 #                 # Create an image Part using FileData
 #                 image_part = Part.from_data(image_bytes, mime_type=mime_type)
 #                 message_parts.append(image_part)
@@ -114,7 +114,7 @@
 #                     message_parts.append(message["content"])
 #                 else:
 #                     message_parts.append("Name the cheese in the image, no descriptions needed")
-                
+
 #             except ValueError as e:
 #                 print(f"Error processing image: {str(e)}")
 #                 raise HTTPException(
@@ -149,7 +149,7 @@
 #             if message.get("content"):
 #                 # Create embeddings for the message content
 #                 query_embedding = generate_query_embedding(message["content"])
-#                 # Retrieve chunks based on embedding value 
+#                 # Retrieve chunks based on embedding value
 #                 results = collection.query(
 #                     query_embeddings=[query_embedding],
 #                     n_results=5
@@ -159,8 +159,8 @@
 #                 {"\n".join(results["documents"][0])}
 #                 """
 #                 message_parts.append(INPUT_PROMPT)
-                    
-        
+
+
 #         if not message_parts:
 #             raise ValueError("Message must contain either text content or image")
 
@@ -169,9 +169,9 @@
 #             message_parts,
 #             generation_config=generation_config
 #         )
-        
+
 #         return response.text
-        
+
 #     except Exception as e:
 #         print(f"Error generating response: {str(e)}")
 #         traceback.print_exc()
@@ -183,11 +183,11 @@
 # def rebuild_chat_session(chat_history: List[Dict]) -> ChatSession:
 #     """Rebuild a chat session with complete context"""
 #     new_session = create_chat_session()
-    
+
 #     for message in chat_history:
 #         if message["role"] == "user":
 #             generate_chat_response(new_session, message)
-    
+
 #     return new_session
 
 import os
@@ -201,7 +201,10 @@ import logging
 
 logger = logging.getLogger(__name__)
 
-def download_files_from_bucket(bucket_name: str, folder_prefix: str, destination_folder: str):
+
+def download_files_from_bucket(
+    bucket_name: str, folder_prefix: str, destination_folder: str
+):
     """
     Downloads files from a specified Google Cloud Storage bucket to a local destination folder.
     Args:
@@ -209,7 +212,9 @@ def download_files_from_bucket(bucket_name: str, folder_prefix: str, destination
         folder_prefix (str): The folder prefix in the bucket to download files from.
         destination_folder (str): The local folder to save the downloaded files.
     """
-    logger.info(f"Starting download from bucket: {bucket_name}, prefix: {folder_prefix}")
+    logger.info(
+        f"Starting download from bucket: {bucket_name}, prefix: {folder_prefix}"
+    )
     storage_client = storage.Client()
     bucket = storage_client.bucket(bucket_name)
 
@@ -233,7 +238,9 @@ def download_files_from_bucket(bucket_name: str, folder_prefix: str, destination
     logger.info("All files downloaded successfully.")
 
 
-def retrieve_documents(query: str, persist_directory: str, model_name: str) -> List[str]:
+def retrieve_documents(
+    query: str, persist_directory: str, model_name: str
+) -> List[str]:
     """
     Retrieves relevant documents from a Chroma database using similarity search.
     Args:
@@ -245,7 +252,9 @@ def retrieve_documents(query: str, persist_directory: str, model_name: str) -> L
     """
     logger.info(f"Retrieving documents for query: {query}")
     hf = HuggingFaceEmbeddings(model_name=model_name)
-    logger.debug(f"Using model: {model_name} with persist directory: {persist_directory}")
+    logger.debug(
+        f"Using model: {model_name} with persist directory: {persist_directory}"
+    )
     db = Chroma(
         collection_name="all_manuscripts",
         embedding_function=hf,
@@ -262,6 +271,7 @@ def retrieve_documents(query: str, persist_directory: str, model_name: str) -> L
         documents.append(snippet)
 
     return documents
+
 
 # def rank_and_filter_documents(query: str, documents: List[str], model: GenerativeModel, top_k: int = 5) -> List[str]:
 #     """
@@ -303,35 +313,37 @@ def rank_and_filter_documents(query, documents, model, top_k=5):
     list_res = []
 
     for doc in documents:
-        input_text = (
-            f"""You are an expert data annotator who works on a project to connect non-profit users to technological research papers that might be relevant to the non-profit's use case
+        input_text = f"""You are an expert data annotator who works on a project to connect non-profit users to technological research papers that might be relevant to the non-profit's use case
         Please rate the following research paper for its relevance to the non-profit's user query. Output "Relevant" if the paper relevant, or "Not Relevant" if the paper is not relevant.
 
         User query: {query}
 
         Paper snippet: {doc}
         """
-        )
 
         print("Query:", query)
         print("Number of documents:", len(documents))
         print("Top K:", top_k)
         print("Model:", model)
-    
 
-        model = GenerativeModel("projects/ai-research-for-good/locations/us-central1/endpoints/8528956776635170816")
-        response = model.generate_content([input_text],)
+        model = GenerativeModel(
+            "projects/ai-research-for-good/locations/us-central1/endpoints/8528956776635170816"
+        )
+        response = model.generate_content(
+            [input_text],
+        )
         generated_text = response.text.strip()  # Strip whitespace from response
 
         if generated_text.lower() == "relevant":
             print("added")
             list_res.append(doc)
 
-
         return list_res
 
 
-def generate_answer(documents: List[str], query: str, project_id: str, location: str, model_id: str) -> str:
+def generate_answer(
+    documents: List[str], query: str, project_id: str, location: str, model_id: str
+) -> str:
     """
     Generates a consolidated response using a generative model on Google Vertex AI.
     Args:
@@ -343,17 +355,21 @@ def generate_answer(documents: List[str], query: str, project_id: str, location:
     Returns:
         str: The generated response.
     """
-    logger.info(f"Generating answer for query: {query} using {len(documents)} documents")
+    logger.info(
+        f"Generating answer for query: {query} using {len(documents)} documents"
+    )
     documents_combined = "\n\n".join(documents)
-    logger.debug(f"Combined documents:\n{documents_combined[:500]}")  # Log the first 500 characters
+    logger.debug(
+        f"Combined documents:\n{documents_combined[:500]}"
+    )  # Log the first 500 characters
     prompt = f"""
     You are a helpful assistant for Global Tech Colab For Good, connecting non-profits with relevant research papers.
-    
+
     Query: {query}
-    
+
     Here are some relevant research paper snippets:
     {documents_combined}
-    
+
     Please provide a summary of the papers and explain how they can help address the query.
     If the title of a paper is unavailable, make up a relevant title.
     """

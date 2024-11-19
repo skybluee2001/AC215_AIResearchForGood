@@ -42,14 +42,14 @@
 #     # Create a new chat session
 #     chat_session = create_chat_session()
 #     chat_sessions[chat_id] = chat_session
-    
+
 #     # Add ID and role to the user message
 #     message["message_id"] = str(uuid.uuid4())
 #     message["role"] = "user"
-    
+
 #     # Generate response
 #     assistant_response = generate_chat_response(chat_session, message)
-    
+
 #     # Create chat response
 #     title = message.get("content")
 #     if title == "":
@@ -68,7 +68,7 @@
 #             }
 #         ]
 #     }
-    
+
 #     # Save chat
 #     chat_manager.save_chat(chat_response, x_session_id)
 #     return chat_response
@@ -81,24 +81,24 @@
 #     chat = chat_manager.get_chat(chat_id, x_session_id)
 #     if not chat:
 #         raise HTTPException(status_code=404, detail="Chat not found")
-    
+
 #     # Get or rebuild chat session
 #     chat_session = chat_sessions.get(chat_id)
 #     if not chat_session:
 #         chat_session = rebuild_chat_session(chat["messages"])
 #         chat_sessions[chat_id] = chat_session
-    
+
 #     # Update timestamp
 #     current_time = int(time.time())
 #     chat["dts"] = current_time
-    
+
 #     # Add message ID and role
 #     message["message_id"] = str(uuid.uuid4())
 #     message["role"] = "user"
-    
+
 #     # Generate response
 #     assistant_response = generate_chat_response(chat_session, message)
-    
+
 #     # Add messages
 #     chat["messages"].append(message)
 #     chat["messages"].append({
@@ -106,7 +106,7 @@
 #         "role": "assistant",
 #         "content": assistant_response
 #     })
-    
+
 #     # Save updated chat
 #     chat_manager.save_chat(chat, x_session_id)
 #     return chat
@@ -115,11 +115,11 @@
 # async def get_chat_image(chat_id: str, message_id: str):
 #     """
 #     Serve an image from the chat history.
-    
+
 #     Args:
 #         chat_id: The chat ID
 #         message_id: The message ID
-    
+
 #     Returns:
 #         FileResponse: The image file with appropriate content type
 #     """
@@ -130,34 +130,34 @@
 #             chat_id,
 #             f"{message_id}.png"
 #         )
-        
+
 #         # Verify the path exists and is within the images directory
 #         image_path = Path(image_path).resolve()
 #         images_dir = Path(chat_manager.images_dir).resolve()
-        
+
 #         # Security check: ensure the requested file is within the images directory
 #         if not str(image_path).startswith(str(images_dir)):
 #             raise HTTPException(
 #                 status_code=403,
 #                 detail="Access denied"
 #             )
-        
+
 #         if not image_path.exists():
 #             raise HTTPException(
 #                 status_code=404,
 #                 detail="Image not found"
 #             )
-        
+
 #         # Determine content type
 #         content_type, _ = mimetypes.guess_type(str(image_path))
 #         if not content_type:
 #             content_type = "application/octet-stream"
-        
+
 #         return FileResponse(
 #             path=image_path,
 #             media_type=content_type
 #         )
-        
+
 #     except HTTPException:
 #         raise
 #     except Exception as e:
@@ -167,7 +167,12 @@
 #         )
 
 from fastapi import APIRouter, HTTPException
-from api.utils.llm_rag_utils import download_files_from_bucket, retrieve_documents, rank_and_filter_documents, generate_answer
+from api.utils.llm_rag_utils import (
+    download_files_from_bucket,
+    retrieve_documents,
+    rank_and_filter_documents,
+    generate_answer,
+)
 import vertexai
 from vertexai.generative_models import GenerativeModel
 import logging
@@ -175,6 +180,7 @@ import logging
 logger = logging.getLogger(__name__)
 
 router = APIRouter()
+
 
 @router.post("/perform_rag")
 async def perform_rag(query: str):

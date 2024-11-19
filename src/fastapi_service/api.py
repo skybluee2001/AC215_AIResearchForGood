@@ -6,13 +6,17 @@ import sys
 import os
 
 # Add the perform_rag directory to the path to import the perform_rag module
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'perform_rag')))
+sys.path.append(
+    os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "perform_rag"))
+)
 from perform_rag import main as perform_rag_main
 
 app = FastAPI()
 
+
 class QueryRequest(BaseModel):
     query: str
+
 
 @app.post("/get_answer")
 def get_answer(request: QueryRequest):

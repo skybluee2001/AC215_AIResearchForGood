@@ -50,7 +50,9 @@ import requests
 
 # Streamlit UI
 st.title("Global Tech Colab For Good: A Platform for Non-Profits and Research Groups")
-st.write("Enter a problem statement to find relevant tech research papers and get an explanation for bonus!")
+st.write(
+    "Enter a problem statement to find relevant tech research papers and get an explanation for bonus!"
+)
 
 # FastAPI endpoint URL
 API_URL = "http://localhost:8000/generate_explanation/"
@@ -61,10 +63,12 @@ if st.button("Submit"):
             # Send the query to the FastAPI backend
             response = requests.post(API_URL, json={"query": query})
             response_data = response.json()
-            if 'explanation' in response_data:
+            if "explanation" in response_data:
                 st.success("Explanation generated successfully!")
-                st.write(response_data['explanation'])
+                st.write(response_data["explanation"])
             else:
-                st.error(f"An error occurred: {response_data.get('error', 'Unknown error')}")
+                st.error(
+                    f"An error occurred: {response_data.get('error', 'Unknown error')}"
+                )
         except Exception as e:
             st.error(f"An error occurred: {e}")

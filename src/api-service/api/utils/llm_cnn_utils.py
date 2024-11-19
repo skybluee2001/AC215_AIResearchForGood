@@ -57,43 +57,43 @@ When answering a query:
 Your goal is to provide accurate, helpful information about cheese for each query.
 """
 generative_model = GenerativeModel(
-	GENERATIVE_MODEL,
-	system_instruction=[SYSTEM_INSTRUCTION]
+    GENERATIVE_MODEL, system_instruction=[SYSTEM_INSTRUCTION]
 )
 
 # Initialize chat sessions
 chat_sessions: Dict[str, ChatSession] = {}
 
+
 def create_chat_session() -> ChatSession:
     """Create a new chat session with the model"""
     return generative_model.start_chat()
 
+
 def generate_chat_response(chat_session: ChatSession, message: Dict) -> str:
     response = chat_session.send_message(
-        message["content"],
-        generation_config=generation_config
+        message["content"], generation_config=generation_config
     )
     return response.text
+
 
 def rebuild_chat_session(chat_history: List[Dict]) -> ChatSession:
     """Rebuild a chat session with complete context"""
     new_session = create_chat_session()
-    
+
     for message in chat_history:
-        if message["role"] == 'user' and message["content"] != "":
+        if message["role"] == "user" and message["content"] != "":
             prompt = message["content"]
             response = new_session.send_message(
-                prompt,
-                generation_config=generation_config
+                prompt, generation_config=generation_config
             )
-        if message["role"] == 'cnn':
+        if message["role"] == "cnn":
             prompt = f"We have already identified the image of a cheese as {message['results']['prediction_label']}"
             response = new_session.send_message(
-                prompt,
-                generation_config=generation_config
+                prompt, generation_config=generation_config
             )
-    
+
     return new_session
+
 
 def load_cnn_model():
     print("Loading CNN Model...")
@@ -102,21 +102,23 @@ def load_cnn_model():
     os.makedirs(local_experiments_path, exist_ok=True)
 
     best_model_path = os.path.join(
-        local_experiments_path,
-        "experiments",
-        "mobilenetv2_train_base_True.keras"
+        local_experiments_path, "experiments", "mobilenetv2_train_base_True.keras"
     )
     if not os.path.exists(best_model_path):
         # Download from Github for easy access (This needs to be from you GCS bucket)
         # https://github.com/dlops-io/models/releases/download/v3.0/experiments.zip
-        packet_url = "https://github.com/dlops-io/models/releases/download/v3.0/experiments.zip"
+        packet_url = (
+            "https://github.com/dlops-io/models/releases/download/v3.0/experiments.zip"
+        )
         packet_file = os.path.basename(packet_url)
         with requests.get(packet_url, stream=True, headers=None) as r:
             r.raise_for_status()
             with open(os.path.join(local_experiments_path, packet_file), "wb") as f:
                 for chunk in r.iter_content(chunk_size=8192):
                     f.write(chunk)
-        with zipfile.ZipFile(os.path.join(local_experiments_path, packet_file)) as zfile:
+        with zipfile.ZipFile(
+            os.path.join(local_experiments_path, packet_file)
+        ) as zfile:
             zfile.extractall(local_experiments_path)
 
     print("best_model_path:", best_model_path)
@@ -131,8 +133,10 @@ def load_cnn_model():
     with open(data_details_path, "r") as json_file:
         data_details = json.load(json_file)
 
+
 # Load the CNN Model
 load_cnn_model()
+
 
 def load_preprocess_image_from_path(image_path):
     print("Image", image_path)
@@ -180,5 +184,5 @@ def make_prediction(image_path):
         "prediction_shape": prediction.shape,
         "prediction_label": prediction_label,
         "prediction": prediction.tolist(),
-        "accuracy": round(np.max(prediction) * 100, 2)
+        "accuracy": round(np.max(prediction) * 100, 2),
     }

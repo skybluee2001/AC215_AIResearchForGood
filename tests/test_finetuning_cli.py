@@ -1,4 +1,3 @@
-
 import pytest
 import argparse
 from unittest.mock import patch, MagicMock
@@ -33,6 +32,7 @@ def test_train_success(mock_sleep, mock_sft_train):
     ):
         # Import and call the train function
         from finetuning.gemini_finetuner.cli import train
+
         train(wait_for_job=True)
 
         # Assertions
@@ -51,7 +51,9 @@ def test_train_success(mock_sleep, mock_sft_train):
 
 @patch("finetuning.gemini_finetuner.cli.sft.train")
 @patch("time.sleep", return_value=None)
-@patch("finetuning.gemini_finetuner.cli.train", autospec=True)  # Mock the train function's local variables
+@patch(
+    "finetuning.gemini_finetuner.cli.train", autospec=True
+)  # Mock the train function's local variables
 def test_train(mock_train, mock_sleep, mock_train_func):
     # Mock the return value of sft.train
     mock_train.return_value = type(
@@ -64,14 +66,15 @@ def test_train(mock_train, mock_sleep, mock_train_func):
             "experiment": "mock-experiment",
         },
     )()
-    
+
     # Inject mock variables into train()'s namespace
     mock_train_func.GENERATIVE_SOURCE_MODEL = "mock-model"
     mock_train_func.TRAIN_DATASET = "mock-train-dataset"
     mock_train_func.VALIDATION_DATASET = "mock-validation-dataset"
-    
+
     try:
         from finetuning.gemini_finetuner.cli import train
+
         train(wait_for_job=True)
         mock_train.assert_called_once()
     except Exception as e:
@@ -82,7 +85,9 @@ from unittest.mock import patch, MagicMock
 import pytest
 
 
-@patch("finetuning.gemini_finetuner.cli.GenerativeModel", autospec=True)  # Mock GenerativeModel
+@patch(
+    "finetuning.gemini_finetuner.cli.GenerativeModel", autospec=True
+)  # Mock GenerativeModel
 def test_chat_behavior(mock_generative_model):
     # Mock the GenerativeModel instance and its method
     mock_instance = mock_generative_model.return_value
@@ -92,7 +97,11 @@ def test_chat_behavior(mock_generative_model):
     with patch.dict(
         "finetuning.gemini_finetuner.cli.__dict__",
         {
-            "generation_config": {"max_output_tokens": 3000, "temperature": 0.75, "top_p": 0.95},
+            "generation_config": {
+                "max_output_tokens": 3000,
+                "temperature": 0.75,
+                "top_p": 0.95,
+            },
         },
     ):
         # Import the chat function
@@ -108,10 +117,13 @@ def test_chat_behavior(mock_generative_model):
         # Ensure generate_content was called with the correct arguments
         mock_instance.generate_content.assert_called_once_with(
             ["How to solve homelessness?"],  # Input query
-            generation_config={"max_output_tokens": 3000, "temperature": 0.75, "top_p": 0.95},  # Config
+            generation_config={
+                "max_output_tokens": 3000,
+                "temperature": 0.75,
+                "top_p": 0.95,
+            },  # Config
             stream=False,
         )
-
 
 
 def test_cli_args():
@@ -132,4 +144,3 @@ def test_cli_args():
         assert "--chat" in help_output, "CLI help output does not include --chat"
     except Exception as e:
         pytest.fail(f"test_cli_args raised an exception: {e}")
-

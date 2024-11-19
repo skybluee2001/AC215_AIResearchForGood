@@ -11,7 +11,6 @@ from vertexai.generative_models import GenerativeModel, GenerationConfig
 from google.oauth2 import service_account
 
 
-
 def train(wait_for_job=False):
     print("train()")
 
@@ -67,7 +66,7 @@ def chat():
 def main(args=None):
     print("CLI Arguments:", args)
 
-        # Setup
+    # Setup
     GCP_PROJECT = os.environ["GCP_PROJECT"]
     TRAIN_DATASET = (
         "gs://dataset-ai-research/train_annotated.jsonl"  # Replace with your dataset
@@ -84,13 +83,11 @@ def main(args=None):
         "top_p": 0.95,  # Use nucleus sampling
     }
 
-
     credentials = service_account.Credentials.from_service_account_file(
         "secrets/ai-research-for-good-b6f4173936f9.json"
     )
 
     vertexai.init(project=GCP_PROJECT, location=GCP_LOCATION, credentials=credentials)
-
 
     if args.train:
         train()

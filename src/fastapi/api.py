@@ -4,8 +4,10 @@ from src.perform_rag.perform_rag import main as perform_rag_main
 
 app = FastAPI()
 
+
 class QueryRequest(BaseModel):
     query: str
+
 
 @app.post("/generate_explanation/")
 async def generate_explanation(request: QueryRequest):

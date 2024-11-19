@@ -11,7 +11,6 @@ from vertexai.generative_models import GenerativeModel, GenerationConfig
 from google.oauth2 import service_account
 
 
-
 def train(wait_for_job=False):
     print("train()")
 
@@ -78,7 +77,7 @@ if __name__ == "__main__":
     # Generate the inputs arguments parser
     # if you type into the terminal '--help', it will provide the description
 
-        # Setup
+    # Setup
     GCP_PROJECT = os.environ["GCP_PROJECT"]
     TRAIN_DATASET = (
         "gs://dataset-ai-research/train_annotated.jsonl"  # Replace with your dataset
@@ -94,7 +93,6 @@ if __name__ == "__main__":
         "temperature": 0.75,  # Control randomness in output
         "top_p": 0.95,  # Use nucleus sampling
     }
-
 
     credentials = service_account.Credentials.from_service_account_file(
         "secrets/ai-research-for-good-b6f4173936f9.json"
