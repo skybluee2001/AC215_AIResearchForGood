@@ -3,7 +3,9 @@ import requests
 
 # Streamlit UI
 st.title("Global Tech Colab For Good: A Platform for Non-Profits and Research Groups")
-st.write("Enter a problem statement to find relevant tech research papers and get an explanation!")
+st.write(
+    "Enter a problem statement to find relevant tech research papers and get an explanation!"
+)
 
 # FastAPI endpoint URL
 API_URL = "http://localhost:9000/api/perform_rag"
@@ -22,12 +24,12 @@ if st.button("Submit"):
                 response_data = response.json()
                 st.success("Explanation generated successfully!")
                 st.write("### Query")
-                st.write(response_data['query'])
+                st.write(response_data["query"])
                 st.write("### Relevant Documents")
-                for idx, doc in enumerate(response_data.get('documents', [])):
+                for idx, doc in enumerate(response_data.get("documents", [])):
                     st.write(f"**Document {idx + 1}:** {doc}")
                 st.write("### Answer")
-                st.write(response_data['answer'])
+                st.write(response_data["answer"])
             else:
                 st.error(f"Error: {response.status_code} - {response.text}")
         except Exception as e:

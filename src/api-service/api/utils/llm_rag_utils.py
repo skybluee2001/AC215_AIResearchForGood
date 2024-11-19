@@ -9,7 +9,10 @@ import logging
 
 logger = logging.getLogger(__name__)
 
-def download_files_from_bucket(bucket_name: str, folder_prefix: str, destination_folder: str):
+
+def download_files_from_bucket(
+    bucket_name: str, folder_prefix: str, destination_folder: str
+):
     """
     Downloads files from a specified Google Cloud Storage bucket to a local destination folder.
     Args:
@@ -17,7 +20,9 @@ def download_files_from_bucket(bucket_name: str, folder_prefix: str, destination
         folder_prefix (str): The folder prefix in the bucket to download files from.
         destination_folder (str): The local folder to save the downloaded files.
     """
-    logger.info(f"Starting download from bucket: {bucket_name}, prefix: {folder_prefix}")
+    logger.info(
+        f"Starting download from bucket: {bucket_name}, prefix: {folder_prefix}"
+    )
     storage_client = storage.Client()
     bucket = storage_client.bucket(bucket_name)
 
@@ -41,7 +46,9 @@ def download_files_from_bucket(bucket_name: str, folder_prefix: str, destination
     logger.info("All files downloaded successfully.")
 
 
-def retrieve_documents(query: str, persist_directory: str, model_name: str) -> List[str]:
+def retrieve_documents(
+    query: str, persist_directory: str, model_name: str
+) -> List[str]:
     """
     Retrieves relevant documents from a Chroma database using similarity search.
     Args:
@@ -53,7 +60,9 @@ def retrieve_documents(query: str, persist_directory: str, model_name: str) -> L
     """
     logger.info(f"Retrieving documents for query: {query}")
     hf = HuggingFaceEmbeddings(model_name=model_name)
-    logger.debug(f"Using model: {model_name} with persist directory: {persist_directory}")
+    logger.debug(
+        f"Using model: {model_name} with persist directory: {persist_directory}"
+    )
     db = Chroma(
         collection_name="all_manuscripts",
         embedding_function=hf,
@@ -71,29 +80,31 @@ def retrieve_documents(query: str, persist_directory: str, model_name: str) -> L
 
     return documents
 
+
 def rank_and_filter_documents(query, documents, model, top_k=5):
     # This function ranks and filters documents using the fine-tuned model.
     list_res = []
 
     for doc in documents:
-        input_text = (
-            f"""You are an expert data annotator who works on a project to connect non-profit users to technological research papers that might be relevant to the non-profit's use case
+        input_text = f"""You are an expert data annotator who works on a project to connect non-profit users to technological research papers that might be relevant to the non-profit's use case
         Please rate the following research paper for its relevance to the non-profit's user query. Output "Relevant" if the paper relevant, or "Not Relevant" if the paper is not relevant.
 
         User query: {query}
 
         Paper snippet: {doc}
         """
-        )
 
         print("Query:", query)
         print("Number of documents:", len(documents))
         print("Top K:", top_k)
         print("Model:", model)
-    
 
-        model = GenerativeModel("projects/ai-research-for-good/locations/us-central1/endpoints/8528956776635170816")
-        response = model.generate_content([input_text],)
+        model = GenerativeModel(
+            "projects/ai-research-for-good/locations/us-central1/endpoints/8528956776635170816"
+        )
+        response = model.generate_content(
+            [input_text],
+        )
         generated_text = response.text.strip()  # Strip whitespace from response
 
         if generated_text.lower() == "relevant":
@@ -102,7 +113,10 @@ def rank_and_filter_documents(query, documents, model, top_k=5):
 
         return list_res
 
-def generate_answer(documents: List[str], query: str, project_id: str, location: str, model_id: str) -> str:
+
+def generate_answer(
+    documents: List[str], query: str, project_id: str, location: str, model_id: str
+) -> str:
     """
     Generates a consolidated response using a generative model on Google Vertex AI.
     Args:
@@ -114,17 +128,21 @@ def generate_answer(documents: List[str], query: str, project_id: str, location:
     Returns:
         str: The generated response.
     """
-    logger.info(f"Generating answer for query: {query} using {len(documents)} documents")
+    logger.info(
+        f"Generating answer for query: {query} using {len(documents)} documents"
+    )
     documents_combined = "\n\n".join(documents)
-    logger.debug(f"Combined documents:\n{documents_combined[:500]}")  # Log the first 500 characters
+    logger.debug(
+        f"Combined documents:\n{documents_combined[:500]}"
+    )  # Log the first 500 characters
     prompt = f"""
     You are a helpful assistant for Global Tech Colab For Good, connecting non-profits with relevant research papers.
-    
+
     Query: {query}
-    
+
     Here are some relevant research paper snippets:
     {documents_combined}
-    
+
     Please provide a summary of the papers and explain how they can help address the query.
     If the title of a paper is unavailable, make up a relevant title.
     """

@@ -1,5 +1,10 @@
 from fastapi import APIRouter, HTTPException
-from api.utils.llm_rag_utils import download_files_from_bucket, retrieve_documents, rank_and_filter_documents, generate_answer
+from api.utils.llm_rag_utils import (
+    download_files_from_bucket,
+    retrieve_documents,
+    rank_and_filter_documents,
+    generate_answer,
+)
 import vertexai
 from vertexai.generative_models import GenerativeModel
 import logging
@@ -9,8 +14,10 @@ logger = logging.getLogger(__name__)
 
 router = APIRouter()
 
+
 class QueryRequest(BaseModel):
     query: str
+
 
 @router.post("/perform_rag")
 async def perform_rag(request: QueryRequest):
