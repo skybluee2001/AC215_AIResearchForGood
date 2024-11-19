@@ -3,3 +3,5 @@ langchain-community
 langchain-chroma
 langchain-huggingface
 vertexai
+streamlit
+unittest
