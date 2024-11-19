@@ -15,7 +15,7 @@ def train(wait_for_job=False):
         source_model=GENERATIVE_SOURCE_MODEL,
         train_dataset=TRAIN_DATASET,
         validation_dataset=VALIDATION_DATASET,
-        epochs=10,  # change to 2-3
+        epochs=10,  
         adapter_size=4,
         learning_rate_multiplier=1.0,
         tuned_model_display_name="GlobalCollab-FineTuned-Model",
@@ -41,9 +41,7 @@ def train(wait_for_job=False):
 
 def chat():
     print("chat()")
-    # Get the model endpoint from Vertex AI: https://console.cloud.google.com/vertex-ai/studio/tuning?project=ac215-project
-    # MODEL_ENDPOINT = "projects/129349313346/locations/us-central1/endpoints/810191635601162240"
-    # MODEL_ENDPOINT = "projects/129349313346/locations/us-central1/endpoints/5584851665544019968"
+
     MODEL_ENDPOINT = "projects/129349313346/locations/us-central1/endpoints/3319822527953371136"  # Finetuned model
 
     generative_model = GenerativeModel(MODEL_ENDPOINT)
@@ -80,7 +78,7 @@ def main(args=None):
     }
 
     credentials = service_account.Credentials.from_service_account_file(
-        "secrets/ai-research-for-good-b6f4173936f9.json"
+        "../../../../secrets/ai-research-for-good-bdf580df11b3.json"
     )
 
     vertexai.init(project=GCP_PROJECT, location=GCP_LOCATION, credentials=credentials)
