@@ -67,17 +67,6 @@ def chat():
 def main(args=None):
     print("CLI Arguments:", args)
 
-    if args.train:
-        train()
-
-    if args.chat:
-        chat()
-
-
-if __name__ == "__main__":
-    # Generate the inputs arguments parser
-    # if you type into the terminal '--help', it will provide the description
-
         # Setup
     GCP_PROJECT = os.environ["GCP_PROJECT"]
     TRAIN_DATASET = (
@@ -102,6 +91,17 @@ if __name__ == "__main__":
 
     vertexai.init(project=GCP_PROJECT, location=GCP_LOCATION, credentials=credentials)
 
+
+    if args.train:
+        train()
+
+    if args.chat:
+        chat()
+
+
+if __name__ == "__main__":
+    # Generate the inputs arguments parser
+    # if you type into the terminal '--help', it will provide the description
     parser = argparse.ArgumentParser(description="CLI")
 
     parser.add_argument(
