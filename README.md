@@ -57,5 +57,5 @@ python perform_rag.py
 **Modifications for Milestone 4**
 1. Implemented GitHub Actions with linting, automated testing, and >50% coverage across all modules.  
 2. Built a Streamlit-based frontend interface for user interaction and result visualization.
-3. Developed FastAPI endpoints for user queries and backend processing.  
-4. Integrated fine-tuned LLM outputs for relevance filtering and response generation.  
+3. Developed FastAPI endpoints for user queries to communicate between the front end and back end.
+5. Integrated fine-tuned LLM outputs for relevance filtering and response generation.  
