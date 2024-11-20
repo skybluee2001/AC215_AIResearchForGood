@@ -53,13 +53,6 @@ docker build -t perform_rag .
 docker run --rm -ti -v "$(pwd)":/app perform_rag
 python perform_rag.py
 ```
-
-**Modifications for Milestone 4**
-1. Implemented GitHub Actions with linting, automated testing, and >50% coverage across all modules.  
-2. Built a Streamlit-based frontend interface for user interaction and result visualization.
-3. Developed FastAPI endpoints for user queries to communicate between the front end and back end.
-5. Integrated fine-tuned LLM outputs for relevance filtering and response generation.
-
 **Setup instructions and usage guidelines for the API to communicate between the front end and back end**
 
 1. Navigate to ```api-service``` directory
@@ -75,3 +68,8 @@ python perform_rag.py
 8. Run frontend application
 ```streamlit run app.py```
 
+**Modifications for Milestone 4**
+1. Implemented GitHub Actions with linting, automated testing, and >50% coverage across all modules.  
+2. Built a Streamlit-based frontend interface for user interaction and result visualization.
+3. Developed FastAPI endpoints for user queries to communicate between the front end and back end.
+5. Integrated fine-tuned LLM outputs for relevance filtering and response generation.
