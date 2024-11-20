@@ -54,8 +54,8 @@ docker run --rm -ti -v "$(pwd)":/app perform_rag
 python perform_rag.py
 ```
 
-**Modifications for Milestone 3**
-1. Fine-tuning
-     We fine-tune a relevance classifying model, which further filters the papers according to their relevance to the user query after they are retrieved from the vector database. For this, we manually annotate ~60 examples of (user query, paper, relevance) triplets and perform supervise fine-tuning of Gemini 1.5-Pro-Flash. We will expand our set of examples in the future.
-2. Front-end UI
-  We build a frontend using Streamlit, which accepts the user query and displays the LLM's generated response.
+**Modifications for Milestone 4**
+1. Implemented GitHub Actions with linting, automated testing, and >50% coverage across all modules.  
+2. Built a Streamlit-based frontend interface for user interaction and result visualization.
+3. Developed FastAPI endpoints for user queries and backend processing.  
+4. Integrated fine-tuned LLM outputs for relevance filtering and response generation.  
