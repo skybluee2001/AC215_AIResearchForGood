@@ -58,4 +58,20 @@ python perform_rag.py
 1. Implemented GitHub Actions with linting, automated testing, and >50% coverage across all modules.  
 2. Built a Streamlit-based frontend interface for user interaction and result visualization.
 3. Developed FastAPI endpoints for user queries to communicate between the front end and back end.
-5. Integrated fine-tuned LLM outputs for relevance filtering and response generation.  
+5. Integrated fine-tuned LLM outputs for relevance filtering and response generation.
+
+**Setup instructions and usage guidelines for the API to communicate between the front end and back end**
+
+1. Navigate to ```api-service``` directory
+2. Build & Run Container
+```sh docker-shell.sh```
+3. Run the following command within the docker shell:
+```uvicorn_server```
+4. Verify service is running at http://localhost:9000
+5. Go to http://localhost:9000/docs to test the API from this tool by giving in the query
+6. Navigate to the ```frontend_ui``` directory 
+7. Build & Run the container:
+```sh docker-shell.sh```
+8. Run frontend application
+```streamlit run app.py```
+
