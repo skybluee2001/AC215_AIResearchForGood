@@ -4,10 +4,10 @@
 #set -e
 
 # Define some environment variables
-export IMAGE_NAME="cheese-app-deployment"
+export IMAGE_NAME="social-app-deployment"
 export BASE_DIR=$(pwd)
 export SECRETS_DIR=$(pwd)/../../../secrets/
-export GCP_PROJECT="ac215-project" # Change to your GCP Project
+export GCP_PROJECT="ai-research-for-good" # Change to your GCP Project
 export GCP_ZONE="us-central1-a"
 export GOOGLE_APPLICATION_CREDENTIALS=/secrets/deployment.json
 
@@ -22,8 +22,7 @@ docker run --rm --name $IMAGE_NAME -ti \
 -v "$SECRETS_DIR":/secrets \
 -v "$HOME/.ssh":/home/app/.ssh \
 -v "$BASE_DIR/../api-service":/api-service \
--v "$BASE_DIR/../frontend-react":/frontend-react \
--v "$BASE_DIR/../vector-db":/vector-db \
+-v "$BASE_DIR/../frontend_ui":/frontend_ui \
 -e GOOGLE_APPLICATION_CREDENTIALS=$GOOGLE_APPLICATION_CREDENTIALS \
 -e USE_GKE_GCLOUD_AUTH_PLUGIN=True \
 -e GCP_PROJECT=$GCP_PROJECT \
