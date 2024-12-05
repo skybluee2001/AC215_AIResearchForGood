@@ -5,6 +5,13 @@ from finetuning.gemini_finetuner.cli import train, chat, main
 import subprocess
 
 
+@patch("os.environ", {})
+def test_environment_variables_missing():
+    from finetuning.gemini_finetuner.cli import main
+    with pytest.raises(KeyError):
+        main(args=argparse.Namespace(train=False, chat=False))
+
+
 @patch("finetuning.gemini_finetuner.cli.sft.train", autospec=True)  # Mock sft.train
 @patch("time.sleep", return_value=None)  # Avoid delays during the test
 def test_train_success(mock_sleep, mock_sft_train):
