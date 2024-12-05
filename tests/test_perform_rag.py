@@ -5,6 +5,7 @@ from perform_rag.perform_rag import (
     retrieve_documents,
     download_files_from_bucket,
     rank_and_filter_documents,
+    main,
 )
 
 
@@ -125,3 +126,39 @@ def test_retrieve_documents(mock_chroma, mock_hf_embeddings):
         "\nPage Content: Content of document 2\n",
     ]
     assert documents == expected_documents
+
+
+@patch("perform_rag.perform_rag.download_files_from_bucket")
+@patch("perform_rag.perform_rag.retrieve_documents", return_value=["Doc1", "Doc2"])
+@patch("perform_rag.perform_rag.rank_and_filter_documents", return_value=["Doc1"])
+@patch("perform_rag.perform_rag.GenerativeModel", autospec=True)
+def test_rank_and_filter_call(
+    mock_model, mock_rank_filter, mock_retrieve, mock_download
+):
+    """Test ranking and filtering of documents with mocked connections."""
+    mock_model_instance = MagicMock()
+    mock_model.return_value = mock_model_instance
+
+    main(query="Test query")
+
+    mock_download.assert_called_once_with(
+        "paper-rec-bucket", "paper_vector_db/", "paper_vector_db"
+    )
+
+    mock_retrieve.assert_called_once_with(
+        "Test query", "paper_vector_db/", "sentence-transformers/all-MiniLM-L6-v2"
+    )
+
+    args, _ = mock_model.call_args
+    valid_prefix = "projects/129349313346/locations/us-central1/endpoints"
+    valid_value = "gemini-1.5-flash"
+
+    # GenerativeModel could be called with custom endpoint or base model
+    assert (
+        args[0].startswith(valid_prefix) or args[0] == valid_value
+    ), f"Unexpected argument to GenerativeModel: {args[0]}"
+
+    # Verify rank_and_filter_documents is called with correct arguments
+    mock_rank_filter.assert_called_once_with(
+        "Test query", ["Doc1", "Doc2"], mock_model_instance, 5
+    )
