@@ -131,13 +131,20 @@
               storage: 10Gi
     when: cluster_state == "present"
   
+  - name: Check if Secret exists
+    shell: |
+      kubectl get secret gcp-service-key --namespace="{{cluster_name}}-namespace"
+      register: secret_check
+      ignore_errors: true
+    when: cluster_state == "present"
+
   - name: Importing credentials as a Secret
     shell: |
       #!/bin/bash
       kubectl create secret generic gcp-service-key --from-file=gcp-service.json=../secrets/gcp-service.json --namespace="{{cluster_name}}-namespace"
     register: create_secret_op
     ignore_errors: yes
-    when: cluster_state == "present"
+    when: secret_check.rc != 0
   
   - name: "Print Create Secret Output"
     debug:
@@ -234,7 +241,7 @@
                   secret:
                     secretName: gcp-service-key
               containers:
-              - image: gcr.io/{{ gcp_project }}/cheese-app-api-service:{{ tag.stdout}}
+              - image: gcr.io/{{ gcp_project }}/social-app-api-service:{{ tag.stdout}}
                 imagePullPolicy: IfNotPresent
                 name: api
                 ports:
@@ -249,7 +256,7 @@
                   - name: GOOGLE_APPLICATION_CREDENTIALS
                     value: /secrets/gcp-service.json
                   - name: GCS_BUCKET_NAME
-                    value: cheese-app-models
+                    value: social-app-models
                   - name: CHROMADB_HOST
                     value: vector-db
                   - name: CHROMADB_PORT
