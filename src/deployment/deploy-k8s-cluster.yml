@@ -283,6 +283,7 @@
           ports:
           - port: 3000
             protocol: TCP
+            targetPort: 8501    # Changed to match Streamlit's default port
           selector:
             run: frontend
           type: NodePort
