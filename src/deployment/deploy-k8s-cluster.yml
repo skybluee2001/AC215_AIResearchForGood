@@ -141,7 +141,7 @@
   - name: Importing credentials as a Secret
     shell: |
       #!/bin/bash
-      kubectl create secret generic gcp-service-key --from-file=gcp-service.json=../secrets/gcp-service.json --namespace="{{cluster_name}}-namespace"
+      kubectl create secret generic gcp-service-key --from-file=gcp-service.json=/secrets/gcp-service.json --namespace="{{cluster_name}}-namespace"
     register: create_secret_op
     ignore_errors: yes
     when: secret_check.rc != 0
