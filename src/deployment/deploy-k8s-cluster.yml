@@ -289,24 +289,24 @@
           type: NodePort
     when: cluster_state == "present"
 
-  # - name: "Create Service for ChromaDB"
-  #   k8s:
-  #     state: present
-  #     definition:
-  #       apiVersion: v1
-  #       kind: Service
-  #       metadata:
-  #         name: vector-db
-  #         namespace: "{{cluster_name}}-namespace"
-  #       spec:
-  #         ports:
-  #         - port: 8000
-  #           protocol: TCP
-  #           targetPort: 8000
-  #         selector:
-  #           run: vector-db
-  #         type: NodePort
-  #   when: cluster_state == "present"
+  - name: "Create Service for ChromaDB"
+    k8s:
+      state: present
+      definition:
+        apiVersion: v1
+        kind: Service
+        metadata:
+          name: vector-db
+          namespace: "{{cluster_name}}-namespace"
+        spec:
+          ports:
+          - port: 8000
+            protocol: TCP
+            targetPort: 8000
+          selector:
+            run: vector-db
+          type: NodePort
+    when: cluster_state == "present"
 
   # - name: "Delete existing vector-db-loader job if it exists"
   #   k8s:
