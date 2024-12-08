@@ -474,4 +474,3 @@
                     name: api
                     port:
                       number: 9000
-    when: cluster_state == "present"
