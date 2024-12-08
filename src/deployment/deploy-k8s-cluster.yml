@@ -174,7 +174,7 @@
                 imagePullPolicy: IfNotPresent
                 name: frontend
                 ports:
-                - containerPort: 3000
+                - containerPort: 8501
                   protocol: TCP
     when: cluster_state == "present"
 
