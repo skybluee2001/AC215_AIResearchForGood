@@ -457,7 +457,7 @@
               }
         spec:
           rules:
-          - host: "{{ nginx_ingress_ip }}.sslip.io" # Host requires a domain and not just an IP
+          - host: "{{ nginx_ingress_ip }}.sslip.io"
             http:
               paths:
               - path: /
