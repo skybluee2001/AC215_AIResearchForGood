@@ -134,8 +134,8 @@
   - name: Check if Secret exists
     shell: |
       kubectl get secret gcp-service-key --namespace="{{cluster_name}}-namespace"
-      register: secret_check
-      ignore_errors: true
+    register: secret_check
+    ignore_errors: true
     when: cluster_state == "present"
 
   - name: Importing credentials as a Secret
