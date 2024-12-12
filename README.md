@@ -68,8 +68,7 @@ python perform_rag.py
 8. Run frontend application
 ```streamlit run app.py```
 
-**Modifications for Milestone 4**
-1. Implemented GitHub Actions with linting, automated testing, and >50% coverage across all modules.
-2. Built a Streamlit-based frontend interface for user interaction and result visualization.
-3. Developed FastAPI endpoints for user queries to communicate between the front end and back end.
-5. Integrated fine-tuned LLM outputs for relevance filtering and response generation.
+**Modifications for Milestone 5**
+1. Tried to Deploy our application on GCP Virtual Machine (VM)
+2. Added the React frontend 
+3. Fine-tuned the model with increased training samples 
