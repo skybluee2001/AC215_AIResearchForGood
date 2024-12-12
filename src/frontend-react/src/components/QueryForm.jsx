@@ -44,16 +44,19 @@ const QueryForm = ({ onResponse }) => {
         style={{
           width: "100%",
           padding: "0.8rem",
-          background: "#1565c0",
+          background: "linear-gradient(to right, #ff6f91, #ff9671)", // Gradient matching the title
           color: "#fff",
           border: "none",
           borderRadius: "5px",
           fontSize: "1rem",
           cursor: "pointer",
-          transition: "background 0.3s ease",
+          transition: "all 0.3s ease",
+          textTransform: "uppercase",
+          letterSpacing: "1px",
+          fontWeight: "bold",
         }}
-        onMouseOver={(e) => (e.target.style.background = "#004ba0")}
-        onMouseOut={(e) => (e.target.style.background = "#1565c0")}
+        onMouseOver={(e) => (e.target.style.background = "linear-gradient(to right, #ff9671, #ff6f91)")} // Reverse gradient on hover
+        onMouseOut={(e) => (e.target.style.background = "linear-gradient(to right, #ff6f91, #ff9671)")} // Original gradient
         disabled={loading}
       >
         {loading ? "Fetching..." : "Submit"}
