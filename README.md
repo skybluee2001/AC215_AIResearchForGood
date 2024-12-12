@@ -88,7 +88,6 @@ python perform_rag.py
 │   └── UI.jpeg                     # User interface design image
 ├── reports/
 │   ├── .gitkeep                    # Placeholder for reports folder
-│   └── Milesone4.pdf        # Project milestone report
 ├── src/
      ├── api-service/                # API service module
      ├── api/                        # Main API structure
@@ -103,23 +102,23 @@ python perform_rag.py
      ├── docker-entrypoint.sh            	# Entrypoint script for Docker container
      ├── docker-shell.sh                 	# Shell script for Docker operations
 ├── embed_papers/                   	# Scripts for embedding research papers
-├── finetuning/                     		# Folder for model finetuning scripts and files
-├── frontend_react/                       	# Frontend implementation
+├── finetuning/                     	# Folder for model finetuning scripts and files
+├── frontend_react/                     # Frontend implementation
 ├── deployment/                       	# Deployment implementation
 ├── perform_rag/                    	# Folder for RAG (Retrieve and Generate) functionality
 ├── retrieve_papers/                	# Folder for retrieving research papers
 ├── docker-compose.sh               	# Script for Docker Compose operations
 ├── tests/                          		# Testing suite
 │   ├── test_embed_papers.py        		        # Unit tests for embedding papers
-│   ├── test_integration_embed_retrieve.py         # Integration tests for embedding and retrieval
+│   ├── test_integration_embed_retrieve.py           # Integration tests for embedding and retrieval
 │   ├── test_perform_rag.py         	   	        # Unit tests for RAG functionality
 │   ├── test_retrieve_papers.py     		        # Unit tests for paper retrieval
 │   └── test_app.py     			        # System tests
-├── .gitignore                     		# Git ignore file
+├── .gitignore                     	   # Git ignore file
 ├── .pre-commit-config.yaml        	# Configuration file for pre-commit hooks
 ├── LICENSE                         	# License for the project
 ├── README.md                       	# Project README file
-├── pytest.ini                     	 	# Configuration file for pytest
+├── pytest.ini                     	# Configuration file for pytest
 ├── requirements.txt                	# Additional requirements for Python dependencies
 └── test_output.tar                 	# Test output archive
 ```
