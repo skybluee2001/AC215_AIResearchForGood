@@ -96,8 +96,8 @@ python perform_rag.py
      │   │   └── llm_rag_chat.py
      │   └── utils/                  		# Utility modules for API logic
      │       └── llm_rag_utils.py
-           ├── service.py                  	# Main service entry file for FastAPI application
-      |── Dockerfile                      		# Dockerfile for API containerization
+         ├── service.py                  	# Main service entry file for FastAPI application
+     |── Dockerfile                      		# Dockerfile for API containerization
      ├── Pipfile                        		# Pipfile for Python dependencies (pipenv)
      ├── Pipfile.lock                    		# Lock file for pipenv dependencies
      ├── docker-entrypoint.sh            	# Entrypoint script for Docker container
