@@ -68,8 +68,57 @@ python perform_rag.py
 8. Run frontend application
 ```streamlit run app.py```
 
-**Modifications for Milestone 4**
-1. Implemented GitHub Actions with linting, automated testing, and >50% coverage across all modules.
-2. Built a Streamlit-based frontend interface for user interaction and result visualization.
-3. Developed FastAPI endpoints for user queries to communicate between the front end and back end.
-5. Integrated fine-tuned LLM outputs for relevance filtering and response generation.
+**Modifications for Milestone 5**
+1. Tried to Deploy our application on GCP Virtual Machine (VM)
+2. Added the React frontend 
+3. Fine-tuned the model with increased training samples
+
+#### Project Milestone 5 Organization
+
+```
+├── .github/
+│   └── workflows/
+│       └── pre-commit.yml          # GitHub Actions workflow for pre-commit hooks
+├── notebooks/
+│   ├── .gitkeep                    # Placeholder to keep notebooks folder in version control
+│   └── eda.ipynb                   # Exploratory Data Analysis notebook
+├── references/
+│   ├── .gitkeep                    # Placeholder for references folder
+│   ├── Flowchart.jpeg              # Project flowchart image
+│   └── UI.jpeg                     # User interface design image
+├── reports/
+│   ├── .gitkeep                    # Placeholder for reports folder
+├── src/
+     ├── api-service/                # API service module
+     ├── api/                        # Main API structure
+     │   ├── routers/                # FastAPI router modules
+     │   │   └── llm_rag_chat.py
+     │   └── utils/                  		# Utility modules for API logic
+     │       └── llm_rag_utils.py
+         ├── service.py                  	# Main service entry file for FastAPI application
+     |── Dockerfile                      		# Dockerfile for API containerization
+     ├── Pipfile                        		# Pipfile for Python dependencies (pipenv)
+     ├── Pipfile.lock                    		# Lock file for pipenv dependencies
+     ├── docker-entrypoint.sh            	# Entrypoint script for Docker container
+     ├── docker-shell.sh                 	# Shell script for Docker operations
+├── embed_papers/                   	# Scripts for embedding research papers
+├── finetuning/                     	# Folder for model finetuning scripts and files
+├── frontend_react/                     # Frontend implementation
+├── deployment/                       	# Deployment implementation
+├── perform_rag/                    	# Folder for RAG (Retrieve and Generate) functionality
+├── retrieve_papers/                	# Folder for retrieving research papers
+├── docker-compose.sh               	# Script for Docker Compose operations
+├── tests/                          		# Testing suite
+│   ├── test_embed_papers.py        		        # Unit tests for embedding papers
+│   ├── test_integration_embed_retrieve.py           # Integration tests for embedding and retrieval
+│   ├── test_perform_rag.py         	   	        # Unit tests for RAG functionality
+│   ├── test_retrieve_papers.py     		        # Unit tests for paper retrieval
+│   └── test_app.py     			        # System tests
+├── .gitignore                     	   # Git ignore file
+├── .pre-commit-config.yaml        	# Configuration file for pre-commit hooks
+├── LICENSE                         	# License for the project
+├── README.md                       	# Project README file
+├── pytest.ini                     	# Configuration file for pytest
+├── requirements.txt                	# Additional requirements for Python dependencies
+└── test_output.tar                 	# Test output archive
+```
