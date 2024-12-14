@@ -4,6 +4,7 @@ import os
 from google.cloud import storage
 import requests
 import tarfile
+import pandas as pd
 
 # Get the directory of the current script
 script_dir = os.path.dirname(os.path.abspath(__file__))
@@ -14,7 +15,6 @@ credentials_path = os.path.join(
 )
 
 os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = credentials_path
-# os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "../../../secrets/ai-research-for-good-b6f4173936f9.json"
 
 
 def set_up_gcs(bucket_name):
@@ -24,11 +24,18 @@ def set_up_gcs(bucket_name):
     return bucket, storage_client
 
 
-def fetch_arxiv_papers(search_query, max_results=50):
+def fetch_arxiv_papers(search_query, max_results=50, title=False, comment=False):
+    search_query = search_query.replace(" ", "+")
     base_url = "http://export.arxiv.org/api/query?"
-    url = f"{base_url}search_query=all:{search_query}&start=0&max_results={max_results}&sortBy=lastUpdatedDate&sortOrder=ascending"
+    if title:
+      url = f'{base_url}search_query=all:{search_query}&searchtype=title&order=-announced_date_first&max_results={max_results}'
+    elif comment:
+      url = f'{base_url}search_query=all:{search_query}&searchtype=comments&order=-announced_date_first&max_results={max_results}'
+    else:
+      url = f'{base_url}search_query=all:{search_query}&order=-announced_date_first&max_results={max_results}'
+
     data = urllib.request.urlopen(url)
-    xml_data = data.read().decode("utf-8")
+    xml_data = data.read().decode('utf-8')
     return xml_data
 
 
@@ -188,11 +195,24 @@ def main():
     os.makedirs(base_extract_path, exist_ok=True)
     os.makedirs(final_txt_path, exist_ok=True)
 
-    # Fetch papers from arXiv
-    xml_data = fetch_arxiv_papers(search_query, max_results)
+    # Dataframe containing papers from AAAI AI4SI track
+    df = pd.read_csv('data/ai4sipapers.csv')
+    papers = []
 
-    # Parse the fetched XML data
-    papers = parse_paper_data(xml_data)
+    # Search for the titles on ArXiv and retrieve the metadata
+    for _, row in df.iterrows():
+      search_query = row['title']
+      xml_data = fetch_arxiv_papers(search_query, max_results, title=True)
+      flag = 'Not found'
+      result_parsed = parse_paper_data(xml_data)
+      for paper in result_parsed:
+        if paper['title'] == search_query:
+          papers.append(paper)
+          flag = 'Found'
+          break
+      if flag != 'Found' and result_parsed:
+        # If no exact match for title found, return first paper from results
+        papers.append(result_parsed[0])
 
     # Save the paper metadata to a .txt file
     save_paper_metadata_to_txt(papers, output_file)
