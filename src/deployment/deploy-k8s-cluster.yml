@@ -132,10 +132,9 @@
     when: cluster_state == "present"
   
   - name: Check if Secret exists
-    shell: |
-      kubectl get secret gcp-service-key --namespace="{{cluster_name}}-namespace"
-      register: secret_check
-      ignore_errors: true
+    shell: kubectl get secret gcp-service-key --namespace="{{cluster_name}}-namespace"
+    register: secret_check
+    ignore_errors: yes
     when: cluster_state == "present"
 
   - name: Importing credentials as a Secret
@@ -170,7 +169,7 @@
                 run: frontend
             spec:
               containers:
-              - image: "gcr.io/{{ gcp_project }}/social-app-frontend-ui:{{ tag.stdout}}"
+              - image: "gcr.io/{{ gcp_project }}/social-app-frontend-react:{{ tag.stdout}}"
                 imagePullPolicy: IfNotPresent
                 name: frontend
                 ports:
@@ -257,10 +256,10 @@
                     value: /secrets/gcp-service.json
                   - name: GCS_BUCKET_NAME
                     value: social-app-models
-                  - name: CHROMADB_HOST
-                    value: vector-db
-                  - name: CHROMADB_PORT
-                    value: "8000"
+                  # - name: CHROMADB_HOST
+                  #   value: vector-db
+                  # - name: CHROMADB_PORT
+                  #   value: "8000"
                   - name: GCP_PROJECT
                     value: "{{ gcp_project }}"
     when: cluster_state == "present"

@@ -12,21 +12,21 @@
   - name: Build frontend container image
     community.general.docker_image:
       build:
-        path: /frontend_ui
-        platform: linux/amd64/v2
-      name: gcr.io/{{ gcp_project }}/social-app-frontend_ui:{{ tag.stdout}}
+        path: /frontend-react
+        platform: linux/amd64
+      name: gcr.io/{{ gcp_project }}/social-app-frontend-react:{{ tag.stdout}}
       source: build
   - name: Push frontend image to GCR
     community.general.docker_image:
-      name: gcr.io/{{ gcp_project }}/social-app-frontend_ui:{{ tag.stdout}}
-      repository: gcr.io/{{ gcp_project }}/social-app-frontend_ui:{{ tag.stdout}}
+      name: gcr.io/{{ gcp_project }}/social-app-frontend-react:{{ tag.stdout}}
+      repository: gcr.io/{{ gcp_project }}/social-app-frontend-react:{{ tag.stdout}}
       push: yes
       source: local
   - name: Build api-service container image
     community.general.docker_image:
       build:
         path: /api-service
-        platform: linux/amd64/v2
+        platform: linux/amd64
       name: gcr.io/{{ gcp_project }}/social-app-api-service:{{ tag.stdout}}
       source: build
   - name: Push api-service image to GCR
@@ -52,3 +52,58 @@
     shell: echo {{ tag.stdout}} > .docker-tag
   - name: "Remove all unused containers"
     shell: docker system prune -a
+
+    # ---
+# - name: "Build docker images and push them to GCR"
+#   hosts: localhost
+#   gather_facts: false
+#   tasks:
+#   - name: "Get timestamp for docker tag"
+#     shell: "(date +%Y%m%d%H%M%S)"
+#     register: tag
+
+#   - name: Print tag
+#     debug:
+#       msg: "Generated timestamp for docker tag: {{ tag.stdout }}"
+
+#   - name: Validate Dockerfile existence for frontend
+#     stat:
+#       path: /frontend-react/Dockerfile
+#     register: frontend_dockerfile_check
+
+#   - name: Debug Dockerfile check for frontend
+#     debug:
+#       msg: >
+#         Dockerfile for frontend exists: {{ frontend_dockerfile_check.stat.exists }}
+
+#   - name: Build frontend container image
+#     community.general.docker_image:
+#       build:
+#         path: /frontend-react
+#         platform: linux/amd64/v2
+#       name: gcr.io/{{ gcp_project }}/social-app-frontend-react:{{ tag.stdout }}
+#       source: build
+#     register: frontend_image_build
+
+#   - name: Debug frontend image build
+#     debug:
+#       msg:
+#         - "Frontend image build output: {{ frontend_image_build }}"
+#         - "Image name: gcr.io/{{ gcp_project }}/social-app-frontend-react:{{ tag.stdout }}"
+
+#   - name: Verify frontend image exists locally
+#     shell: docker images gcr.io/{{ gcp_project }}/social-app-frontend-react:{{ tag.stdout }}
+#     register: frontend_image_check
+#     failed_when: frontend_image_check.stdout == ""
+#     ignore_errors: true
+
+#   - name: Debug frontend image existence
+#     debug:
+#       msg: "Frontend image exists locally: {{ frontend_image_check.stdout_lines }}"
+
+#   - name: Push frontend image to GCR
+#     community.general.docker_image:
+#       name: gcr.io/{{ gcp_project }}/social-app-frontend-react:{{ tag.stdout }}
+#       repository: gcr.io/{{ gcp_project }}/social-app-frontend-react:{{ tag.stdout }}
+#       push: yes
+#       source: local
