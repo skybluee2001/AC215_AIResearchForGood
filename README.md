@@ -53,7 +53,7 @@ docker build -t perform_rag .
 docker run --rm -ti -v "$(pwd)":/app perform_rag
 python perform_rag.py
 ```
-## Instructions for deployment#
+## Instructions for deployment
 
 These instructions assume you have set up SSH and have the keys `/secrets/deployment.json`, `/secrets/gcp-service.json`, `/secrets/ssh-key-deployment`, and `/secrets/ssh-key-deployment.pub` already set up. If not, please request access to our GCP project and follow the SSH setup instructions [here](https://github.com/dlops-io/cheese-app-v3/tree/main?tab=readme-ov-file#ssh-setup).
 
