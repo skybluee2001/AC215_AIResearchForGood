@@ -55,7 +55,7 @@ python perform_rag.py
 ```
 ## Instructions for deployment#
 
-These instructions assume you have set up SSH and have the keys `/secrets/deployment.json`, `/secrets/gcp-service.json`, `/secrets/ssh-key-deployment`, and `/secrets/ssh-key-deployment.pub` already set up. If not, please request access to our GCP project and follow the SSH set up instructions here (https://github.com/dlops-io/cheese-app-v3/tree/main?tab=readme-ov-file#ssh-setup). 
+These instructions assume you have set up SSH and have the keys `/secrets/deployment.json`, `/secrets/gcp-service.json`, `/secrets/ssh-key-deployment`, and `/secrets/ssh-key-deployment.pub` already set up. If not, please request access to our GCP project and follow the SSH setup instructions [here](https://github.com/dlops-io/cheese-app-v3/tree/main?tab=readme-ov-file#ssh-setup).
 
 Then, run the following commands in your terminal within the root directory of this repository: 
 1. `cd src/deployment` 
@@ -142,3 +142,10 @@ Then, run the following commands in your terminal within the root directory of t
 
 - *Identify Papers with Code*  
   - Add a badge/filter for papers with open-source code and link to repositories.
+
+
+## Usage details and examples
+
+Our target audience is the nonprofits, social org interested to incorporate tech solutions to scale to impact and researcher, freelance/volunteers interested to help. We have a interface where non-profits can query the problem they are trying to solve. In response, the platform will display top relevant papers, details of the research group, and how these papers can be used to solve the NGO’s queried problem.
+Examples:
+An LA-based organization that aims to reduce homelessness. We have heard from their other non-profit friends that AI and automation could help tackle their challenges in a more resource and cost-efficient way.  We have a software development volunteer and are interested in using their skills to build a nice, technical solution. But it would be helpful if we had a reference of previous work/success! This is where our platform will be useful!
